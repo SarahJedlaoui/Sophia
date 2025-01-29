@@ -21,11 +21,11 @@ const HowItWorks = () => {
       {/* Centered Title Section */}
       <div className="text-center mb-10">
         <Reveal keyframes={fadeInDownShorter2} duration={800} delay={100}>
-          <p className="opacity-50 uppercase tracking-wide">here`&apos;`s how it works</p>
+          <p className="opacity-50 uppercase tracking-wide">here&apos;s how it works</p>
         </Reveal>
         <Reveal keyframes={fadeInDownShorter2} duration={800} delay={200}>
           <h2 className="font-semibold text-center leading-snug text-3xl mb-2">
-            Here`&apos;`s How It Works
+            Here&apos;s How It Works
           </h2>
         </Reveal>
       </div>
