@@ -75,7 +75,7 @@ export const list_artwork = [
     id: 2,
    
     
-    image: '/card2.png',
+    image: '/card4.png',
     
   },
   {
