@@ -70,23 +70,24 @@ const ContentSidebar = ({ toggleMenu }) => {
           onClick={toggleMenu}
           className='mb-3 sm:mb-0 mt-4 sm:mt-0 ml-0 sm:ml-7'
         >
-          Collections
-        </a>
-      </Link>
-      <Link href='/#feature'>
-        <a onClick={toggleMenu} className='mb-3 sm:mb-0 ml-0 sm:ml-7'>
-          Feature
+          Home
         </a>
       </Link>
       <Link href='/#faq'>
         <a
           onClick={toggleMenu}
-          className='mb-3 sm:mb-0 ml-0 sm:ml-7 mr-0 sm:mr-7'
+          className='mb-3 sm:mb-0 ml-0 sm:ml-7'
         >
-          FAQ
+          How It Works
         </a>
       </Link>
-      <Button variant={'primary'}>Select Wallet</Button>
+      <Link href='/#feature'>
+        <a onClick={toggleMenu} className=' mb-3 sm:mb-0 ml-0 sm:ml-7 mr-0 sm:mr-7'>
+          Explore 
+        </a>
+      </Link>
+    
+      <Button variant={'primary'}>Sign Up</Button>
     </div>
   );
 };
