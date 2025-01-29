@@ -14,8 +14,7 @@ const Footer = () => {
         <div className='w-[300px] mb-10 lg:mb-0 mr-10 lg:mr-28'>
           <Logo />
           <p className='mt-5'>
-            The best NFT marketplace website in the world and feel your
-            experience in selling or buy our work
+          At Sophia.ai, we believe that learning should be actionable and fun. Our platform combines AI technology with coaching principles to help you turn content into growth opportunities.
           </p>
         </div>
         <div className='flex-1 grid grid-cols-2 md:grid-cols-3 gap-4'>
@@ -60,7 +59,7 @@ const Footer = () => {
                 <a className='mb-4 opacity-50'>+012 3456789</a>
               </Link>
               <Link href='/'>
-                <a className='mb-5 opacity-50'>adorableprogrammer@gmail.com</a>
+                <a className='mb-5 opacity-50'>team@bei.dev</a>
               </Link>
               <div className='flex items-center'>
                 <div className='mr-10 cursor-pointer'>
@@ -93,8 +92,8 @@ const Footer = () => {
         </div>
       </div>
       <div className='flex justify-center items-center mb-8'>
-        &copy; <span className='font-bold mr-1'>Joonacode </span>
-        Desain By <span className='font-bold ml-1'>Zarror</span>
+        &copy; <span className='font-bold mr-1'>Sophia </span>
+        Desain By <span className='font-bold ml-1'>The Leap</span>
       </div>
       <div
         onClick={scrollToTop}

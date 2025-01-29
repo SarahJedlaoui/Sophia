@@ -10,6 +10,7 @@ import {
   Navbar,
   Sponsor,
   TopCreator,
+  HowItWorks
 } from '@/components';
 import React from 'react';
 import { Reveal } from 'react-awesome-reveal';
@@ -19,12 +20,12 @@ const Home = () => {
     <div className='h-full main_bg text-white overflow-hidden' id='top'>
       <Navbar />
       <Hero />
-      <Sponsor />
-      <AboutUs />
-      <Collections />
-      <FeaturedArtworks />
-      <TopCreator />
       <FAQ />
+      <HowItWorks />
+     {/** <AboutUs />
+      <Collections />*/}
+      <FeaturedArtworks />
+      {/** <TopCreator />
       <Container>
         <div
           className={
@@ -38,7 +39,7 @@ const Home = () => {
             <Button>Get Started</Button>
           </Reveal>
         </div>
-      </Container>
+      </Container> */}
       <Footer />
     </div>
   );

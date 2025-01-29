@@ -67,27 +67,23 @@ export const list_collection = [
 export const list_artwork = [
   {
     id: 1,
-    username: 'isarjant0',
-    price: 1.646567,
-    image: '/collections/collection1.png',
-    product_name: 'Milvago chimachima',
-    delay: 300,
+   
+    image: '/card1.png',
+
   },
   {
     id: 2,
-    username: 'rwherrett1',
-    price: 3.457135,
-    image: '/collections/collection2.png',
-    product_name: 'Castor fiber',
-    delay: 200,
+   
+    
+    image: '/card2.png',
+    
   },
   {
     id: 3,
-    username: 'mbasnall2',
-    price: 2.34111,
-    image: '/collections/collection3.png',
-    product_name: 'Ara ararauna',
-    delay: 100,
+   
+    image: '/card3.png',
+   
+    
   },
 ];
 

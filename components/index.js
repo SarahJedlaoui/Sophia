@@ -13,7 +13,7 @@ import Navbar from './Navbar';
 import NFTItem from './NFTItem';
 import Sponsor from './Sponsor';
 import TopCreator from './TopCreator';
-
+import HowItWorks from './HowItWorks';
 export {
   FAQ,
   CreatorItem,
@@ -30,4 +30,5 @@ export {
   Container,
   Input,
   Hero,
+  HowItWorks,
 };

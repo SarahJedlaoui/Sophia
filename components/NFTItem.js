@@ -15,17 +15,8 @@ const NFTItem = ({ data }) => {
           alt={username}
         />
       </div>
-      <div className='flex flex-wrap justify-between items-center opacity-50 mb-2'>
-        <p>@{username}</p>
-        <p>Current Bid</p>
-      </div>
-      <div className='flex flex-wrap justify-between items-center font-bold mb-5'>
-        <p>{product_name}</p>
-        <p>{price} ETH</p>
-      </div>
-      <Button className='w-full' variant={'primary'}>
-        Place a bid
-      </Button>
+     
+      
     </div>
   );
 };
