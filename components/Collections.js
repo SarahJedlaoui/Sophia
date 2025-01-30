@@ -100,7 +100,7 @@ const Collections = () => {
             NEED MORE INSPIRATION?
           </h3>
           <p className="text-white font-normal mb-6">
-            Whether you're looking for guidance, new ideas, or building something
+            Whether you&apos;re looking for guidance, new ideas, or building something
             from scratch, the tools you need are just a click away.
           </p>
           <button className="flex items-center gap-2 mt-4 bg-black text-white px-6 py-3 rounded-full shadow-lg">
