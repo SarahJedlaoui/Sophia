@@ -10,7 +10,10 @@ import {
   Navbar,
   Sponsor,
   TopCreator,
-  HowItWorks
+  HowItWorks,
+  WhyChooseSophia,
+  EmpowerSection,
+  FAQSection
 } from '@/components';
 import React from 'react';
 import { Reveal } from 'react-awesome-reveal';
@@ -22,10 +25,12 @@ const Home = () => {
       <Hero />
       <FAQ />
       <HowItWorks />
-     {/** <AboutUs />
-      <Collections />*/}
       <FeaturedArtworks />
-      {/** <TopCreator />
+      <WhyChooseSophia />
+      <EmpowerSection/>
+      <FAQSection/>
+      {/** 
+      <Collections />
       <Container>
         <div
           className={
@@ -39,7 +44,8 @@ const Home = () => {
             <Button>Get Started</Button>
           </Reveal>
         </div>
-      </Container> */}
+      </Container>
+      */}
       <Footer />
     </div>
   );

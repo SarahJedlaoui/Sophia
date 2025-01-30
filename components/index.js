@@ -14,6 +14,9 @@ import NFTItem from './NFTItem';
 import Sponsor from './Sponsor';
 import TopCreator from './TopCreator';
 import HowItWorks from './HowItWorks';
+import WhyChooseSophia from './WhyUs';
+import EmpowerSection from './Empower';
+import FAQSection from './FAQSection';
 export {
   FAQ,
   CreatorItem,
@@ -31,4 +34,7 @@ export {
   Input,
   Hero,
   HowItWorks,
+  WhyChooseSophia,
+  EmpowerSection,
+  FAQSection,
 };

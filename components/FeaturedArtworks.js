@@ -6,7 +6,7 @@ import { fadeInDownShorter, fadeInDownShorter2 } from '@/keyframes';
 
 const FeaturedArtworks = () => {
   return (
-    <Container className={'mb-44 scroll-mt-10'} id='feature'>
+    <Container className={'mt-20 mb-44 scroll-mt-10'} id='feature'>
       <div className='text-center mb-8'>
         <h2 className='font-bold text-3xl mb-2'>Explore Coaching with Sophia</h2>
         <Reveal keyframes={fadeInDownShorter2} duration={800} delay={100}>
