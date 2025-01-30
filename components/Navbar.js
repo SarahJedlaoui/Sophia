@@ -30,7 +30,11 @@ const Navbar = () => {
   return (
     <div className='py-4 relative'>
       <Container className={'flex justify-between items-center'}>
-        <Logo />
+      <Link href="/" passHref>
+          <a>
+            <Logo />
+          </a>
+        </Link>
         <div className='hidden sm:block'>
           <ContentSidebar toggleMenu={toggleMenu} />
         </div>
@@ -62,9 +66,7 @@ const Navbar = () => {
 const ContentSidebar = ({ toggleMenu }) => {
   return (
     <div className='items-center flex-col sm:flex-row flex'>
-      <div className='block sm:hidden lg:block'>
-        <Input />
-      </div>
+      
       <Link href='/#collections'>
         <a
           onClick={toggleMenu}
