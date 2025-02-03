@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
         <title>Sophia.AI</title>
         <meta name='title' content='Sophia.AI' />
         <meta name='description' content='Sophia AI ' />
-        <meta name='keywords' content='nft, marketplace' />
+        <meta name='keywords' content='AI, sophia' />
         <meta name='robots' content='index, follow' />
         <meta httpEquiv='Content-Type' content='text/html; charset=utf-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
