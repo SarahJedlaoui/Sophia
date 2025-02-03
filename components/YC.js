@@ -521,7 +521,7 @@ const YC = () => {
                     ) : (
                         <div className="lg:w-1/3 p-5 flex flex-col justify-between">
                             <h2 className="text-white text-2xl font-bold mb-5">
-                                Hi, here's what Sophia can do for you:
+                                Hi, here&apos;s what Sophia can do for you:
                             </h2>
 
                             {/* Options in Cards */}
