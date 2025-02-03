@@ -17,6 +17,7 @@ import HowItWorks from './HowItWorks';
 import WhyChooseSophia from './WhyUs';
 import EmpowerSection from './Empower';
 import FAQSection from './FAQSection';
+import YC from './YC';
 export {
   FAQ,
   CreatorItem,
@@ -37,4 +38,5 @@ export {
   WhyChooseSophia,
   EmpowerSection,
   FAQSection,
+  YC,
 };
