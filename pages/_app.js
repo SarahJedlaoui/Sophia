@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Sophia.AI</title>
         <meta name='title' content='Sophia.AI' />
-        <meta name='description' content='Buy & sale nft online' />
+        <meta name='description' content='Sophia AI ' />
         <meta name='keywords' content='nft, marketplace' />
         <meta name='robots' content='index, follow' />
         <meta httpEquiv='Content-Type' content='text/html; charset=utf-8' />
@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
         <meta property='og:type' content='website' />
         <meta property='og:url' content={process.env.NEXT_PUBLIC_MAIN_URL} />
         <meta property='og:title' content='Sophia.AI' />
-        <meta property='og:description' content='Buy & sale nft online' />
+        <meta property='og:description' content='Sophia AI ' />
         <meta
           property='og:image'
           content={process.env.NEXT_PUBLIC_MAIN_URL + 'logo.png'}
@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
           content={process.env.NEXT_PUBLIC_MAIN_URL}
         />
         <meta property='twitter:title' content='Sophia.AI' />
-        <meta property='twitter:description' content='Buy & sale nft online' />
+        <meta property='twitter:description' content='Sophia AI ' />
         <meta
           property='twitter:image'
           content={process.env.NEXT_PUBLIC_MAIN_URL + 'logo.png'}
