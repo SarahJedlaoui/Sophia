@@ -58,7 +58,7 @@ const VideoAnalysisPage = () => {
             {/* Highlights Section */}
             <div>
                 <h2 className="text-xl md:text-2xl  mb-5 text-left md:text-center lg:text-center" style={{ fontFamily: 'Playfair' }}>
-                    This Week's Highlights
+                    This Week&apos;s Highlights
                 </h2>
                 <div className="grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-6">
                     {/* Predefined Cards */}
