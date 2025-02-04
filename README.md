@@ -3,8 +3,8 @@
     <img src="screenshot.png" alt="screenshot">
   </a>
 
-  <h1 align="center">PsychoArt</h3>
-Mencoba tailwindcss v3.0 dengan mengslicing landing page. Design by <a href='https://www.figma.com/@zet_dev'>Dliya' Zarror Nibros</a>
+  <h1 align="center">Sophia AI</h3>
+
 <br/ >
   <p align="center">
     <br />
@@ -42,27 +42,6 @@ npm install or yarn install
 ```sh
 npm run dev or yarn dev
 ```
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-<!-- CONTACT -->
-## Contact
-
-joonacode@gmail.com
-
-Project Link: [https://github.com/joonacode/psychoart_landing_page.git](https://github.com/joonacode/psychoart_landing_page.git)
-
-
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
