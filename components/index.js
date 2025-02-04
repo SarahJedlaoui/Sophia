@@ -18,6 +18,7 @@ import WhyChooseSophia from './WhyUs';
 import EmpowerSection from './Empower';
 import FAQSection from './FAQSection';
 import YC from './YC';
+import VideoAnalysisPage from './Home';
 export {
   FAQ,
   CreatorItem,
@@ -39,4 +40,5 @@ export {
   EmpowerSection,
   FAQSection,
   YC,
+  VideoAnalysisPage
 };
