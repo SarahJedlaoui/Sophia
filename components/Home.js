@@ -14,7 +14,17 @@ const VideoAnalysisPage = () => {
     const [chatResponse, setChatResponse] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [inputValuePractice, setInputValuePractice] = useState("I'm grateful for ");
+    const [practiceFinished, setPracticeFinished] = useState(false); // Tracks if the practice is finished
+    const examples = ['Love', 'Family', 'Health', 'Work', 'Food'];
 
+    const handleExampleClick = (example) => {
+        setInputValuePractice(`I'm grateful for ${example}`);
+    };
+
+    const handleSubmitPractice = () => {
+        setPracticeFinished(true); // Set practice to finished
+    };
     const handleAddLink = () => {
         if (inputValue.trim()) {
             setVideoLinks((prev) => [...prev, { link: inputValue, status: 'loading' }]);
@@ -56,15 +66,7 @@ const VideoAnalysisPage = () => {
         }
     };
 
-    const handleEndChat = () => {
-        setShowModal(false);
-        setChatResponse(null);
-    };
 
-    const handleDiveIn = () => {
-        // Redirect to another page
-        window.location.href = '/dive-in';
-    };
     return (
         <Container className="min-h-screen bg-black text-white p-5">
             {/* Welcome Section */}
@@ -97,7 +99,7 @@ const VideoAnalysisPage = () => {
             </div>
             {/* Highlights Section */}
             <div>
-                <h2 className="text-xl md:text-2xl  mb-5 text-left md:text-left lg:text-left" style={{ fontFamily: 'Playfair' }}>
+                <h2 className="text-xl md:text-2xl lg:text-3xl mb-5 text-left md:text-left lg:text-left" style={{ fontFamily: 'Playfair' }}>
                     This Week&apos;s Highlights
                 </h2>
                 <div className="grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-6">
@@ -157,8 +159,9 @@ const VideoAnalysisPage = () => {
                     ))}
                 </div>
             </div>
+            {/* video Section */}
             <div>
-                <h2 className="text-xl md:text-2xl  mb-5 text-left md:text-center lg:text-center mt-5" style={{ fontFamily: 'Playfair' }}>
+                <h2 className="text-xl md:text-2xl lg:text-3xl  mb-5 text-left md:text-left lg:text-left mt-5" style={{ fontFamily: 'Playfair' }}>
                     Spotlight Video
                 </h2>
                 <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center mt-5 gap-6">
@@ -188,14 +191,14 @@ const VideoAnalysisPage = () => {
                     {/* Video Description */}
                     <div className="w-full lg:w-1/2">
                         <div className="text-white space-y-2">
-                            <p className="text-sm" style={{ fontFamily: 'Wix Madefor Display' }}>
+                            <p className="text-sm lg:text-xl" style={{ fontFamily: 'Wix Madefor Display' }}>
                                 Uploaded By: <span className="font-medium">TEDx Talks</span>
                             </p>
-                            <h4 className="text-md lg:text-xl md:text-xl" style={{ fontFamily: 'Wix Madefor Display' }}>
+                            <h4 className="text-md lg:text-3xl md:text-xl" style={{ fontFamily: 'Wix Madefor Display' }}>
                                 The quality of your relationships determines the quality of your lives
                             </h4>
 
-                            <p className="text-sm font-light">Esther Perel - 12 min</p>
+                            <p className="text-sm lg:text-lg font-light">Esther Perel - 12 min</p>
                         </div>
                         {/* Play Button in Description */}
                         <button
@@ -226,11 +229,11 @@ const VideoAnalysisPage = () => {
                 </div>
 
             </div>
-
+            {/* question Section */}
             <div className="flex flex-col w-full items-center mt-7">
                 {/* Input Section */}
                 {!chatResponse && ( // Only show the input section when there's no chat response
-                    <div className="flex flex-wrap items-center w-full max-w-full sm:max-w-md gap-4">
+                    <div className="flex flex-wrap items-center w-full w-full  gap-4">
                         <img
                             src="/collections/protocol1.png"
                             alt="Profile"
@@ -242,7 +245,7 @@ const VideoAnalysisPage = () => {
                             value={inputValueQ}
                             onChange={(e) => setInputValueQ(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()} // Handle Enter key
-                            className="flex-1 p-3 rounded-full bg-transparent text-white placeholder-gray-400 focus:outline-none w-full sm:w-auto"
+                            className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none w-full sm:w-auto"
                             style={{ fontSize: '14.29px' }}
                         />
                         <button
@@ -292,8 +295,131 @@ const VideoAnalysisPage = () => {
                 )}
 
             </div>
+            {/* Cards Section */}
+            <div className="w-full bg-black text-white mt-10">
+                <h2 className="text-xl md:text-2xl lg:text-3xl text-left mb-6" style={{ fontFamily: 'Playfair' }}>
+                    This Week's Practice
+                </h2>
+                <div className="grid grid-cols-3 sm:grid-cols-3 gap-2 md:gap-5 md:px-20">
+                    {/* Card 1 */}
+                    <div className="bg-[#4A3E3E] pt-5 rounded-lg  flex flex-col items-center">
+                        <h3 className="text-xs md:text-xl lg:text-xl text-center font-medium mb-4" style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}>
+                            Deep Work Challenge
+                        </h3>
+                        <img
+                            src="/icons/practice1.svg"
+                            alt="Deep Work Challenge"
+                            className="w-20 h-20 md:w-28 md:h-28"
+                        />
+                    </div>
+                    {/* Card 2 */}
+                    <div className="bg-[#4A3E3E] pt-5 rounded-lg flex flex-col items-center">
+                        <h3 className="text-xs md:text-xl lg:text-xl text-center font-medium mb-4" style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}>
+                            Mastering Effective Feedback
+                        </h3>
+                        <img
+                            src="/icons/practice2.svg"
+                            alt="Mastering Effective Feedback"
+                            className="w-20 h-20 md:w-28 md:h-28 mb-5 md:mb-10"
+                        />
+                    </div>
+                    {/* Card 3 */}
+                    <div className="bg-[#4A3E3E] pt-5 rounded-lg flex flex-col items-center">
+                        <h3 className="text-xs md:text-xl lg:text-xl text-center font-medium mb-4" style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}>
+                            Make your Relationship Work
+                        </h3>
+                        <img
+                            src="/icons/practice3.svg"
+                            alt="Make your Relationship Work"
+                            className="w-20 h-20 md:w-28 md:h-28"
+                        />
+                    </div>
+                </div>
+            </div>
+            {/* practice Section */}
+            <div className=" bg-black text-white mt-10">
+                {/* Title Section */}
+                <div className="text-left lg:text-center mb-6">
+                    <h2 className="text-xl md:text-2xl lg:text-3xl text-left mb-6" style={{ fontFamily: 'Playfair' }}>
+                        Start Practicing
+                    </h2>
+                    <p className="text-sm lg:text-lg mt-2">
+                        Strengthen your connections with practical, guided steps. Build trust, improve communication, and nurture meaningful relationships.
+                    </p>
+                </div>
 
+                {/* Gratitude Card */}
+                <div className="max-w-md mx-auto bg-[#7A65B0] text-white p-4 rounded-lg">
 
+                    {/* Card Header */}
+                    <div className="flex items-center mb-4">
+                        <img
+                            src="/collections/protocol1.png"
+                            alt="Esther Perl"
+                            className="w-12 h-12 rounded-full"
+                        />
+                        <div className="ml-4">
+                            <p className="text-xs lg:text-sm font-medium">The Daily Connection Ritual</p>
+                            <p className="text-xs text-gray-200">By Esther Perl</p>
+                        </div>
+                    </div>
+                    {!practiceFinished ? (
+                        <>
+                            {/* Card Content */}
+                            <h3 className="text-md md:text-lg font-medium mb-4">Deepening Your Relationships</h3>
+                            <p className="text-xs md:text-sm mb-4 ">What's one thing you're grateful for today?</p>
+
+                            {/* Input Section */}
+                            <div className="flex items-center">
+                                <input
+                                    type="text"
+                                    value={inputValuePractice}
+                                    onChange={(e) => setInputValuePractice(e.target.value)}
+                                    className="flex-1 mt-5 rounded-md bg-transparent placeholder-gray-300 text-xs md:text-lg text-white focus:outline-none"
+                                    placeholder="I'm grateful for"
+                                />
+
+                            </div>
+                            {/* Arrow Button */}
+
+                            <div className="flex items-right justify-end mt-4">
+                                <button
+                                    onClick={handleSubmitPractice}
+                                    className="ml-4 bg-white p-3 rounded-full opacity-80 flex items-center justify-center shadow-md"
+                                    style={{ width: '48px', height: '48px' }}
+                                >
+                                    <ArrowForwardIcon style={{ fontSize: '24px', color: 'black' }} />
+                                </button>
+                            </div>
+
+                            {/* Examples Section */}
+                            <div className="mt-4">
+                                <h4 className="text-sm font-medium mb-2">Examples</h4>
+                                <div className="flex gap-1 flex-wrap">
+                                    {examples.map((example, index) => (
+                                        <button
+                                            key={index}
+                                            onClick={() => handleExampleClick(example)}
+                                            className="px-2 py-1 border border-white text-white rounded-full text-xs"
+                                        >
+                                            {example}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="text-center mb-10">
+                            <h3 className="text-lg md:text-xl font-medium mb-4">Your practice is finished. Thank you!</h3>
+                            <img
+                                src="/icons/practice1.svg"
+                                alt="Practice Completed"
+                                className="mx-auto w-32 h-32"
+                            />
+                        </div>
+                    )}
+                </div>
+            </div>
         </Container>
     );
 };
