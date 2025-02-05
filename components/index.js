@@ -19,6 +19,7 @@ import EmpowerSection from './Empower';
 import FAQSection from './FAQSection';
 import YC from './YC';
 import VideoAnalysisPage from './Home';
+import Chat from './Chat';
 export {
   FAQ,
   CreatorItem,
@@ -40,5 +41,6 @@ export {
   EmpowerSection,
   FAQSection,
   YC,
-  VideoAnalysisPage
+  VideoAnalysisPage,
+  Chat,
 };

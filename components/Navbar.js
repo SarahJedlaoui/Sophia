@@ -67,7 +67,7 @@ const ContentSidebar = ({ toggleMenu }) => {
   return (
     <div className='items-center flex-col sm:flex-row flex'>
       
-      <Link href='/#collections'>
+      <Link href='/'>
         <a
           onClick={toggleMenu}
           className='mb-3 sm:mb-0 mt-4 sm:mt-0 ml-0 sm:ml-7'
