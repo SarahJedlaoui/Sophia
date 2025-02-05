@@ -298,7 +298,7 @@ const VideoAnalysisPage = () => {
             {/* Cards Section */}
             <div className="w-full bg-black text-white mt-10">
                 <h2 className="text-xl md:text-2xl lg:text-3xl text-left mb-6" style={{ fontFamily: 'Playfair' }}>
-                    This Week's Practice
+                    This Week&lsquo;s Practice
                 </h2>
                 <div className="grid grid-cols-3 sm:grid-cols-3 gap-2 md:gap-5 md:px-20">
                     {/* Card 1 */}
@@ -367,7 +367,7 @@ const VideoAnalysisPage = () => {
                         <>
                             {/* Card Content */}
                             <h3 className="text-md md:text-lg font-medium mb-4">Deepening Your Relationships</h3>
-                            <p className="text-xs md:text-sm mb-4 ">What's one thing you're grateful for today?</p>
+                            <p className="text-xs md:text-sm mb-4 ">What&lsquo;s one thing you&lsquo;re grateful for today?</p>
 
                             {/* Input Section */}
                             <div className="flex items-center">
