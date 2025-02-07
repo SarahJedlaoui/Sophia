@@ -177,138 +177,162 @@ const Chat = () => {
                 </div>
 
             </div>
+            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                <div className="relative text-white mt-10 mb-10">
+                    {/* Blurred Background */}
+                    <div
+                        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                        style={{
+                            backgroundImage: "url('/coverb.jpeg')", // Replace with your background image
+                            filter: "blur(30px)", // Adjust the blur intensity
 
-            {/* video Section */}
-            <div>
-                <h2 className="text-xl md:text-2xl lg:text-3xl  mb-5 text-left md:text-left lg:text-left mt-5" style={{ fontFamily: 'Playfair' }}>
-                    Highlights of the Video
-                </h2>
-                <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center mt-5 gap-6">
-                    {/* Video Card */}
-                    <div className="relative w-full lg:w-1/2 aspect-video">
+                        }}
+                    ></div>
 
-                        {/* YouTube Video */}
-                        <iframe
-                            id="spotlightYouTube"
-                            className="w-full h-full rounded-lg"
-                            src="https://www.youtube.com/embed/OkgtwMxbnLw?rel=0&autoplay=1"
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay ; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen
-                            style={{ display: 'none' }} // Initially hide the YouTube video
-                        ></iframe>
-                        {/* Video Cover */}
-                        <img
-                            id="coverOverlay"
-                            src="/cover.png" // Cover image
-                            alt="Video Cover"
-                            className="absolute w-full h-full object-cover rounded-lg"
-                        />
-                    </div>
+                    {/* Content */}
+                    <div className="relative z-10">
+                        {/* video Section */}
+                        <div>
+                            <h2 className="text-xl md:text-2xl lg:text-3xl  mb-5 text-left md:text-left lg:text-left mt-5" style={{ fontFamily: 'Playfair' }}>
+                                Highlights of the Video
+                            </h2>
+                            <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center mt-5 gap-6">
+                                {/* Video Card */}
+                                <div className="relative w-full lg:w-1/2 aspect-video">
 
-                    {/* Video Description */}
-                    <div className="w-full lg:w-1/2">
-                        <div className="text-white space-y-2">
-                            <p className="text-sm lg:text-xl" style={{ fontFamily: 'Wix Madefor Display' }}>
-                                Uploaded By: <span className="font-medium">TEDx Talks</span>
-                            </p>
-                            <h4 className="text-md lg:text-3xl md:text-xl" style={{ fontFamily: 'Wix Madefor Display' }}>
-                                The quality of your relationships determines the quality of your lives
-                            </h4>
+                                    {/* YouTube Video */}
+                                    <iframe
+                                        id="spotlightYouTube"
+                                        className="w-full h-full rounded-lg"
+                                        src="https://www.youtube.com/embed/OkgtwMxbnLw?rel=0&autoplay=1"
+                                        title="YouTube video player"
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay ; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowFullScreen
+                                        style={{ display: 'none' }} // Initially hide the YouTube video
+                                    ></iframe>
+                                    {/* Video Cover */}
+                                    <img
+                                        id="coverOverlay"
+                                        src="/cover.png" // Cover image
+                                        alt="Video Cover"
+                                        className="absolute w-full h-full object-cover rounded-lg"
+                                    />
+                                </div>
 
-                            <p className="text-sm lg:text-lg font-light">Esther Perel - 12 min</p>
+                                {/* Video Description */}
+                                <div className="w-full lg:w-1/2">
+                                    <div className="text-white space-y-2">
+                                        <p className="text-sm lg:text-xl" style={{ fontFamily: 'Wix Madefor Display' }}>
+                                            Uploaded By: <span className="font-medium">TEDx Talks</span>
+                                        </p>
+                                        <h4 className="text-md lg:text-3xl md:text-xl" style={{ fontFamily: 'Wix Madefor Display' }}>
+                                            tl;dr - The quality of your relationships determines the quality of your lives
+                                        </h4>
+
+                                        <p className="text-sm lg:text-lg font-light">Esther Perel - 12 min</p>
+                                    </div>
+                                    {/* Play Button in Description */}
+                                    <button
+                                        onClick={() => {
+                                            const iframe = document.getElementById('spotlightYouTube');
+                                            iframe.style.display = 'block'; // Show the YouTube video
+                                            document.getElementById('coverOverlay').style.display = 'none'; // Hide the overlay
+                                        }}
+                                        className="flex items-center mt-4 bg-white text-black px-4 py-2 rounded-full"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-5 w-5"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M14.752 11.168l-5.197 3.007A1 1 0 018 13.307V6.693a1 1 0 011.555-.832l5.197 3.007a1 1 0 010 1.664z"
+                                            />
+                                        </svg>
+                                        <span className="ml-2">Play</span>
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
-                        {/* Play Button in Description */}
-                        <button
-                            onClick={() => {
-                                const iframe = document.getElementById('spotlightYouTube');
-                                iframe.style.display = 'block'; // Show the YouTube video
-                                document.getElementById('coverOverlay').style.display = 'none'; // Hide the overlay
-                            }}
-                            className="flex items-center mt-4 bg-white text-black px-4 py-2 rounded-full"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M14.752 11.168l-5.197 3.007A1 1 0 018 13.307V6.693a1 1 0 011.555-.832l5.197 3.007a1 1 0 010 1.664z"
+                        {/* question Section */}
+                        
+                        <div className="w-full mx-auto bg-[#262121] bg-opacity-70 text-white p-5 rounded-lg shadow-lg mt-10"
+                         style={{
+                            backgroundColor: 'rgba(74, 62, 62, 0.7)', // Apply transparency using rgba
+                        }}>
+                            {/* Header */}
+                            <div className="flex justify-between items-center mb-4">
+                                <div className="flex items-center">
+                                    <img
+                                        src="/collections/protocol1.png"
+                                        alt="Profile"
+                                        className="w-10 h-10 rounded-full"
+                                    />
+                                    <p className="ml-4 font-medium text-sm">Ask me anything</p>
+                                </div>
+                                <button
+                                    onClick={handleEndChat}
+                                    className="text-gray-400 hover:text-white text-sm"
+                                >
+                                    ✖
+                                </button>
+                            </div>
+
+                            {/* Conversation */}
+                            <div className="h-64 overflow-y-auto space-y-4 mb-4">
+                                {conversation.map((item, index) => (
+                                    <div
+                                        key={index}
+                                        className={`flex ${item.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                                    >
+                                        <div
+                                            className={`p-3 rounded-lg max-w-xs ${item.role === 'user' ? 'bg-[#8E72D7] text-white' : ' text-gray-300'
+                                                }`}
+                                        >
+                                            {item.message}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Input Section */}
+                            <div className="flex items-center">
+                                <input
+                                    type="text"
+                                    placeholder="Type your question..."
+                                    value={inputValueQ}
+                                    onChange={(e) => setInputValueQ(e.target.value)}
+                                    onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                                    className="flex-1 p-3 rounded-full bg-transparent border border-gray-500 text-white placeholder-gray-400 focus:outline-none"
                                 />
-                            </svg>
-                            <span className="ml-2">Play</span>
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-            {/* question Section */}
-            <div className="w-full max-w-lg mx-auto bg-[#262121] text-white p-5 rounded-lg shadow-lg mt-10">
-                {/* Header */}
-                <div className="flex justify-between items-center mb-4">
-                    <div className="flex items-center">
-                        <img
-                            src="/collections/protocol1.png"
-                            alt="Profile"
-                            className="w-10 h-10 rounded-full"
-                        />
-                        <p className="ml-4 font-medium text-sm">Ask me anything</p>
-                    </div>
-                    <button
-                        onClick={handleEndChat}
-                        className="text-gray-400 hover:text-white text-sm"
-                    >
-                        ✖
-                    </button>
-                </div>
-
-                {/* Conversation */}
-                <div className="h-64 overflow-y-auto space-y-4 mb-4">
-                    {conversation.map((item, index) => (
-                        <div
-                            key={index}
-                            className={`flex ${item.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                        >
-                            <div
-                                className={`p-3 rounded-lg max-w-xs ${item.role === 'user' ? 'bg-[#8E72D7] text-white' : ' text-gray-300'
-                                    }`}
-                            >
-                                {item.message}
+                                <button
+                                    onClick={handleSendMessage}
+                                    disabled={isLoading}
+                                    className="ml-4 bg-white p-3 rounded-full"
+                                    style={{ minWidth: '48px', minHeight: '48px' }}
+                                >
+                                    {isLoading ? (
+                                        <div className="animate-spin w-6 h-6 border-2 border-t-transparent border-purple-600 rounded-full"></div>
+                                    ) : (
+                                        <ArrowForwardIcon style={{ fontSize: '24px', color: 'black' }} />
+                                    )}
+                                </button>
                             </div>
                         </div>
-                    ))}
-                </div>
 
-                {/* Input Section */}
-                <div className="flex items-center">
-                    <input
-                        type="text"
-                        placeholder="Type your question..."
-                        value={inputValueQ}
-                        onChange={(e) => setInputValueQ(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                        className="flex-1 p-3 rounded-full bg-transparent border border-gray-500 text-white placeholder-gray-400 focus:outline-none"
-                    />
-                    <button
-                        onClick={handleSendMessage}
-                        disabled={isLoading}
-                        className="ml-4 bg-white p-3 rounded-full"
-                        style={{ minWidth: '48px', minHeight: '48px' }}
-                    >
-                        {isLoading ? (
-                            <div className="animate-spin w-6 h-6 border-2 border-t-transparent border-purple-600 rounded-full"></div>
-                        ) : (
-                            <ArrowForwardIcon style={{ fontSize: '24px', color: 'black' }} />
-                        )}
-                    </button>
+                    </div>
                 </div>
-            </div>
+            </Reveal>
+
+
+
             {/* Insights Section */}
             {insights && insights.length > 0 && (
                 <div className="text-white flex flex-col w-full items-center mt-7">

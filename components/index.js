@@ -20,6 +20,8 @@ import FAQSection from './FAQSection';
 import YC from './YC';
 import VideoAnalysisPage from './Home';
 import Chat from './Chat';
+import Practice from './Practice';
+import CreatorSearch from './Creators';
 export {
   FAQ,
   CreatorItem,
@@ -43,4 +45,6 @@ export {
   YC,
   VideoAnalysisPage,
   Chat,
+  Practice,
+  CreatorSearch,
 };
