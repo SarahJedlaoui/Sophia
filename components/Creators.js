@@ -166,7 +166,7 @@ const CreatorSearch = () => {
                                     <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                                     <div className="text-left mb-10">
                                         <h2 className="text-3xl font-bold" style={{ fontFamily: 'Playfair' }}>
-                                            Esther's Expertise
+                                            Esther&apos;s Expertise
                                         </h2>
                                         <p className="text-sm text-gray-300 mt-2">
                                             Get practical tools and exercises to transform your relationships.
