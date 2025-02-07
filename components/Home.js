@@ -106,7 +106,7 @@ const VideoAnalysisPage = () => {
                         This Week&apos;s Highlights
                     </h2>
                 </Reveal>
-                <div className="grid grid-cols-4 gap-2 md:grid-cols-4 lg:grid-cols-6">
+                <div className="grid grid-cols-4 gap-2 md:grid-cols-4 lg:grid-cols-5">
                     {/* Purple Card */}
                     <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                         <div className="relative text-center bg-[#7A65B0] rounded-lg p-4 flex flex-col items-center justify-between h-64">
@@ -114,7 +114,7 @@ const VideoAnalysisPage = () => {
                             <img
                                 src="/vid3.png" // Replace with the actual path to your image
                                 alt="Relationship Reboot Coaching"
-                                className="w-full h-auto max-w-xs mb-3 rounded-[20px] object-cover"
+                                className="w-full h-auto max-w-xs lg:max-h-28 md:max-h-28 mb-3 rounded-[20px] object-cover"
                             />
                             {/* Title */}
                             <h3 className="text-white text-sm lg:text-lg font-medium mb-3" style={{ fontFamily: 'Playfair' }}>
@@ -264,7 +264,7 @@ const VideoAnalysisPage = () => {
                 </div>
             </Reveal>
 
-            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+            
                 <div className="relative text-white mt-10">
                     {/* Blurred Background */}
                     <div
@@ -275,10 +275,11 @@ const VideoAnalysisPage = () => {
 
                         }}
                     ></div>
-
                     {/* Content */}
                     <div className="relative z-10">
                         {/* Video Section */}
+                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+
                         <div>
                             <h2
                                 className="text-xl md:text-2xl lg:text-3xl mb-5 text-left mt-5"
@@ -355,8 +356,10 @@ const VideoAnalysisPage = () => {
                                 </div>
                             </div>
                         </div>
-
+                        </Reveal>
                         {/* Cards Section */}
+                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+
                         <div className="w-full text-white mt-10">
                             <h2
                                 className="text-xl md:text-2xl lg:text-3xl text-left mb-6"
@@ -426,9 +429,10 @@ const VideoAnalysisPage = () => {
                                 </div>
                             </div>
                         </div>
+                        </Reveal>
                     </div>
                 </div>
-            </Reveal>
+            
 
 
             {/* Highlights Section2 */}

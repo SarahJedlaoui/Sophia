@@ -177,7 +177,7 @@ const Chat = () => {
                 </div>
 
             </div>
-            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+            
                 <div className="relative text-white mt-10 mb-10">
                     {/* Blurred Background */}
                     <div
@@ -193,9 +193,12 @@ const Chat = () => {
                     <div className="relative z-10">
                         {/* video Section */}
                         <div>
+                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                             <h2 className="text-xl md:text-2xl lg:text-3xl  mb-5 text-left md:text-left lg:text-left mt-5" style={{ fontFamily: 'Playfair' }}>
                                 Highlights of the Video
                             </h2>
+                            </Reveal>
+                            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                             <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center mt-5 gap-6">
                                 {/* Video Card */}
                                 <div className="relative w-full lg:w-1/2 aspect-video">
@@ -259,7 +262,7 @@ const Chat = () => {
                                     </button>
                                 </div>
                             </div>
-
+                            </Reveal>
                         </div>
                         {/* question Section */}
                         
@@ -329,7 +332,7 @@ const Chat = () => {
 
                     </div>
                 </div>
-            </Reveal>
+           
 
 
 
