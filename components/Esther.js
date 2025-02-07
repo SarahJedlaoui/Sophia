@@ -109,10 +109,17 @@ const CreatorProfileSection = () => {
                         {/* Stats */}
                         <p className="text-lg font-medium mb-4">2.9M followers</p>
                         <p className="text-sm text-gray-300 mb-4">#Relationships #Love #Desire #Emotions</p>
-                        {/* Description */}
-                        <div className="relative z-10 w-full bg-white bg-opacity-10 backdrop-blur-xl rounded-2xl p-6">
+                        {/* Description Section */}
+                        <div
+                            className="relative z-10 w-full bg-white bg-opacity-10 backdrop-blur-xl rounded-2xl p-6"
+                            style={{
+                                backgroundColor: "rgba(255, 255, 255, 0.1)",  // Ensure transparency
+                                WebkitBackdropFilter: "blur(20px)",  // Safari fix
+                                backdropFilter: "blur(20px)",  // General support
+                            }}
+                        >
                             <p className="text-sm text-white mb-4">
-                                Dive deep into Esther’s world of relationship psychology through engaging
+                                Dive deep into Esther&apos;s world of relationship psychology through engaging
                                 videos, insightful podcasts, and articles on building stronger emotional
                                 connections.
                             </p>
@@ -124,6 +131,7 @@ const CreatorProfileSection = () => {
                                 </button>
                             </div>
                         </div>
+
 
 
 
