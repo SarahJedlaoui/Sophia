@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Reveal } from 'react-awesome-reveal';
 import { fadeInUp, fadeInLeft } from '@/keyframes';
+import Link from 'next/link';
 
 const CreatorSearch = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -15,6 +16,7 @@ const CreatorSearch = () => {
             description:
                 'Dive deep into Esther’s world of relationship psychology through engaging videos, insightful podcasts, and articles on building stronger emotional connections.',
             image: '/Esther.png',
+            link:'/esther'
         },
         {
             name: 'John Doe',
@@ -23,6 +25,7 @@ const CreatorSearch = () => {
             description:
                 'Helping you achieve your goals through proven coaching techniques and actionable insights.',
             image: '/John.png',
+             link:'/esther'
         },
         // Add more creators as needed
     ];
@@ -59,7 +62,7 @@ const CreatorSearch = () => {
             {
                 breakpoint: 768, // Mobile view
                 settings: {
-                    slidesToShow: 1,
+                    slidesToShow: 1.1,
                 },
             },
         ],
@@ -112,9 +115,11 @@ const CreatorSearch = () => {
                                 <div className="flex items-center justify-between">
                                     {/* Name and Button */}
                                     <h3 className="text-xl font-bold text-white">{creator.name}</h3>
+                                    <Link href={creator.link} passHref>
                                     <button className="py-1 px-1 bg-white opacity-70 text-black rounded-full text-sm">
                                         View profile
                                     </button>
+                                    </Link>
                                 </div>
                                 <p className="text-sm text-gray-300">{creator.username}</p>
                                 <p className="text-sm mt-2 text-white">{creator.profession}</p>
