@@ -91,6 +91,7 @@ const CreatorSearch = () => {
                     Creator of the Month
                 </h2>
             </Reveal>
+
             {/* Creators Section */}
             <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                 <div className="grid grid-cols-1 gap-5">
@@ -160,115 +161,120 @@ const CreatorSearch = () => {
                 </div>
             </Reveal>
 
-            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
-                <div className="min-h-screen bg-[#2D2B2B] text-white px-5 py-10">
-                    {/* Section Title */}
-                    <div className="text-left mb-10">
-                        <h2 className="text-3xl font-bold" style={{ fontFamily: 'Playfair' }}>
-                            Our creators Expertise
-                        </h2>
-                        <p className="text-sm text-gray-300 mt-2">
-                            Get practical tools and exercises to transform your life
-                        </p>
-                    </div>
-
-                    {/* Grid Section */}
-                    <div
-                        className="grid grid-cols-2 gap-4 md:grid-cols-2"
-                        style={{
-                            gridTemplateRows: 'auto auto',
-                        }}
-                    >
-                        {/* Card 1 (Tall Card) */}
-                        <div
-                            className="bg-[#323232] rounded-lg overflow-hidden flex flex-col justify-center items-center"
-                            style={{ height: '400px', backgroundColor: 'rgba(74, 62, 62, 0.7)' }}
-                        >
-                            {/* Image Section */}
-                            <div className="w-full flex justify-center items-center p-2">
-                                <img
-                                    src="/vid1.png"
-                                    alt="Relationship Reboot Coaching"
-                                    className="w-full rounded-50 h-auto object-cover"
-                                />
-                            </div>
-                            {/* Content Section */}
-                            <div className="w-full flex flex-col items-center justify-center">
-                                <h3 className="text-md md:text-lg font-semibold text-center mb-5">Relationship Reboot Coaching</h3>
-                                <button className="bg-white opacity-70 text-black py-1 px-4 rounded-full text-sm font-medium hover:bg-gray-200">
-                                    Discover More
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Card 2 (Smaller Card) */}
-                        <div
-                            className="bg-[#FFFFFF] rounded-lg overflow-hidden flex flex-col justify-center items-center"
-                            style={{ height: '300px', backgroundColor: 'rgba(202, 184, 184, 0.7)' }}
-                        >
-                            {/* Image Section */}
-                            <div className="w-full flex justify-center items-center p-4">
-                                <img
-                                    src="/vid1.png"
-                                    alt="Emotional Resilience Mastery"
-                                    className="w-full max-h-40 rounded-70 object-cover"
-                                />
-                            </div>
-                            {/* Content Section */}
-                            <div className="w-full flex flex-col items-center justify-center">
-                                <h3 className="text-md md:text-lg font-semibold text-center mb-2">Emotional Resilience Mastery</h3>
-                                <button className="bg-white opacity-70 text-black py-2 px-4 rounded-full text-sm font-medium hover:bg-gray-200">
-                                    Discover More
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Card 3 (Smaller Card) */}
-                        <div
-                            className="bg-[#4A3E3E] rounded-lg overflow-hidden flex flex-col justify-center items-center p-4"
-                            style={{ height: '300px', backgroundColor: 'rgba(202, 184, 184, 0.7)' }}
-                        >
-                            {/* Image Section */}
-                            <div className="w-full flex justify-center items-center mb-4">
-                                <img
-                                    src="/vid1.png"
-                                    alt="Emotional Intelligence Coaching"
-                                    className="w-full max-h-40 object-cover"
-                                />
-                            </div>
-                            {/* Content Section */}
-                            <div className="w-full flex flex-col items-center justify-center">
-                                <h3 className="text-md md:text-lg font-semibold text-center mb-2">Emotional Intelligence Coaching</h3>
-                                <button className="bg-white opacity-70 text-black py-2 px-4 rounded-full text-sm font-medium hover:bg-gray-200">
-                                    Discover More
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Card 4 (Tall Card) */}
-                        <div
-                            className="bg-[#323232] rounded-lg overflow-hidden flex flex-col justify-center items-center -mt-24 p-2"
-                            style={{ height: '400px', backgroundColor: 'rgba(74, 62, 62, 0.7)' }}
-                        >
-                            {/* Image Section */}
-                            <div className="w-full flex justify-center items-center mb-4">
-                                <img
-                                    src="/vid1.png"
-                                    alt="Rebuilding Trust Modules"
-                                    className="w-full h-auto object-cover"
-                                />
-                            </div>
-                            {/* Content Section */}
-                            <div className="w-full flex flex-col items-center justify-center">
-                                <h3 className="text-md md:text-lg font-semibold text-center mb-2">Rebuilding Trust Modules</h3>
-                                <button className="bg-white opacity-70 text-black py-2 px-4 rounded-full text-sm font-medium hover:bg-gray-200">
-                                    Discover More
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Reveal>
+             <div className="min-h-screen text-white px-5 py-10">
+                                    {/* Section Title */}
+                                    <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                                    <div className="text-left mb-10">
+                                        <h2 className="text-3xl font-bold" style={{ fontFamily: 'Playfair' }}>
+                                            Esther's Expertise
+                                        </h2>
+                                        <p className="text-sm text-gray-300 mt-2">
+                                            Get practical tools and exercises to transform your relationships.
+                                        </p>
+                                    </div>
+                                    </Reveal>
+                                    {/* Grid Section */}
+                                    <div
+                                        className="grid grid-cols-2 gap-4 md:grid-cols-2"
+                                        style={{
+                                            gridTemplateRows: 'auto auto',
+                                        }}
+                                    >
+                                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                                        {/* Card 1 (Tall Card) */}
+                                        <div
+                                            className="bg-[#323232] rounded-lg overflow-hidden flex flex-col justify-center items-center"
+                                            style={{ height: '400px', backgroundColor: 'rgba(74, 62, 62, 0.7)' }}
+                                        >
+                                            {/* Image Section */}
+                                            <div className="w-full flex justify-center items-center p-2">
+                                                <img
+                                                    src="/vid1.png"
+                                                    alt="Relationship Reboot Coaching"
+                                                    className="w-full max-w-xs md:max-w-xs lg:max-w-xs rounded-50 h-auto md:max-h-64 lg:max-h-64 object-cover"                                    />
+                                            </div>
+                                            {/* Content Section */}
+                                            <div className="w-full flex flex-col items-center justify-center">
+                                                <h3 className="text-md md:text-lg font-semibold text-center mb-5">Relationship Reboot Coaching</h3>
+                                                <button className="bg-white opacity-70 text-black py-1 px-4 rounded-full text-sm font-medium hover:bg-gray-200">
+                                                    Discover More 
+                                                </button>
+                                            </div>
+                                        </div>
+                                        </Reveal>
+                                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                                        {/* Card 2 (Smaller Card) */}
+                                        <div
+                                            className="bg-[#FFFFFF] rounded-lg overflow-hidden flex flex-col justify-center items-center"
+                                            style={{ height: '300px', backgroundColor: 'rgba(202, 184, 184, 0.7)' }}
+                                        >
+                                            {/* Image Section */}
+                                            <div className="w-full flex justify-center items-center p-4">
+                                                <img
+                                                    src="/vid2.png"
+                                                    alt="Emotional Resilience Mastery"
+                                                    className="w-full max-w-xs md:max-w-xs lg:max-w-xs max-h-40 rounded-70 object-cover"
+                                                />
+                                            </div>
+                                            {/* Content Section */}
+                                            <div className="w-full flex flex-col items-center justify-center">
+                                                <h3 className="text-md md:text-lg font-semibold text-center mb-2">Emotional Resilience Mastery</h3>
+                                                <button className="bg-white opacity-70 text-black py-2 px-4 rounded-full text-sm font-medium hover:bg-gray-200">
+                                                    Discover More 
+                                                </button>
+                                            </div>
+                                        </div>
+                                        </Reveal>
+                                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                                        {/* Card 3 (Smaller Card) */}
+                                        <div
+                                            className="bg-[#4A3E3E] rounded-lg overflow-hidden flex flex-col justify-center items-center p-4"
+                                            style={{ height: '300px', backgroundColor: 'rgba(202, 184, 184, 0.7)' }}
+                                        >
+                                            {/* Image Section */}
+                                            <div className="w-full flex justify-center items-center mb-4">
+                                                <img
+                                                    src="/vid3.png"
+                                                    alt="Emotional Intelligence Coaching"
+                                                    className="w-full max-w-xs md:max-w-xs lg:max-w-xs max-h-40 object-cover"
+                                                />
+                                            </div>
+                                            {/* Content Section */}
+                                            <div className="w-full flex flex-col items-center justify-center">
+                                                <h3 className="text-md md:text-lg font-semibold text-center mb-2">Emotional Intelligence Coaching</h3>
+                                                <button className="bg-white opacity-70 text-black py-2 px-4 rounded-full text-sm font-medium hover:bg-gray-200">
+                                                    Discover More 
+                                                </button>
+                                            </div>
+                                        </div>
+                                        </Reveal>
+                                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                                        {/* Card 4 (Tall Card) */}
+                                        <div
+                                            className="bg-[#323232] rounded-lg overflow-hidden flex flex-col justify-center items-center -mt-24 p-2"
+                                            style={{ height: '400px', backgroundColor: 'rgba(74, 62, 62, 0.7)' }}
+                                        >
+                                            {/* Image Section */}
+                                            <div className="w-full flex justify-center items-center mb-4">
+                                                <img
+                                                    src="/R.jpg"
+                                                    alt="Rebuilding Trust Modules"
+                                                    className="w-full max-w-xs md:max-w-xs lg:max-w-xs rounded-50 h-auto md:max-h-64 lg:max-h-64 object-cover"  
+                                                />
+                                            </div>
+                                            {/* Content Section */}
+                                            <div className="w-full flex flex-col items-center justify-center">
+                                                <h3 className="text-md md:text-lg font-semibold text-center mb-2">Rebuilding Trust Modules</h3>
+                                                <button className="bg-white opacity-70 text-black py-2 px-4 rounded-full text-sm font-medium hover:bg-gray-200">
+                                                    Discover More 
+                                                </button>
+                                            </div>
+                                        </div>
+                                        </Reveal>
+                                        
+                                    </div>
+                                </div>
+                           
 
 
 

@@ -7,7 +7,7 @@ import {
   FeaturedArtworks,
   Footer,
   Hero,
-  Navbar,
+  Navbar2,
   Sponsor,
   TopCreator,
   HowItWorks,
@@ -21,7 +21,7 @@ import { fadeInDownShorter } from '@/keyframes';
 const Home = () => {
   return (
     <div className='h-full main_bg text-white overflow-hidden' id='top'>
-      <Navbar />
+      <Navbar2 />
       <Hero />
       <FAQ />
       <HowItWorks />

@@ -2,7 +2,7 @@ import {
     Button,
     Collections,
     Footer,
-    Navbar,
+    Navbar2,
    
   } from '@/components';
   import React from 'react';
@@ -11,7 +11,7 @@ import {
   const Home = () => {
     return (
       <div className='h-full main_bg text-white overflow-hidden' id='top'>
-        <Navbar />
+        <Navbar2 />
         <Collections />
         {/** 
         <Collections />

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import {
     Footer,
-    Navbar,
+    Navbar2,
     Practice
 } from '@/components';
 import React from 'react';
@@ -19,7 +19,7 @@ const Home = () => {
             </Head>
 
             <div className='h-full main_bg text-white overflow-hidden' id='top'>
-                <Navbar />
+                <Navbar2 />
                 <Practice />
                 <Footer />
             </div>

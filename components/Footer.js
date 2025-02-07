@@ -10,7 +10,7 @@ const Footer = () => {
   }
   return (
     <Container className={'pb-10'}>
-      <div className='flex flex-col lg:flex-row mb-16'>
+      <div className='flex flex-col lg:flex-row mb-16 mt-10'>
         <div className='w-[300px] mb-10 lg:mb-0 mr-10 lg:mr-28'>
           <Logo />
           <p className='mt-5'>
