@@ -5,7 +5,21 @@ module.exports = {
       sans: ['Poppins', 'sans-serif','Playfair','Wix Madefor Display'],
     },
     
-    extend: {},
+    extend: {
+
+      backdropBlur: {
+        xs: '2px',
+        sm: '4px',
+        md: '8px',
+        lg: '12px',
+        xl: '20px',
+        '2xl': '30px',
+      }
+    },
+    variants: {
+      extend: {
+        backdropBlur: ['responsive'],
+      }
   },
   plugins: [],
 };
