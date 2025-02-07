@@ -110,7 +110,7 @@ const CreatorProfileSection = () => {
                         <p className="text-lg font-medium mb-4">2.9M followers</p>
                         <p className="text-sm text-gray-300 mb-4">#Relationships #Love #Desire #Emotions</p>
                         {/* Description */}
-                        <div className="relative z-10 w-full bg-white bg-opacity-20 backdrop-blur-xl rounded-2xl p-6">
+                        <div className="relative z-10 w-full bg-white bg-opacity-10 backdrop-blur-xl rounded-2xl p-6">
                             <p className="text-sm text-white mb-4">
                                 Dive deep into Esther’s world of relationship psychology through engaging
                                 videos, insightful podcasts, and articles on building stronger emotional
