@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Reveal } from 'react-awesome-reveal';
-import { fadeInUp } from '@/keyframes'; 
+import { fadeInUp } from '@/keyframes';
 import { Button, Container } from '.';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
@@ -89,7 +89,7 @@ const Practice = () => {
                     <div className="relative z-10">
                         {/* Cards Section */}
                         <div className="w-full text-white">
-                            <div className="grid grid-cols-3 sm:grid-cols-3 gap-2 md:gap-5 md:px-20">
+                            <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-5 ">
                                 {/* Card 1 */}
                                 <div
                                     className="bg-[#4A3E3E] bg-opacity-70 pt-5 rounded-lg flex flex-col items-center"
@@ -98,7 +98,7 @@ const Practice = () => {
                                     }}
                                 >
                                     <h3
-                                        className="text-xs md:text-xl lg:text-xl text-center font-medium mb-4"
+                                        className="text-xs md:text-xl lg:text-xl text-left font-medium mb-4"
                                         style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}
                                     >
                                         Deep Work Challenge
@@ -119,7 +119,7 @@ const Practice = () => {
                                 >
 
                                     <h3
-                                        className="text-xs md:text-xl lg:text-xl text-center font-medium mb-4"
+                                        className="text-xs md:text-xl lg:text-xl text-left px-4 font-medium mb-4"
                                         style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}
                                     >
                                         Mastering Effective Feedback
@@ -138,13 +138,53 @@ const Practice = () => {
                                     }}
                                 >
                                     <h3
-                                        className="text-xs md:text-xl lg:text-xl text-center font-medium mb-4"
+                                        className="text-xs md:text-xl lg:text-xl text-left px-4 font-medium mb-4"
                                         style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}
                                     >
                                         Make your Relationship Work
                                     </h3>
                                     <img
                                         src="/icons/practice3.svg"
+                                        alt="Make your Relationship Work"
+                                        className="w-20 h-20 md:w-28 md:h-28"
+                                    />
+                                </div>
+                                {/* Card 4 */}
+                                <div
+                                    className="bg-[#4A3E3E] hidden bg-opacity-70 pt-5 rounded-lg md:flex flex-col items-center"
+                                    style={{
+                                        backgroundColor: 'rgba(74, 62, 62, 0.7)', // Apply transparency using rgba
+                                    }}
+                                >
+                                    <h3
+                                        className="text-xs md:text-xl lg:text-xl text-left px-4 font-medium mb-4"
+                                        style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}
+                                    >
+                                        Better  emotional
+                                        intelligence
+                                    </h3>
+                                    <img
+                                        src="/icons/practice1.svg"
+                                        alt="Make your Relationship Work"
+                                        className="w-20 h-20 md:w-28 md:h-28"
+                                    />
+                                </div>
+                                {/* Card 5 */}
+                                <div
+                                    className="bg-[#4A3E3E] hidden bg-opacity-70 pt-5 rounded-lg lg:flex flex-col items-center"
+                                    style={{
+                                        backgroundColor: 'rgba(74, 62, 62, 0.7)',
+                                    }}
+                                >
+                                    <h3
+                                        className="text-xs md:text-xl lg:text-xl text-left px-4 font-medium mb-4"
+                                        style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}
+                                    >
+                                        Mastering Effective
+                                        Feedback
+                                    </h3>
+                                    <img
+                                        src="/icons/practice2.svg"
                                         alt="Make your Relationship Work"
                                         className="w-20 h-20 md:w-28 md:h-28"
                                     />
@@ -251,11 +291,13 @@ const Practice = () => {
                 <div className="flex flex-row lg:flex-row  text-white rounded-lg overflow-hidden shadow-lg mt-10">
                     {/* Left Section: Image and Title */}
                     <div className="bg-[#6B7B88] flex flex-col items-center justify-between p-4 w-1/3 lg:w-1/4">
-                        <img
-                            src="/coverb.jpeg" // Replace with the actual image URL
-                            alt="Emotional Intelligence Coaching"
-                            className="w-full h-full rounded-lg object-cover"
-                        />
+                        <div className="w-full h-[100px] lg:h-[150px] flex items-center">
+                            <img
+                                src="/coverb.jpeg"
+                                alt="Emotional Intelligence Coaching"
+                                className="w-full h-full object-cover rounded-lg"
+                            />
+                        </div>
                         <h3 className="text-white text-lg lg:text-xl font-bold mt-4" style={{ fontFamily: 'Playfair' }}>
                             Emotional Intelligence Coaching
                         </h3>
@@ -313,11 +355,13 @@ const Practice = () => {
                 <div className="flex flex-row lg:flex-row  text-white rounded-lg overflow-hidden shadow-lg mt-10">
                     {/* Left Section: Image and Title */}
                     <div className="bg-[#6B7B88] flex flex-col items-center justify-between p-4 w-1/3 lg:w-1/4">
-                        <img
-                            src="/vid2.png" // Replace with the actual image URL
-                            alt="Emotional Intelligence Coaching"
-                            className="w-full h-full rounded-lg object-cover"
-                        />
+                        <div className="w-full h-[100px] lg:h-[150px] flex items-center">
+                            <img
+                                src="/vid3.png" // Replace with the actual image URL
+                                alt="Emotional Intelligence Coaching"
+                                className="w-full h-full rounded-lg object-cover"
+                            />
+                        </div>
                         <h3 className="text-white text-lg lg:text-xl font-bold mt-4" style={{ fontFamily: 'Playfair' }}>
                             Management Mastery Coaching
                         </h3>
