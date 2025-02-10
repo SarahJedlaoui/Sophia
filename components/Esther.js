@@ -124,7 +124,7 @@ const CreatorProfileSection = () => {
                                 connections.
                             </p>
                             <div className="flex justify-end">
-                                <button className="flex items-center px-4 py-2 border text-white font-medium rounded-full hover:bg-gray-700 transition duration-300">
+                                <button className="flex items-center px-4 py-2 border text-white font-medium rounded-full hover:bg-gray-300 transition duration-300">
                                     <span className="mr-2">Ask Esther</span>
                                     {/* Replace the below img src with your icon file */}
                                     <img src="/Vector.svg" alt="Icon" className="w-5 h-5" />
