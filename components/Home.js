@@ -115,7 +115,7 @@ const VideoAnalysisPage = () => {
             {
                 breakpoint: 768, // For mobile screens
                 settings: {
-                    slidesToShow: 2.02, // Show 3.1 slides
+                    slidesToShow: 1.5, // Show 3.1 slides
                     centerMode: true,
                 },
             },
