@@ -53,11 +53,11 @@ const Hero = () => {
           <Reveal keyframes={fadeInUp} duration={1000} delay={200}>
             <Button
               isLink
-              href={'/#about'}
+              href={'/home'}
               className={'mr-3'}
               variant={'primary'}
             >
-              Add your video
+              Try it Now
             </Button>
           </Reveal>
         

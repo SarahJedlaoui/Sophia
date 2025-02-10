@@ -3,6 +3,9 @@ import { Reveal } from 'react-awesome-reveal';
 import { fadeInUp } from '@/keyframes'; // Include this keyframe animation
 import { Button, Container } from '.';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 
@@ -67,14 +70,65 @@ const VideoAnalysisPage = () => {
     };
 
 
+
+    const carouselData = [
+        {
+            title: "Glucose Revolution",
+            image: "/hero/carousel1.png",
+        },
+        {
+            title: "Ramit Sethi",
+            image: "/hero/carousel2.png",
+        },
+        {
+            title: "Esther Perel",
+            image: "/hero/carousel3.png",
+        },
+        {
+            title: "Glucose Revolution",
+            image: "/hero/carousel4.png",
+        },
+        {
+            title: "Ramit Sethi",
+            image: "/hero/carousel5.png",
+        },
+    ];
+
+    const settings = {
+        dots: false,
+        arrows: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 5.1,
+        centerMode: true,
+        centerPadding: "0",
+        focusOnSelect: true,
+        arrows: true,
+        responsive: [
+            {
+                breakpoint: 1024, // For medium screens (tablets)
+                settings: {
+                    slidesToShow: 4.1, // Show 4.1 slides
+                    centerMode: true,
+                },
+            },
+            {
+                breakpoint: 768, // For mobile screens
+                settings: {
+                    slidesToShow: 2.02, // Show 3.1 slides
+                    centerMode: true,
+                },
+            },
+        ],
+    };
+
     return (
         <Container className="min-h-screen bg-black text-white p-5">
             {/* Welcome Section */}
             <Reveal keyframes={fadeInUp} duration={800} delay={50}>
-                <div className="text-left  lg:text-center md:text-center mb-10">
-                    <h1 className="text-xl  lg:text-4xl md:text-4xl lg:font-bold"
+                <div className="text-left  lg:text-left md:text-left mb-10">
+                    <h1 className="text-xl  lg:text-3xl md:text-3xl lg:font-bold"
                         style={{ fontFamily: 'Playfair' }} >Welcome Back, Alex.</h1>
-                    <p className="text-sm lg:text-lg md:text-lg mt-2 " style={{ fontFamily: 'Playfair' }} >Ready to learn something new today?</p>
                     <div className="flex justify-center items-center mt-5 w-full">
                         <div className="relative w-full ">
                             <input
@@ -99,340 +153,201 @@ const VideoAnalysisPage = () => {
 
                 </div>
             </Reveal>
-            {/* Highlights Section */}
-            <div>
-                <Reveal keyframes={fadeInUp} duration={800} delay={50}>
-                    <h2 className="text-xl md:text-2xl lg:text-3xl mb-5 text-left md:text-left lg:text-left" style={{ fontFamily: 'Playfair' }}>
-                        This Week&apos;s Highlights
-                    </h2>
-                </Reveal>
-                <div className="grid grid-cols-4 gap-2 md:grid-cols-4 lg:grid-cols-5">
-                    {/* Purple Card */}
-                    <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+
+
+            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                {/* Blurry Card Container */}
+                <div
+                    className="relative bg-white bg-opacity-10 rounded-lg p-6 flex flex-col lg:flex-row w-full gap-6 "
+                    style={{
+                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        WebkitBackdropFilter: "blur(20px)",
+                        backdropFilter: "blur(20px)",
+                    }}
+                >
+                    {/* Left Chat Section */}
+                    <div className="flex flex-col justify-between w-full lg:w-1/3 h-full">
+                        {/* Title Section */}
+                        <div>
+                            <h2 className="text-md md:text-md lg:text-md mb-5" style={{ fontFamily: "Playfair" }}>
+                                You watched videos about dopamine fasting, personal finance tips, and skin care.
+                            </h2>
+                        </div>
+
+                        {/* Chat Input and Response Logic */}
+                        <div className="mt-auto">
+                            {!chatResponse ? (
+                                // Input Section
+                                <div className="flex flex-nowrap items-center w-full gap-2">
+                                    <img
+                                        src="/collections/protocol1.png"
+                                        alt="Profile"
+                                        className="w-12 h-12 rounded-full flex-shrink-0"
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Ask me anything"
+                                        value={inputValueQ}
+                                        onChange={(e) => setInputValueQ(e.target.value)}
+                                        onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
+                                        className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none"
+                                        style={{ fontSize: "14.29px" }}
+                                    />
+                                    <button
+                                        onClick={handleSendMessage}
+                                        disabled={isLoading}
+                                        className="bg-white p-3 rounded-full flex-shrink-0"
+                                        style={{ minWidth: "48px", minHeight: "48px" }}
+                                    >
+                                        {isLoading ? (
+                                            <div className="animate-spin w-6 h-6 border-2 border-t-transparent border-purple-600 rounded-full"></div>
+                                        ) : (
+                                            <ArrowForwardIcon style={{ fontSize: "24px", color: "black" }} />
+                                        )}
+                                    </button>
+                                </div>
+                            ) : (
+                                // Chat Response Section
+                                <div className="w-full mt-5 p-2 rounded-lg" style={{ backgroundColor: "rgba(74, 62, 62, 0.7)" }}>
+                                    <div className="flex items-center">
+                                        <img
+                                            src="/collections/protocol1.png"
+                                            alt="Profile"
+                                            className="w-10 h-10 rounded-full"
+                                        />
+                                        <p className="ml-4 text-sm font-medium">{inputValueQ}</p>
+                                    </div>
+                                    <div className="mt-4 p-0 rounded-lg text-sm text-white">{chatResponse}</div>
+                                    <div className="flex justify-end space-x-4 mt-4">
+                                        <button
+                                            onClick={() => {
+                                                setChatResponse(null);
+                                                setInputValueQ("");
+                                            }}
+                                            className="px-2 py-1 border text-xs text-white rounded-full"
+                                        >
+                                            End Chat
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setChatResponse(null); // Clear response for next input
+                                                setInputValueQ(""); // Reset input
+                                            }}
+                                            className="px-3 py-1 bg-white text-xs text-black rounded-full"
+                                        >
+                                            Continue
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Right Cards Section */}
+                    <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full lg:w-2/3">
+                        {/* Purple Card */}
                         <div className="relative text-center bg-[#7A65B0] rounded-lg p-4 flex flex-col items-center justify-between h-64">
-                            {/* Image with rectangle and rounded corners */}
                             <img
-                                src="/vid3.png" // Replace with the actual path to your image
+                                src="/coverb.jpeg"
                                 alt="Relationship Reboot Coaching"
                                 className="w-full h-auto max-w-xs lg:max-h-28 md:max-h-28 mb-3 rounded-[20px] object-cover"
                             />
-                            {/* Title */}
-                            <h3 className="text-white text-sm lg:text-lg font-medium mb-3" style={{ fontFamily: 'Playfair' }}>
+                            <h3 className="text-white text-sm lg:text-lg font-medium mb-3" style={{ fontFamily: "Playfair" }}>
                                 Relationship Reboot Coaching
                             </h3>
-                            {/* Button */}
                             <button
                                 className="bg-white text-black py-2 px-4 rounded-full text-xs font-medium hover:bg-gray-200"
-                                onClick={() => alert('Start Practice clicked!')} // Replace with your logic
+                                onClick={() => alert("Start Practice clicked!")}
                             >
                                 Start Practice
                             </button>
                         </div>
-                    </Reveal>
 
-                    {/* Predefined Cards */}
-                    <Reveal keyframes={fadeInUp} duration={800} delay={100}>
+                        {/* Static Cards */}
                         <div className="relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
-                            <h3 className="text-white text-center text-xs lg:text-xl md:text-xl absolute top-1">Enhancing Focus Through Routine</h3>
-                            <img
-                                src="/vid1.png"
-                                alt="Card 1"
-                                className="rounded-md w-full h-full object-cover"
-                            />
+                            <h3 className="text-white text-center text-xs lg:text-lg md:text-lg absolute top-1">
+                                Enhancing Focus Through Routine
+                            </h3>
+                            <img src="/hero/card1.png" alt="Card 1" className="rounded-md w-full h-full object-cover" />
                         </div>
-                    </Reveal>
-                    <Reveal keyframes={fadeInUp} duration={800} delay={200}>
                         <div className="relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
-                            <h3 className="text-white text-center text-xs lg:text-xl md:text-xl absolute top-1">Mastering Effective Feedback</h3>
-                            <img
-                                src="/vid2.png"
-                                alt="Card 2"
-                                className="rounded-md w-full h-full object-cover"
-                            />
+                            <h3 className="text-white text-center text-xs lg:text-lg md:text-lg absolute top-1">
+                                Mastering Effective Feedback
+                            </h3>
+                            <img src="/hero/card2.png" alt="Card 2" className="rounded-md w-full h-full object-cover" />
                         </div>
-                    </Reveal>
-
-                    {/* User-Generated Cards */}
-                    {videoLinks.map((video, index) => (
-                        <Reveal keyframes={fadeInUp} duration={800} delay={index * 100} key={index}>
-                            <div className="relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
-                                <h3 className="absolute top-1 text-white text-center text-xs lg:text-xl md:text-xl">
-                                    {video.status === 'loading' ? 'Your next one is loading' : 'Video Analysis'}
-                                </h3>
-                                {video.status === 'loading' ? (
-                                    <div className="flex justify-center items-center h-full">
-                                        <div className="animate-spin w-8 h-8 border-4 border-t-transparent border-purple-600 rounded-full"></div>
-                                    </div>
-                                ) : (
-                                    <div className="w-full h-full relative">
+                        <div className="hidden md:flex relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
+                            <h3 className="text-white text-center text-xs lg:text-lg md:text-lg absolute top-1">
+                                Mastering Effective Feedback
+                            </h3>
+                            <img src="/hero/card3.png" alt="Card 2" className="rounded-md w-full h-full object-cover" />
+                        </div>
+                        {/* User-Generated Cards */}
+                        {videoLinks.map((video, index) => (
+                            <Reveal keyframes={fadeInUp} duration={800} delay={index * 100} key={index}>
+                                <div className="relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
+                                    <h3 className="absolute top-1 text-white text-center text-xs lg:text-lg md:text-lg">
+                                        {video.status === 'loading' ? 'Your next one is loading' : 'Video Analysis'}
+                                    </h3>
+                                    {video.status === 'loading' ? (
+                                        <div className="flex justify-center items-center h-full">
+                                            <div className="animate-spin w-8 h-8 border-4 border-t-transparent border-purple-600 rounded-full"></div>
+                                        </div>
+                                    ) : (
                                         <iframe
-                                            className="absolute top-0 left-0 w-full h-full rounded-md object-cover"
-                                            src={video.link} // Replace with actual video embedding logic
+                                            className="rounded-md w-full h-full object-cover"
+                                            src={video.link} // Replace with actual video link
                                             title={`Video ${index}`}
                                             frameBorder="0"
                                             allowFullScreen
                                         ></iframe>
-                                    </div>
-                                )}
-                                {video.status === 'loading' && (
-                                    <button
-                                        className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-[#8E72D7] px-3 py-0 text-white rounded-full text-xs"
-                                        onClick={() => handleVideoReady(index)}
-                                    >
-                                        Simulate Ready
-                                    </button>
-                                )}
-                            </div>
-                        </Reveal>
-                    ))}
-                </div>
-
-            </div>
-
-
-            {/* question Section */}
-            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
-                <div className="flex flex-col w-full items-left mt-7">
-
-                    <h2 className="text-lg md:text-xl lg:text-2xl mb-5 text-left md:text-left lg:text-left" style={{ fontFamily: 'Playfair' }}>
-                        We have new topics about Dopamine fasting, finance 101
-                    </h2>
-                    {/* Input Section */}
-
-                    {!chatResponse && ( // Only show the input section when there's no chat response
-                        <div className="flex flex-wrap items-center w-full w-full  gap-4">
-                            <img
-                                src="/collections/protocol1.png"
-                                alt="Profile"
-                                className="w-12 h-12 rounded-full flex-shrink-0"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Ask me anything"
-                                value={inputValueQ}
-                                onChange={(e) => setInputValueQ(e.target.value)}
-                                onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()} // Handle Enter key
-                                className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none w-full sm:w-auto"
-                                style={{ fontSize: '14.29px' }}
-                            />
-                            <button
-                                onClick={handleSendMessage}
-                                disabled={isLoading}
-                                className="bg-white p-3 rounded-full flex-shrink-0"
-                                style={{ minWidth: '48px', minHeight: '48px' }}
-                            >
-                                {isLoading ?
-                                    <div className="animate-spin w-6 h-6 border-2 border-t-transparent border-purple-600 rounded-full"></div>
-                                    : <ArrowForwardIcon style={{ fontSize: '24px', color: 'black' }} />}
-                            </button>
-                        </div>
-                    )}
-
-                    {/* Chat Dropdown Section */}
-                    {chatResponse && (
-                        <div className="w-full max-w-md mt-5 p-4 rounded-lg" style={{ backgroundColor: 'rgba(74, 62, 62, 0.7)' }}>
-                            <div className="flex items-center">
-                                <img
-                                    src="/collections/protocol1.png"
-                                    alt="Profile"
-                                    className="w-10 h-10 rounded-full"
-                                />
-                                <p className="ml-4 text-sm font-medium">{inputValueQ}</p>
-                            </div>
-                            <div className="mt-4 p-0 rounded-lg text-sm">
-                                {chatResponse}
-                            </div>
-                            <div className="flex justify-end space-x-4 mt-4">
-                                <button
-                                    onClick={() => {
-                                        setChatResponse(null);
-                                        setInputValueQ('');
-                                    }} className="px-2 py-1 border text-xs text-white rounded-full"
-                                >
-                                    End Chat
-                                </button>
-                                <button
-                                    onClick={() => (window.location.href = '/dive-in')}
-                                    className="px-3 py-1 bg-white text-xs text-black rounded-full"
-                                >
-                                    Dive In
-                                </button>
-                            </div>
-                        </div>
-                    )}
-
+                                    )}
+                                    {video.status === 'loading' && (
+                                        <button
+                                            className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-[#8E72D7] px-3 py-1 text-white rounded-full text-xs"
+                                            onClick={() => handleVideoReady(index)}
+                                        >
+                                            Simulate Ready
+                                        </button>
+                                    )}
+                                </div>
+                            </Reveal>
+                        ))}
+                    </div>
                 </div>
             </Reveal>
 
-            
-                <div className="relative text-white mt-10">
-                    {/* Blurred Background */}
-                    <div
-                        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                        style={{
-                            backgroundImage: "url('/coverb.jpeg')", // Replace with your background image
-                            filter: "blur(20px)", // Adjust the blur intensity
-
-                        }}
-                    ></div>
-                    {/* Content */}
-                    <div className="relative z-10">
-                        {/* Video Section */}
-                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
-
-                        <div>
-                            <h2
-                                className="text-xl md:text-2xl lg:text-3xl mb-5 text-left mt-5"
-                                style={{ fontFamily: 'Playfair' }}
+            <div className="relative  mx-auto py-10">
+                <h1 className="text-xl  lg:text-3xl md:text-3xl lg:font-bold mb-10"
+                    style={{ fontFamily: 'Playfair' }} >
+                    Discover Fresh Insights
+                </h1>
+                <Slider {...settings}>
+                    {carouselData.map((item, index) => (
+                        <div
+                            key={index}
+                            className="relative text-center transition-transform transform hover:scale-105"
+                        >
+                            {/* Image */}
+                            <div
+                                className="w-full h-80 overflow-hidden rounded-lg shadow-lg"
+                                style={{
+                                    boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.3)",
+                                    transition: "box-shadow 0.3s ease, transform 0.3s ease",
+                                }}
                             >
-                                Esther Perel
-                            </h2>
-                            <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center mt-5 gap-6">
-                                {/* Video Card */}
-                                <div className="relative w-full lg:w-1/2 aspect-video">
-                                    {/* YouTube Video */}
-                                    <iframe
-                                        id="spotlightYouTube"
-                                        className="w-full h-full rounded-lg"
-                                        src="https://www.youtube.com/embed/OkgtwMxbnLw?rel=0&autoplay=1"
-                                        title="YouTube video player"
-                                        frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                        style={{ display: 'none' }} // Initially hide the YouTube video
-                                    ></iframe>
-                                    {/* Video Cover */}
-                                    <img
-                                        id="coverOverlay"
-                                        src="/cover.png"
-                                        alt="Video Cover"
-                                        className="absolute w-full h-full object-cover rounded-lg"
-                                    />
-                                </div>
-
-                                {/* Video Description */}
-                                <div className="w-full lg:w-1/2">
-                                    <div className="text-white space-y-2">
-                                        <p
-                                            className="text-sm lg:text-xl"
-                                            style={{ fontFamily: 'Wix Madefor Display' }}
-                                        >
-                                            Uploaded By: <span className="font-medium">TEDx Talks</span>
-                                        </p>
-                                        <h4
-                                            className="text-md lg:text-3xl md:text-xl"
-                                            style={{ fontFamily: 'Wix Madefor Display' }}
-                                        >
-                                            The quality of your relationships determines the quality of your lives
-                                        </h4>
-
-                                        <p className="text-sm lg:text-lg font-light">Esther Perel - 12 min</p>
-                                    </div>
-                                    {/* Play Button in Description */}
-                                    <button
-                                        onClick={() => {
-                                            const iframe = document.getElementById('spotlightYouTube');
-                                            iframe.style.display = 'block'; // Show the YouTube video
-                                            document.getElementById('coverOverlay').style.display = 'none'; // Hide the overlay
-                                        }}
-                                        className="flex items-center mt-4 bg-white text-black px-4 py-2 rounded-full"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-5 w-5"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M14.752 11.168l-5.197 3.007A1 1 0 018 13.307V6.693a1 1 0 011.555-.832l5.197 3.007a1 1 0 010 1.664z"
-                                            />
-                                        </svg>
-                                        <span className="ml-2">Play</span>
-                                    </button>
-                                </div>
+                                <img
+                                    src={item.image}
+                                    alt={item.title}
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
                         </div>
-                        </Reveal>
-                        {/* Cards Section */}
-                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                    ))}
+                </Slider>
+            </div>
 
-                        <div className="w-full text-white mt-10">
-                            <h2
-                                className="text-xl md:text-2xl lg:text-3xl text-left mb-6"
-                                style={{ fontFamily: 'Playfair' }}
-                            >
-                                Practices ready for you
-                            </h2>
-                            <div className="grid grid-cols-3 sm:grid-cols-3 gap-2 md:gap-5 md:px-20">
-                                {/* Card 1 */}
-                                <div
-                                    className="bg-[#4A3E3E] bg-opacity-70 pt-5 rounded-lg flex flex-col items-center"
-                                    style={{
-                                        backgroundColor: 'rgba(74, 62, 62, 0.7)', // Apply transparency using rgba
-                                    }}
-                                >
-                                    <h3
-                                        className="text-xs md:text-xl lg:text-xl text-center font-medium mb-4"
-                                        style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}
-                                    >
-                                        Deep Work Challenge
-                                    </h3>
-                                    <img
-                                        src="/icons/practice1.svg"
-                                        alt="Deep Work Challenge"
-                                        className="w-20 h-20 md:w-28 md:h-28"
-                                    />
-                                </div>
 
-                                {/* Card 2 */}
-                                <div
-                                    className="bg-[#4A3E3E] bg-opacity-70 pt-5 rounded-lg flex flex-col items-center"
-                                    style={{
-                                        backgroundColor: 'rgba(74, 62, 62, 0.7)', // Apply transparency using rgba
-                                    }}
-                                >
-
-                                    <h3
-                                        className="text-xs md:text-xl lg:text-xl text-center font-medium mb-4"
-                                        style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}
-                                    >
-                                        Mastering Effective Feedback
-                                    </h3>
-                                    <img
-                                        src="/icons/practice2.svg"
-                                        alt="Mastering Effective Feedback"
-                                        className="w-20 h-20 md:w-28 md:h-28 mb-5 md:mb-10"
-                                    />
-                                </div>
-                                {/* Card 3 */}
-                                <div
-                                    className="bg-[#4A3E3E] bg-opacity-70 pt-5 rounded-lg flex flex-col items-center"
-                                    style={{
-                                        backgroundColor: 'rgba(74, 62, 62, 0.7)', // Apply transparency using rgba
-                                    }}
-                                >
-                                    <h3
-                                        className="text-xs md:text-xl lg:text-xl text-center font-medium mb-4"
-                                        style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}
-                                    >
-                                        Make your Relationship Work
-                                    </h3>
-                                    <img
-                                        src="/icons/practice3.svg"
-                                        alt="Make your Relationship Work"
-                                        className="w-20 h-20 md:w-28 md:h-28"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        </Reveal>
-                    </div>
-                </div>
-            
 
 
             {/* Highlights Section2 */}
@@ -442,7 +357,7 @@ const VideoAnalysisPage = () => {
                         Coming next
                     </h2>
                 </Reveal>
-                <div className="grid grid-cols-4 gap-2 md:grid-cols-4 lg:grid-cols-6">
+                <div className="grid grid-cols-4 gap-2 md:grid-cols-5 lg:grid-cols-6">
 
                     {/* Predefined Cards */}
                     <Reveal keyframes={fadeInUp} duration={800} delay={100}>
@@ -480,6 +395,26 @@ const VideoAnalysisPage = () => {
                             <h3 className="text-white text-center text-xs lg:text-xl md:text-xl absolute top-1">Mastering Effective Feedback</h3>
                             <img
                                 src="/vid5.png"
+                                alt="Card 2"
+                                className="rounded-md w-full h-full object-cover"
+                            />
+                        </div>
+                    </Reveal>
+                    <Reveal keyframes={fadeInUp} duration={800} delay={200}>
+                        <div className="hidden relative text-center h-64 md:flex flex-col items-center justify-center bg-[#262121] rounded-lg">
+                            <h3 className="text-white text-center text-xs lg:text-xl md:text-xl absolute top-1">Mastering Effective Feedback</h3>
+                            <img
+                                src="/vid6.png"
+                                alt="Card 2"
+                                className="rounded-md w-full h-full object-cover"
+                            />
+                        </div>
+                    </Reveal>
+                    <Reveal keyframes={fadeInUp} duration={800} delay={200}>
+                        <div className=" hidden relative text-center h-64 lg:flex flex-col items-center justify-center bg-[#262121] rounded-lg">
+                            <h3 className="text-white text-center text-xs lg:text-xl md:text-xl absolute top-1">Mastering Effective Feedback</h3>
+                            <img
+                                src="/collections/protocol4.png"
                                 alt="Card 2"
                                 className="rounded-md w-full h-full object-cover"
                             />
