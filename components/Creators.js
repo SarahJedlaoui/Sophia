@@ -77,7 +77,7 @@ const CreatorSearch = () => {
     };
     return (
         <Container >
-        <div className="min-h-screen  text-white px-5 py-10">
+        <div className="min-h-screen  text-white  py-10">
             {/* Header */}
             <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                 <h2 className="text-3xl font-bold" style={{ fontFamily: 'Playfair' }}>
