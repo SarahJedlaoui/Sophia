@@ -71,7 +71,7 @@ const Practice = () => {
         <Container className="min-h-screen bg-black text-white p-5">
             {/* Welcome Section */}
             <Reveal keyframes={fadeInUp} duration={800} delay={50}>
-                <div className="text-left  lg:text-center md:text-center mb-10">
+                <div className="text-left  lg:text-left md:text-left mb-10">
                     <h1 className="text-xl  lg:text-4xl md:text-4xl lg:font-bold"
                         style={{ fontFamily: 'Playfair' }} >Your Personalized Practices</h1>
                     <p className="text-sm lg:text-lg md:text-lg mt-2 " style={{ fontFamily: 'Playfair' }} >

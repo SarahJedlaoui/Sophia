@@ -255,12 +255,15 @@ const VideoAnalysisPage = () => {
                             <h3 className="text-white text-sm lg:text-lg font-medium mb-3" style={{ fontFamily: "Playfair" }}>
                                 Relationship Reboot Coaching
                             </h3>
-                            <button
-                                className="bg-white text-black py-2 px-4 rounded-full text-xs font-medium hover:bg-gray-200"
-                                onClick={() => alert("Start Practice clicked!")}
+                            <Button
+                                isLink
+                                href={'/practice'}
+                                className={'bg-white text-black py-2 px-4 rounded-full text-xs font-medium hover:bg-gray-200'}
+                                variant={'primary'}
                             >
                                 Start Practice
-                            </button>
+                            </Button>
+
                         </div>
 
                         {/* Static Cards */}
