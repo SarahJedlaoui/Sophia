@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Image from 'next/image';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Link from 'next/link';
 
 const CreatorProfileSection = () => {
     const [isFollowing, setIsFollowing] = useState(false);
@@ -102,7 +103,9 @@ const CreatorProfileSection = () => {
                 {/* Top Bar with Title and Back Arrow */}
                 <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                     <div className="relative z-10 w-full  px-4 mt-6 flex items-center">
-                        <ChevronLeft size={24} className="mr-4 cursor-pointer hover:text-gray-300" />
+                        <Link href='/home'>
+                            <ChevronLeft size={24} className="mr-4 cursor-pointer hover:text-gray-300" />
+                        </Link>
                         <h1 className="text-xl font-semibold" style={{ fontFamily: 'Playfair' }} >
                             Esther Perel</h1>
                     </div>
@@ -168,77 +171,77 @@ const CreatorProfileSection = () => {
                                 connections.
                             </p>
                             {!showChat && (
-                            <div className="flex justify-end">
-                                <button onClick={() => setShowChat(true)} className="flex items-center px-4 py-2 border text-white font-medium rounded-full hover:bg-gray-300 transition duration-300">
-                                    <span className="mr-2">Ask Esther</span>
-                                    {/* Replace the below img src with your icon file */}
-                                    <img src="/Vector.svg" alt="Icon" className="w-5 h-5" />
-                                </button>
-                            </div>
-                            )}
-                             {showChat && (
-                            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
-                                {/* Chat Input and Response Logic */}
-                                <div className="mt-auto">
-                                    {!chatResponse ? (
-                                        // Input Section
-                                        <>
-                                            <div className="flex items-center w-full gap-2">
-                                                {/* Text Input */}
-                                                <input
-                                                    type="text"
-                                                    placeholder={`Ask Esther anything`}
-                                                    className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none"
-                                                    style={{ fontSize: "14.29px" }}
-                                                    value={inputValueChat}
-                                                    onChange={(e) => setInputValueChat(e.target.value)}
-                                                    onKeyDown={(e) => e.key === 'Enter' && handleSendMessage2()}
-                                                />
-
-                                                {/* Send Button */}
-                                                <button onClick={() => handleSendMessage2()}
-                                                    className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
-                                                    <ArrowForwardIcon style={{ fontSize: "24px", color: "black" }} />
-                                                </button>
-                                            </div>
-                                        </>
-                                    ) : (
-                                        // Chat Response Section
-                                        <div className="w-full mt-5 p-2 rounded-lg" style={{ backgroundColor: "rgba(74, 62, 62, 0.7)" }}>
-                                            <div className="flex items-center">
-                                                <img
-                                                    src="/collections/protocol1.png"
-                                                    alt="Profile"
-                                                    className="w-10 h-10 rounded-full"
-                                                />
-                                                <p className="ml-4 text-sm font-medium">{inputValueChat}</p>
-                                            </div>
-                                            <div className="mt-4 p-0 rounded-lg text-sm text-white">{chatResponse}</div>
-                                            <div className="flex justify-end space-x-4 mt-4">
-                                                <button
-                                                    onClick={() => {
-                                                        setChatResponse(null);
-                                                        setInputValueChat("");
-                                                    }}
-                                                    className="px-2 py-1 border text-xs text-white rounded-full"
-                                                >
-                                                    End Chat
-                                                </button>
-                                                <button
-                                                    onClick={() => {
-                                                        setChatResponse(null); // Clear response for next input
-                                                        setInputValueChat(""); // Reset input
-                                                    }}
-                                                    className="px-3 py-1 bg-white text-xs text-black rounded-full"
-                                                >
-                                                    Continue
-                                                </button>
-                                            </div>
-                                        </div>
-                                    )}
+                                <div className="flex justify-end">
+                                    <button onClick={() => setShowChat(true)} className="flex items-center px-4 py-2 border text-white font-medium rounded-full hover:bg-gray-300 transition duration-300">
+                                        <span className="mr-2">Ask Esther</span>
+                                        {/* Replace the below img src with your icon file */}
+                                        <img src="/Vector.svg" alt="Icon" className="w-5 h-5" />
+                                    </button>
                                 </div>
-                            </Reveal>
-                              )}
+                            )}
+                            {showChat && (
+                                <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                                    {/* Chat Input and Response Logic */}
+                                    <div className="mt-auto">
+                                        {!chatResponse ? (
+                                            // Input Section
+                                            <>
+                                                <div className="flex items-center w-full gap-2">
+                                                    {/* Text Input */}
+                                                    <input
+                                                        type="text"
+                                                        placeholder={`Ask Esther anything`}
+                                                        className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none"
+                                                        style={{ fontSize: "14.29px" }}
+                                                        value={inputValueChat}
+                                                        onChange={(e) => setInputValueChat(e.target.value)}
+                                                        onKeyDown={(e) => e.key === 'Enter' && handleSendMessage2()}
+                                                    />
+
+                                                    {/* Send Button */}
+                                                    <button onClick={() => handleSendMessage2()}
+                                                        className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
+                                                        <ArrowForwardIcon style={{ fontSize: "24px", color: "black" }} />
+                                                    </button>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            // Chat Response Section
+                                            <div className="w-full mt-5 p-2 rounded-lg" style={{ backgroundColor: "rgba(74, 62, 62, 0.7)" }}>
+                                                <div className="flex items-center">
+                                                    <img
+                                                        src="/collections/protocol1.png"
+                                                        alt="Profile"
+                                                        className="w-10 h-10 rounded-full"
+                                                    />
+                                                    <p className="ml-4 text-sm font-medium">{inputValueChat}</p>
+                                                </div>
+                                                <div className="mt-4 p-0 rounded-lg text-sm text-white">{chatResponse}</div>
+                                                <div className="flex justify-end space-x-4 mt-4">
+                                                    <button
+                                                        onClick={() => {
+                                                            setChatResponse(null);
+                                                            setInputValueChat("");
+                                                        }}
+                                                        className="px-2 py-1 border text-xs text-white rounded-full"
+                                                    >
+                                                        End Chat
+                                                    </button>
+                                                    <button
+                                                        onClick={() => {
+                                                            setChatResponse(null); // Clear response for next input
+                                                            setInputValueChat(""); // Reset input
+                                                        }}
+                                                        className="px-3 py-1 bg-white text-xs text-black rounded-full"
+                                                    >
+                                                        Continue
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </Reveal>
+                            )}
                         </div>
 
 
