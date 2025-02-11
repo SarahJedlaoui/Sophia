@@ -105,7 +105,7 @@ const Chat = () => {
     return (
         <Container className="min-h-screen bg-black text-white p-5">
             {/* Welcome Section */}
-            <div className="text-left  lg:text-center md:text-center mb-10">
+            <div className="text-left  lg:text-left md:text-left mb-10">
                 <p className="text-sm lg:text-lg md:text-lg mt-2 " style={{ fontFamily: 'Playfair' }} >Ready to learn something new today?</p>
                 <div className="flex justify-center items-center mt-5 w-full">
                     <div className="relative w-full ">
@@ -135,7 +135,7 @@ const Chat = () => {
 
 
 
-            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+          
                 {/* Blurry Card Container */}
                 <div
                     className="relative bg-white bg-opacity-10 rounded-lg p-6 flex flex-col lg:flex-row w-full gap-6 "
@@ -148,6 +148,8 @@ const Chat = () => {
                     {/* Left Chat Section */}
                     <div className="flex flex-col justify-between w-full lg:w-1/3 h-full">
                         {/* Title Section */}
+                        <Reveal keyframes={fadeInUp} duration={800} delay={50}> 
+                            
                         <div className="flex space-x-5 mb-5 ">
                             <h2
                                 className={`text-md md:text-md lg:text-md pb-2 cursor-pointer  border-b-2 border-white"
@@ -157,6 +159,8 @@ const Chat = () => {
                             </h2>
 
                         </div>
+                        </Reveal>
+                        <Reveal keyframes={fadeInUp} duration={800} delay={50}> 
                         <div>
                             <h2 className="text-md md:text-md lg:text-md mb-5">
 
@@ -164,7 +168,8 @@ const Chat = () => {
 
                             </h2>
                         </div>
-
+                        </Reveal>
+                        <Reveal keyframes={fadeInUp} duration={800} delay={50}> 
                         {/* Chat Input and Response Logic */}
                         <div className="mt-auto">
                             {!chatResponse ? (
@@ -237,10 +242,11 @@ const Chat = () => {
                                 </div>
                             )}
                         </div>
+                        </Reveal>
                     </div>
 
                     {/* Right Cards Section */}
-
+                    <Reveal keyframes={fadeInUp} duration={800} delay={50}> 
                     <div className="w-full lg:w-2/3 mt-10">
                         {/* Mobile View: Horizontal Scroll */}
                         <div className="flex gap-4 overflow-x-auto md:hidden scrollbar-hide">
@@ -360,8 +366,9 @@ const Chat = () => {
                         </div>
 
                     </div>
+                    </Reveal>
                 </div>
-            </Reveal>
+           
 
 
 

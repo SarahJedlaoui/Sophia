@@ -19,7 +19,7 @@ const Practice = () => {
     const examples = ['Love', 'Family', 'Health', 'Work', 'Food'];
     const creators = [
         { name: "Glucose Revolution", image: "/coverb.jpeg" },
-        { name: "Esther Perel", image: "/esther.png" },
+        { name: "Esther Perel", image: "/Esther.png" },
         { name: "Ramit Sethi", image: "/vid2.png" },
         { name: "Adam Grant", image: "/vid1.png" },
     ];
@@ -87,7 +87,7 @@ const Practice = () => {
                 </div>
             </Reveal>
 
-            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+            
                 {/* Blurry Card Container */}
                 <div
                     className="relative bg-white bg-opacity-10 rounded-lg p-6 flex flex-col lg:flex-row w-full gap-6 "
@@ -100,6 +100,7 @@ const Practice = () => {
                     {/* Left Chat Section */}
                     <div className="flex flex-col justify-between w-full lg:w-1/3 h-full">
                         {/* Title Section */}
+                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                         <div className="flex space-x-5 mb-5 ">
                             <h2
                                 className={`text-md md:text-md lg:text-md pb-2 cursor-pointer border-b-2 border-white `}
@@ -109,13 +110,17 @@ const Practice = () => {
                             </h2>
 
                         </div>
+                        </Reveal>
+                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                         <div>
                             <h2 className="text-md md:text-md lg:text-md mb-5">
                                 Discover coaching sessions designed to help you improve your skills and mindset.
                             </h2>
                         </div>
+                        </Reveal>
 
                         {/* Chat Input and Response Logic */}
+                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                         <div className="mt-auto">
                             {!chatResponse ? (
                                 // Input Section
@@ -187,9 +192,11 @@ const Practice = () => {
                                 </div>
                             )}
                         </div>
+                        </Reveal>
                     </div>
 
                     {/* Right Cards Section */}
+                    <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                     <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4  w-full lg:w-2/3 mt-10">
 
                         {/* Coaching Cards */}
@@ -223,8 +230,9 @@ const Practice = () => {
                         </div>
                        
                     </div>
+                    </Reveal>
                 </div>
-            </Reveal>
+           
 
 
 
