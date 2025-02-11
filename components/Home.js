@@ -302,7 +302,7 @@ const HomePage = () => {
 
 
 
-        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+        
             {/* Blurry Card Container */}
             <div
                 className="relative bg-white bg-opacity-10 rounded-lg p-6 flex flex-col lg:flex-row w-full gap-6 "
@@ -315,6 +315,7 @@ const HomePage = () => {
                 {/* Left Chat Section */}
                 <div className="flex flex-col justify-between w-full lg:w-1/3 h-full">
                     {/* Title Section */}
+                    <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                     <div className="flex space-x-5 mb-5 ">
                         <h2
                             className={`text-md md:text-md lg:text-md pb-2 cursor-pointer ${activeTab === "videos" ? "border-b-2 border-white" : "text-gray-400"
@@ -331,6 +332,8 @@ const HomePage = () => {
                             Coaching
                         </h2>
                     </div>
+                    </Reveal>
+                    <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                     <div>
                         <h2 className="text-md md:text-md lg:text-md mb-5">
                             {activeTab === "videos"
@@ -338,8 +341,9 @@ const HomePage = () => {
                                 : "Discover coaching sessions designed to help you improve your skills and mindset."}
                         </h2>
                     </div>
-
+                    </Reveal>
                     {/* Chat Input and Response Logic */}
+                    <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                     <div className="mt-auto">
                         {!chatResponse ? (
                             // Input Section
@@ -411,9 +415,11 @@ const HomePage = () => {
                             </div>
                         )}
                     </div>
+                    </Reveal>
                 </div>
 
                 {/* Right Cards Section */}
+                <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                 <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full lg:w-2/3 mt-10">
                     {activeTab === "videos" ? (
                         <>
@@ -494,8 +500,9 @@ const HomePage = () => {
                         </>
                     )}
                 </div>
+                </Reveal>
             </div>
-        </Reveal>
+       
 
         <div className="relative  mx-auto py-10">
             <h1 className="text-xl  lg:text-3xl md:text-3xl lg:font-bold mb-10"
