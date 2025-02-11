@@ -12,21 +12,22 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const CreatorProfileSection = () => {
     const [isFollowing, setIsFollowing] = useState(false);
     const [chatResponse, setChatResponse] = useState(null);
-    const handleSendMessage = async () => {
-        if (!inputValueQ.trim()) return;
+    const [inputValueChat, setInputValueChat] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [showChat, setShowChat] = useState(false);
 
-        // Add user's question to the conversation
-        setConversation((prev) => [...prev, { role: 'user', message: inputValueQ }]);
+    const handleSendMessage2 = async () => {
+        if (!inputValueChat.trim()) return;
+
         setIsLoading(true);
 
         try {
-            // Fetch AI response
-            const response = await fetch('https://aftervisit-0b4087b58b8e.herokuapp.com/api/respond-to-chat', {
+            const response = await fetch('https://aftervisit-0b4087b58b8e.herokuapp.com/api/ask-ai', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ question: inputValueQ }),
+                body: JSON.stringify({ question: inputValueChat }), // Send the user's question
             });
 
             if (!response.ok) {
@@ -34,26 +35,24 @@ const CreatorProfileSection = () => {
             }
 
             const data = await response.json();
+            setChatResponse(data.answer); // Update chat response with AI's answer
 
-            // Update conversation with AI's response
-            setConversation((prev) => [...prev, { role: 'ai', message: data.response }]);
-
-            // Add new insight to the insights section
-            setInsights((prev) => [...prev, data.insight]);
         } catch (error) {
             console.error('Error fetching AI response:', error);
-            setConversation((prev) => [...prev, { role: 'ai', message: 'Sorry, something went wrong. Please try again.' }]);
+            setChatResponse('There was an error processing your question. Please try again.');
         } finally {
-            setInputValueQ(''); // Clear input field
-            setIsLoading(false); // Stop loading spinner
+            setIsLoading(false);
         }
     };
 
 
+
     const handleEndChat = () => {
         setConversation([]); // Clear the conversation
-        setInputValueQ(''); // Reset input field
+        setInputValueChat(''); // Reset input field
+        setShowChat(false)
     };
+
     const creators2 = [
         {
             name: "Podcasts",
@@ -168,13 +167,16 @@ const CreatorProfileSection = () => {
                                 videos, insightful podcasts, and articles on building stronger emotional
                                 connections.
                             </p>
+                            {!showChat && (
                             <div className="flex justify-end">
-                                <button className="flex items-center px-4 py-2 border text-white font-medium rounded-full hover:bg-gray-300 transition duration-300">
+                                <button onClick={() => setShowChat(true)} className="flex items-center px-4 py-2 border text-white font-medium rounded-full hover:bg-gray-300 transition duration-300">
                                     <span className="mr-2">Ask Esther</span>
                                     {/* Replace the below img src with your icon file */}
                                     <img src="/Vector.svg" alt="Icon" className="w-5 h-5" />
                                 </button>
                             </div>
+                            )}
+                             {showChat && (
                             <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                                 {/* Chat Input and Response Logic */}
                                 <div className="mt-auto">
@@ -188,10 +190,14 @@ const CreatorProfileSection = () => {
                                                     placeholder={`Ask Esther anything`}
                                                     className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none"
                                                     style={{ fontSize: "14.29px" }}
+                                                    value={inputValueChat}
+                                                    onChange={(e) => setInputValueChat(e.target.value)}
+                                                    onKeyDown={(e) => e.key === 'Enter' && handleSendMessage2()}
                                                 />
 
                                                 {/* Send Button */}
-                                                <button className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
+                                                <button onClick={() => handleSendMessage2()}
+                                                    className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
                                                     <ArrowForwardIcon style={{ fontSize: "24px", color: "black" }} />
                                                 </button>
                                             </div>
@@ -205,14 +211,14 @@ const CreatorProfileSection = () => {
                                                     alt="Profile"
                                                     className="w-10 h-10 rounded-full"
                                                 />
-                                                <p className="ml-4 text-sm font-medium">{inputValueQ}</p>
+                                                <p className="ml-4 text-sm font-medium">{inputValueChat}</p>
                                             </div>
                                             <div className="mt-4 p-0 rounded-lg text-sm text-white">{chatResponse}</div>
                                             <div className="flex justify-end space-x-4 mt-4">
                                                 <button
                                                     onClick={() => {
                                                         setChatResponse(null);
-                                                        setInputValueQ("");
+                                                        setInputValueChat("");
                                                     }}
                                                     className="px-2 py-1 border text-xs text-white rounded-full"
                                                 >
@@ -221,7 +227,7 @@ const CreatorProfileSection = () => {
                                                 <button
                                                     onClick={() => {
                                                         setChatResponse(null); // Clear response for next input
-                                                        setInputValueQ(""); // Reset input
+                                                        setInputValueChat(""); // Reset input
                                                     }}
                                                     className="px-3 py-1 bg-white text-xs text-black rounded-full"
                                                 >
@@ -232,6 +238,7 @@ const CreatorProfileSection = () => {
                                     )}
                                 </div>
                             </Reveal>
+                              )}
                         </div>
 
 

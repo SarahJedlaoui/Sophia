@@ -218,9 +218,6 @@ const Chat = () => {
 
 
                                     <div className="flex items-center w-full gap-2">
-
-
-
                                         {/* Text Input */}
                                         <input
                                             type="text"
