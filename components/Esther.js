@@ -7,8 +7,53 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Image from 'next/image';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 const CreatorProfileSection = () => {
     const [isFollowing, setIsFollowing] = useState(false);
+    const [chatResponse, setChatResponse] = useState(null);
+    const handleSendMessage = async () => {
+        if (!inputValueQ.trim()) return;
+
+        // Add user's question to the conversation
+        setConversation((prev) => [...prev, { role: 'user', message: inputValueQ }]);
+        setIsLoading(true);
+
+        try {
+            // Fetch AI response
+            const response = await fetch('https://aftervisit-0b4087b58b8e.herokuapp.com/api/respond-to-chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ question: inputValueQ }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch AI response');
+            }
+
+            const data = await response.json();
+
+            // Update conversation with AI's response
+            setConversation((prev) => [...prev, { role: 'ai', message: data.response }]);
+
+            // Add new insight to the insights section
+            setInsights((prev) => [...prev, data.insight]);
+        } catch (error) {
+            console.error('Error fetching AI response:', error);
+            setConversation((prev) => [...prev, { role: 'ai', message: 'Sorry, something went wrong. Please try again.' }]);
+        } finally {
+            setInputValueQ(''); // Clear input field
+            setIsLoading(false); // Stop loading spinner
+        }
+    };
+
+
+    const handleEndChat = () => {
+        setConversation([]); // Clear the conversation
+        setInputValueQ(''); // Reset input field
+    };
     const creators2 = [
         {
             name: "Podcasts",
@@ -130,6 +175,63 @@ const CreatorProfileSection = () => {
                                     <img src="/Vector.svg" alt="Icon" className="w-5 h-5" />
                                 </button>
                             </div>
+                            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                                {/* Chat Input and Response Logic */}
+                                <div className="mt-auto">
+                                    {!chatResponse ? (
+                                        // Input Section
+                                        <>
+                                            <div className="flex items-center w-full gap-2">
+                                                {/* Text Input */}
+                                                <input
+                                                    type="text"
+                                                    placeholder={`Ask Esther anything`}
+                                                    className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none"
+                                                    style={{ fontSize: "14.29px" }}
+                                                />
+
+                                                {/* Send Button */}
+                                                <button className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
+                                                    <ArrowForwardIcon style={{ fontSize: "24px", color: "black" }} />
+                                                </button>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        // Chat Response Section
+                                        <div className="w-full mt-5 p-2 rounded-lg" style={{ backgroundColor: "rgba(74, 62, 62, 0.7)" }}>
+                                            <div className="flex items-center">
+                                                <img
+                                                    src="/collections/protocol1.png"
+                                                    alt="Profile"
+                                                    className="w-10 h-10 rounded-full"
+                                                />
+                                                <p className="ml-4 text-sm font-medium">{inputValueQ}</p>
+                                            </div>
+                                            <div className="mt-4 p-0 rounded-lg text-sm text-white">{chatResponse}</div>
+                                            <div className="flex justify-end space-x-4 mt-4">
+                                                <button
+                                                    onClick={() => {
+                                                        setChatResponse(null);
+                                                        setInputValueQ("");
+                                                    }}
+                                                    className="px-2 py-1 border text-xs text-white rounded-full"
+                                                >
+                                                    End Chat
+                                                </button>
+                                                <button
+                                                    onClick={() => {
+                                                        setChatResponse(null); // Clear response for next input
+                                                        setInputValueQ(""); // Reset input
+                                                    }}
+                                                    className="px-3 py-1 bg-white text-xs text-black rounded-full"
+                                                >
+                                                    Continue
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </Reveal>
                         </div>
 
 

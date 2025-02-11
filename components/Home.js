@@ -169,6 +169,7 @@ const HomePage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [activeTab, setActiveTab] = useState("videos");
     const [activeTabPage, setActiveTabPage] = useState("home");
+    const [inputValueChat, setInputValueChat] = useState('');
 
 
     const creators = [
@@ -220,7 +221,34 @@ const HomePage = () => {
         }
     };
 
+    const handleSendMessage2 = async () => {
+        if (!inputValueChat.trim()) return;
 
+        setIsLoading(true);
+
+        try {
+            const response = await fetch('https://aftervisit-0b4087b58b8e.herokuapp.com/api/ask-ai', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ question: inputValueChat }), // Send the user's question
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch AI response');
+            }
+
+            const data = await response.json();
+            setChatResponse(data.answer); // Update chat response with AI's answer
+
+        } catch (error) {
+            console.error('Error fetching AI response:', error);
+            setChatResponse('There was an error processing your question. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const carouselData = [
         {
@@ -368,14 +396,17 @@ const HomePage = () => {
 
                                     {/* Text Input */}
                                     <input
-                                        type="text"
-                                        placeholder={`Ask ${selectedCreator.name} anything`}
-                                        className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none"
-                                        style={{ fontSize: "14.29px" }}
-                                    />
+                                            type="text"
+                                            placeholder={`Ask ${selectedCreator.name} anything`}
+                                            className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none"
+                                            style={{ fontSize: "14.29px" }}
+                                            value={inputValueChat}
+                                            onChange={(e) => setInputValueChat(e.target.value)}
+                                            onKeyDown={(e) => e.key === 'Enter' && handleSendMessage2()}
+                                        />
 
                                     {/* Send Button */}
-                                    <button className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
+                                    <button  onClick={() => handleSendMessage2()} className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
                                         <ArrowForwardIcon style={{ fontSize: "24px", color: "black" }} />
                                     </button>
                                 </div>
@@ -405,7 +436,7 @@ const HomePage = () => {
                                     <button
                                         onClick={() => {
                                             setChatResponse(null); // Clear response for next input
-                                            setInputValueQ(""); // Reset input
+                                            setInputValueChat(""); // Reset input
                                         }}
                                         className="px-3 py-1 bg-white text-xs text-black rounded-full"
                                     >

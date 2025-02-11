@@ -11,6 +11,8 @@ const Practice = () => {
     const [videoLinks, setVideoLinks] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [inputValueQ, setInputValueQ] = useState('');
+    const [inputValueChat, setInputValueChat] = useState('');
+
     const [chatResponse, setChatResponse] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -43,8 +45,8 @@ const Practice = () => {
             prev.map((item, i) => (i === index ? { ...item, status: 'ready' } : item))
         );
     };
-    const handleSendMessage = async () => {
-        if (!inputValueQ.trim()) return;
+    const handleSendMessage2 = async () => {
+        if (!inputValueChat.trim()) return;
 
         setIsLoading(true);
 
@@ -54,7 +56,7 @@ const Practice = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ question: inputValueQ }), // Send the user's question
+                body: JSON.stringify({ question: inputValueChat }), // Send the user's question
             });
 
             if (!response.ok) {
@@ -87,20 +89,20 @@ const Practice = () => {
                 </div>
             </Reveal>
 
-            
-                {/* Blurry Card Container */}
-                <div
-                    className="relative bg-white bg-opacity-10 rounded-lg p-6 flex flex-col lg:flex-row w-full gap-6 "
-                    style={{
-                        backgroundColor: "rgba(255, 255, 255, 0.1)",
-                        WebkitBackdropFilter: "blur(20px)",
-                        backdropFilter: "blur(20px)",
-                    }}
-                >
-                    {/* Left Chat Section */}
-                    <div className="flex flex-col justify-between w-full lg:w-1/3 h-full">
-                        {/* Title Section */}
-                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+
+            {/* Blurry Card Container */}
+            <div
+                className="relative bg-white bg-opacity-10 rounded-lg p-6 flex flex-col lg:flex-row w-full gap-6 "
+                style={{
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    WebkitBackdropFilter: "blur(20px)",
+                    backdropFilter: "blur(20px)",
+                }}
+            >
+                {/* Left Chat Section */}
+                <div className="flex flex-col justify-between w-full lg:w-1/3 h-full">
+                    {/* Title Section */}
+                    <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                         <div className="flex space-x-5 mb-5 ">
                             <h2
                                 className={`text-md md:text-md lg:text-md pb-2 cursor-pointer border-b-2 border-white `}
@@ -110,17 +112,17 @@ const Practice = () => {
                             </h2>
 
                         </div>
-                        </Reveal>
-                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                    </Reveal>
+                    <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                         <div>
                             <h2 className="text-md md:text-md lg:text-md mb-5">
                                 Discover coaching sessions designed to help you improve your skills and mindset.
                             </h2>
                         </div>
-                        </Reveal>
+                    </Reveal>
 
-                        {/* Chat Input and Response Logic */}
-                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                    {/* Chat Input and Response Logic */}
+                    <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                         <div className="mt-auto">
                             {!chatResponse ? (
                                 // Input Section
@@ -149,12 +151,14 @@ const Practice = () => {
                                             placeholder={`Ask ${selectedCreator.name} anything`}
                                             className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none"
                                             style={{ fontSize: "14.29px" }}
+                                            value={inputValueChat}
+                                            onChange={(e) => setInputValueChat(e.target.value)}
+                                            onKeyDown={(e) => e.key === 'Enter' && handleSendMessage2()}
                                         />
-
-                                        {/* Send Button */}
-                                        <button className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
-                                            <ArrowForwardIcon style={{ fontSize: "24px", color: "black" }} />
-                                        </button>
+                                       {/* Send Button */}
+                                    <button  onClick={() => handleSendMessage2()} className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
+                                        <ArrowForwardIcon style={{ fontSize: "24px", color: "black" }} />
+                                    </button>
                                     </div>
                                 </>
                             ) : (
@@ -192,11 +196,11 @@ const Practice = () => {
                                 </div>
                             )}
                         </div>
-                        </Reveal>
-                    </div>
+                    </Reveal>
+                </div>
 
-                    {/* Right Cards Section */}
-                    <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                {/* Right Cards Section */}
+                <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                     <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4  w-full lg:w-2/3 mt-10">
 
                         {/* Coaching Cards */}
@@ -228,11 +232,11 @@ const Practice = () => {
                                 className="rounded-md w-full h-full object-cover"
                             />
                         </div>
-                       
+
                     </div>
-                    </Reveal>
-                </div>
-           
+                </Reveal>
+            </div>
+
 
 
 
@@ -244,8 +248,8 @@ const Practice = () => {
 
                     <div className="text-left lg:text-center mb-6">
                         <h2 className="text-xl md:text-2xl lg:text-3xl text-left mb-6" style={{ fontFamily: 'Playfair' }}>
-                            Improve your ability to understand                        
-                            </h2>
+                            Improve your ability to understand
+                        </h2>
                         <p className="text-sm lg:text-lg mt-2">
                             Strengthen your connections with practical, guided steps. Build trust, improve communication, and nurture meaningful relationships.
                         </p>

@@ -10,6 +10,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const Chat = () => {
     const [videoLinks, setVideoLinks] = useState([]);
     const [inputValue, setInputValue] = useState('');
+    const [inputValueChat, setInputValueChat] = useState('');
     const [inputValueQ, setInputValueQ] = useState('');
     const [chatResponse, setChatResponse] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -17,6 +18,8 @@ const Chat = () => {
         { role: 'ai', message: 'How do you feel when you and your partner have a disagreement?' },
     ]);
     const [insights, setInsights] = useState([]); // Add this state
+    const [savedInsights, setSavedInsights] = useState([]);
+    const hasSavedInsights = savedInsights.length > 0; // Check if any insight is saved
 
     const [selectedImage, setSelectedImage] = useState("/cover.png");
     const [selectedTitle, setSelectedTitle] = useState("Enhancing Focus Through Routine");
@@ -82,24 +85,54 @@ const Chat = () => {
             setIsLoading(false); // Stop loading spinner
         }
     };
+    const handleSendMessage2 = async () => {
+        if (!inputValueChat.trim()) return;
+
+        setIsLoading(true);
+
+        try {
+            const response = await fetch('https://aftervisit-0b4087b58b8e.herokuapp.com/api/ask-ai', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ question: inputValueChat }), // Send the user's question
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch AI response');
+            }
+
+            const data = await response.json();
+            setChatResponse(data.answer); // Update chat response with AI's answer
+
+        } catch (error) {
+            console.error('Error fetching AI response:', error);
+            setChatResponse('There was an error processing your question. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
 
     const handleEndChat = () => {
         setConversation([]); // Clear the conversation
-        setInputValueQ(''); // Reset input field
+        setInputValue(''); // Reset input field
     };
-
-
-
 
     // Save state for cards
     const [savedCards, setSavedCards] = useState({});
 
-    const handleSaveClick = (index) => {
-        setSavedCards((prev) => ({
-            ...prev,
-            [index]: !prev[index], // Toggle save state
-        }));
+    // Function to toggle insight saving
+    const handleToggleSave = (insight) => {
+        setSavedInsights((prev) => {
+            const isAlreadySaved = prev.some((item) => item.title === insight.title);
+            if (isAlreadySaved) {
+                return prev.filter((item) => item.title !== insight.title);
+            } else {
+                return [...prev, insight];
+            }
+        });
     };
 
     return (
@@ -131,25 +164,20 @@ const Chat = () => {
 
             </div>
 
+            {/* Blurry Card Container */}
+            <div
+                className="relative bg-white bg-opacity-10 rounded-lg p-6 flex flex-col lg:flex-row w-full gap-6 "
+                style={{
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    WebkitBackdropFilter: "blur(20px)",
+                    backdropFilter: "blur(20px)",
+                }}
+            >
+                {/* Left Chat Section */}
+                <div className="flex flex-col justify-between w-full lg:w-full h-full">
+                    {/* Title Section */}
+                    <Reveal keyframes={fadeInUp} duration={800} delay={50}>
 
-
-
-
-          
-                {/* Blurry Card Container */}
-                <div
-                    className="relative bg-white bg-opacity-10 rounded-lg p-6 flex flex-col lg:flex-row w-full gap-6 "
-                    style={{
-                        backgroundColor: "rgba(255, 255, 255, 0.1)",
-                        WebkitBackdropFilter: "blur(20px)",
-                        backdropFilter: "blur(20px)",
-                    }}
-                >
-                    {/* Left Chat Section */}
-                    <div className="flex flex-col justify-between w-full lg:w-1/3 h-full">
-                        {/* Title Section */}
-                        <Reveal keyframes={fadeInUp} duration={800} delay={50}> 
-                            
                         <div className="flex space-x-5 mb-5 ">
                             <h2
                                 className={`text-md md:text-md lg:text-md pb-2 cursor-pointer  border-b-2 border-white"
@@ -159,8 +187,8 @@ const Chat = () => {
                             </h2>
 
                         </div>
-                        </Reveal>
-                        <Reveal keyframes={fadeInUp} duration={800} delay={50}> 
+                    </Reveal>
+                    <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                         <div>
                             <h2 className="text-md md:text-md lg:text-md mb-5">
 
@@ -168,8 +196,8 @@ const Chat = () => {
 
                             </h2>
                         </div>
-                        </Reveal>
-                        <Reveal keyframes={fadeInUp} duration={800} delay={50}> 
+                    </Reveal>
+                    <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                         {/* Chat Input and Response Logic */}
                         <div className="mt-auto">
                             {!chatResponse ? (
@@ -199,10 +227,14 @@ const Chat = () => {
                                             placeholder={`Ask ${selectedCreator.name} anything`}
                                             className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none"
                                             style={{ fontSize: "14.29px" }}
+                                            value={inputValueChat}
+                                            onChange={(e) => setInputValueChat(e.target.value)}
+                                            onKeyDown={(e) => e.key === 'Enter' && handleSendMessage2()}
                                         />
 
                                         {/* Send Button */}
-                                        <button className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
+                                        <button onClick={() => handleSendMessage2()}
+                                            className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
                                             <ArrowForwardIcon style={{ fontSize: "24px", color: "black" }} />
                                         </button>
                                     </div>
@@ -232,7 +264,7 @@ const Chat = () => {
                                         <button
                                             onClick={() => {
                                                 setChatResponse(null); // Clear response for next input
-                                                setInputValueQ(""); // Reset input
+                                                setInputValueChat(""); // Reset input
                                             }}
                                             className="px-3 py-1 bg-white text-xs text-black rounded-full"
                                         >
@@ -242,19 +274,19 @@ const Chat = () => {
                                 </div>
                             )}
                         </div>
-                        </Reveal>
-                    </div>
+                    </Reveal>
+                </div>
 
-                    {/* Right Cards Section */}
-                    <Reveal keyframes={fadeInUp} duration={800} delay={50}> 
-                    <div className="w-full lg:w-2/3 mt-10">
+                {/* Right Cards Section */}
+                <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                    <div className=" w-full lg:w-full mt-10">
                         {/* Mobile View: Horizontal Scroll */}
                         <div className="flex gap-4 overflow-x-auto md:hidden scrollbar-hide">
                             {/* Static Cards */}
                             {cards.map((card, index) => (
                                 <div
                                     key={index}
-                                    className={`relative flex-shrink-0 w-[calc(100%/3.1)] sm:w-[calc(100%/4.1)] md:w-[calc(100%/5.1)] h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg overflow-hidden cursor-pointer ${selectedImage === card.image ? "border-2 border-white" : ""
+                                    className={`relative flex-shrink-0 w-[calc(100%/3.1)] sm:w-[calc(100%/4.1)] md:w-[calc(100%/5.1) lg:w-[calc(100%/6.1)] h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg overflow-hidden cursor-pointer ${selectedImage === card.image ? "border-2 border-white" : ""
                                         }`}
                                     onClick={() => {
                                         setSelectedImage(card.image);
@@ -366,13 +398,8 @@ const Chat = () => {
                         </div>
 
                     </div>
-                    </Reveal>
-                </div>
-           
-
-
-
-
+                </Reveal>
+            </div>
 
             <div className="relative text-white mt-10 mb-10">
                 {/* Blurred Background */}
@@ -534,43 +561,74 @@ const Chat = () => {
 
             {/* Insights Section */}
             {insights && insights.length > 0 && (
-                <div className="text-white flex flex-col w-full items-center mt-7">
-                    {/* Title Section */}
-                    <div className="text-left mb-6">
-                        <h2 className="text-xl md:text-2xl lg:text-3xl mb-5 text-left mt-5" style={{ fontFamily: 'Playfair' }}>
-                            Personalized Insights
-                        </h2>
-                        <p className="text-sm md:text-base lg:text-lg mt-2">
-                            In the video, Esther Perel explores the complexities of relationships,how we connect, communicate, and grow with our partners. Based on your conversation, here&apos;s what stood out.                    </p>
-                    </div>
+        <div className="text-white flex flex-col w-full items-center mt-7">
+            {/* Title Section */}
+            <div className="flex justify-between items-center w-full mb-6">
+                {/* Title (Aligned Left) */}
+                <h2 className="text-xl md:text-2xl lg:text-3xl text-left mt-5" style={{ fontFamily: 'Playfair' }}>
+                    Personalized Insights
+                </h2>
 
-                    {/* Dynamic Cards Section */}
-                    <div className="space-y-4 w-full">
-                        {insights.map((insight, index) => (
-                            <div key={index} className="bg-[#4A3E3E] p-4 rounded-lg flex flex-col">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-6 w-6 text-white"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M12 20h9m-9-4h6m-6-4h3m-3-4h.01M9 12h.01M6 16h.01M6 20h.01M6 8h.01M9 4h.01M9 8h.01M6 4h.01"
-                                        />
-                                    </svg>
-                                    <h3 className="text-sm font-bold">{insight.title}</h3>
-                                </div>
-                                <p className="text-xs md:text-sm">{insight.description}</p>
-                            </div>
-                        ))}
+                {/* Save to Coaching Button (Aligned Right, Disabled If No Saved Insights) */}
+                <button
+                    onClick={() => alert('Practices saved!')}
+                    disabled={!hasSavedInsights} // Disable if no saved insights
+                    className={`py-2 px-4 rounded-full text-xs font-medium transition ${
+                        hasSavedInsights ? "bg-white text-black hover:bg-gray-200" : "bg-gray-600 text-gray-300 cursor-not-allowed"
+                    }`}
+                >
+                    Save to Coaching
+                </button>
+            </div>
+
+            {/* Subtitle */}
+            <p className="text-sm md:text-base lg:text-lg mt-2">
+                In the video, Esther Perel explores the complexities of relationships, how we connect, communicate, and grow with our partners. Based on your conversation, here&apos;s what stood out.
+            </p>
+
+            {/* Dynamic Cards Section */}
+            <div className="space-y-4 w-full">
+                {insights.map((insight, index) => (
+                    <div key={index} className="bg-[#4A3E3E] p-4 rounded-lg flex flex-col relative">
+                        {/* Save Button (Top Right of Card) */}
+                        <button
+                            onClick={() => handleToggleSave(insight)}
+                            className="absolute top-2 right-2 p-2 rounded-full transition"
+                        >
+                            {/* Save Icon (Fill if saved, Outline if not saved) */}
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className={`h-6 w-6 ${
+                                    savedInsights.some((item) => item.title === insight.title) ? "text-white fill-white" : "text-gray-400"
+                                }`}
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                fill="none"
+                                strokeWidth={2}
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v18l7-4 7 4V3z" />
+                            </svg>
+                        </button>
+
+                        {/* Insight Title & Content */}
+                        <div className="flex items-center gap-2 mb-2">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6 text-white"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 20h9m-9-4h6m-6-4h3m-3-4h.01M9 12h.01M6 16h.01M6 20h.01M6 8h.01M9 4h.01M9 8h.01M6 4h.01" />
+                            </svg>
+                            <h3 className="text-sm font-bold">{insight.title}</h3>
+                        </div>
+                        <p className="text-xs md:text-sm">{insight.description}</p>
                     </div>
-                </div>
-            )}
+                ))}
+            </div>
+        </div>
+    )}
         </Container>
     );
 };
