@@ -14,11 +14,7 @@ const Navbar = () => {
           </a>
         </Link>
 
-        {/* Navigation Menu */}
-        <div className='flex items-center space-x-4 md:space-x-7'>
-          <NavLinks />
-          
-        </div>
+        
       </Container>
     </div>
   );
