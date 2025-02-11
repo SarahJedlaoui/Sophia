@@ -18,6 +18,24 @@ const Chat = () => {
     ]);
     const [insights, setInsights] = useState([]); // Add this state
 
+    const [selectedImage, setSelectedImage] = useState("/cover.png");
+    const [selectedTitle, setSelectedTitle] = useState("Enhancing Focus Through Routine");
+
+    const cards = [
+        { title: "Enhancing Focus Through Routine", image: "/cover.png" },
+        { title: "Mastering Effective Feedback", image: "/content2.png" },
+        { title: "Effective Leadership", image: "/content3.png" },
+        { title: "Building Resilience", image: "/content4.png" },
+    ];
+
+
+    const creators = [
+        { name: "Glucose Revolution", image: "/hero/card1.png" },
+        { name: "Esther Perel", image: "/hero/card2.png" },
+        { name: "Ramit Sethi", image: "/hero/card3.png" },
+        { name: "Adam Grant", image: "/hero/card4.png" },
+    ];
+    const [selectedCreator, setSelectedCreator] = useState(creators[0]);
 
 
     const handleAddLink = () => {
@@ -72,72 +90,7 @@ const Chat = () => {
     };
 
 
-    // Card data
-    const cards = [
-        {
-            name: 'Insight',
-            description:
-                "To deepen emotional connection, try sharing one thing you've never shared with your partner or someone close to you. This small step can create trust.",
-            icon: (
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 20h9m-9-4h6m-6-4h3m-3-4h.01M9 12h.01M6 16h.01M6 20h.01M6 8h.01M9 4h.01M9 8h.01M6 4h.01"
-                    />
-                </svg>
-            ),
-        },
-        {
-            name: 'Affirmations',
-            description:
-                'I am worthy of love and connection, and I am brave enough to be vulnerable. I honor my individuality and my relationships, and I can find balance between the two.',
-            icon: (
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M20 21l-8-8m0 0l-8 8m8-8V3"
-                    />
-                </svg>
-            ),
-        },
-        {
-            name: 'Actions',
-            description:
-                'Practice Active Listening. In your next conversation, focus on listening without planning your response. Ask open-ended questions and validate the feelings of the other person before offering your viewpoint. This builds trust and understanding.',
-            icon: (
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9.75 17L7 15m0 0V7a2 2 0 012-2h6a2 2 0 012 2v8m-6-6h.01M12 17h0"
-                    />
-                </svg>
-            ),
-        },
-    ];
+
 
     // Save state for cards
     const [savedCards, setSavedCards] = useState({});
@@ -177,28 +130,264 @@ const Chat = () => {
                 </div>
 
             </div>
-            
-                <div className="relative text-white mt-10 mb-10">
-                    {/* Blurred Background */}
-                    <div
-                        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                        style={{
-                            backgroundImage: "url('/coverb.jpeg')", // Replace with your background image
-                            filter: "blur(30px)", // Adjust the blur intensity
 
-                        }}
-                    ></div>
 
-                    {/* Content */}
-                    <div className="relative z-10">
-                        {/* video Section */}
+
+
+
+            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                {/* Blurry Card Container */}
+                <div
+                    className="relative bg-white bg-opacity-10 rounded-lg p-6 flex flex-col lg:flex-row w-full gap-6 "
+                    style={{
+                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        WebkitBackdropFilter: "blur(20px)",
+                        backdropFilter: "blur(20px)",
+                    }}
+                >
+                    {/* Left Chat Section */}
+                    <div className="flex flex-col justify-between w-full lg:w-1/3 h-full">
+                        {/* Title Section */}
+                        <div className="flex space-x-5 mb-5 ">
+                            <h2
+                                className={`text-md md:text-md lg:text-md pb-2 cursor-pointer  border-b-2 border-white"
+                                    }`}
+                            >
+                                All Videos
+                            </h2>
+
+                        </div>
                         <div>
+                            <h2 className="text-md md:text-md lg:text-md mb-5">
+
+                                You watched videos about dopamine fasting, personal finance tips, and skin care.
+
+                            </h2>
+                        </div>
+
+                        {/* Chat Input and Response Logic */}
+                        <div className="mt-auto">
+                            {!chatResponse ? (
+                                // Input Section
+                                <>
+                                    <div className="flex space-x-3 mb-2">
+                                        {creators.map((creator, index) => (
+                                            <button
+                                                key={index}
+                                                className={`w-10 h-10 rounded-full overflow-hidden border-2 ${selectedCreator.name === creator.name ? "border-white" : "border-transparent"
+                                                    }`}
+                                                onClick={() => setSelectedCreator(creator)}
+                                            >
+                                                <img src={creator.image} alt={creator.name} className="w-full h-full object-cover" />
+                                            </button>
+                                        ))}
+                                    </div>
+
+
+                                    <div className="flex items-center w-full gap-2">
+
+
+
+                                        {/* Text Input */}
+                                        <input
+                                            type="text"
+                                            placeholder={`Ask ${selectedCreator.name} anything`}
+                                            className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none"
+                                            style={{ fontSize: "14.29px" }}
+                                        />
+
+                                        {/* Send Button */}
+                                        <button className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
+                                            <ArrowForwardIcon style={{ fontSize: "24px", color: "black" }} />
+                                        </button>
+                                    </div>
+                                </>
+                            ) : (
+                                // Chat Response Section
+                                <div className="w-full mt-5 p-2 rounded-lg" style={{ backgroundColor: "rgba(74, 62, 62, 0.7)" }}>
+                                    <div className="flex items-center">
+                                        <img
+                                            src="/collections/protocol1.png"
+                                            alt="Profile"
+                                            className="w-10 h-10 rounded-full"
+                                        />
+                                        <p className="ml-4 text-sm font-medium">{inputValueQ}</p>
+                                    </div>
+                                    <div className="mt-4 p-0 rounded-lg text-sm text-white">{chatResponse}</div>
+                                    <div className="flex justify-end space-x-4 mt-4">
+                                        <button
+                                            onClick={() => {
+                                                setChatResponse(null);
+                                                setInputValueQ("");
+                                            }}
+                                            className="px-2 py-1 border text-xs text-white rounded-full"
+                                        >
+                                            End Chat
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setChatResponse(null); // Clear response for next input
+                                                setInputValueQ(""); // Reset input
+                                            }}
+                                            className="px-3 py-1 bg-white text-xs text-black rounded-full"
+                                        >
+                                            Continue
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Right Cards Section */}
+
+                    <div className="w-full lg:w-2/3 mt-10">
+                        {/* Mobile View: Horizontal Scroll */}
+                        <div className="flex gap-4 overflow-x-auto md:hidden scrollbar-hide">
+                            {/* Static Cards */}
+                            {cards.map((card, index) => (
+                                <div
+                                    key={index}
+                                    className={`relative flex-shrink-0 w-[calc(100%/3.1)] sm:w-[calc(100%/4.1)] md:w-[calc(100%/5.1)] h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg overflow-hidden cursor-pointer ${selectedImage === card.image ? "border-2 border-white" : ""
+                                        }`}
+                                    onClick={() => {
+                                        setSelectedImage(card.image);
+                                        setSelectedTitle(card.title);
+                                    }}
+                                >
+                                    {/* Dark Overlay */}
+                                    <div className="absolute inset-0 bg-black opacity-50"></div>
+                                    {/* Image (Black & White) */}
+                                    <img
+                                        src={card.image}
+                                        alt={card.title}
+                                        className="rounded-md w-full h-full object-cover filter grayscale"
+                                    />
+                                </div>
+                            ))}
+
+
+
+
+                            {/* User-Generated Cards */}
+                            {videoLinks.map((video, index) => (
+                                <Reveal keyframes={fadeInUp} duration={800} delay={index * 100} key={index}>
+                                    <div className="relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
+                                        <h3 className="absolute top-1 text-white text-center text-xs lg:text-lg md:text-lg">
+                                            {video.status === 'loading' ? 'Your next one is loading' : 'Video Analysis'}
+                                        </h3>
+                                        {video.status === 'loading' ? (
+                                            <div className="flex justify-center items-center h-full">
+                                                <div className="animate-spin w-8 h-8 border-4 border-t-transparent border-purple-600 rounded-full"></div>
+                                            </div>
+                                        ) : (
+                                            <iframe
+                                                className="rounded-md w-full h-full object-cover"
+                                                src={video.link} // Replace with actual video link
+                                                title={`Video ${index}`}
+                                                frameBorder="0"
+                                                allowFullScreen
+                                            ></iframe>
+                                        )}
+                                        {video.status === 'loading' && (
+                                            <button
+                                                className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-[#8E72D7] px-3 py-1 text-white rounded-full text-xs"
+                                                onClick={() => handleVideoReady(index)}
+                                            >
+                                                Simulate Ready
+                                            </button>
+                                        )}
+                                    </div>
+                                </Reveal>
+                            ))}
+
+                        </div>
+                        {/* Desktop View: Grid Layout */}
+                        <div className="hidden md:grid grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-4">
+                            {cards.map((card, index) => (
+                                <div
+                                    key={index}
+                                    className={`relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg overflow-hidden cursor-pointer ${selectedImage === card.image ? "border-2 border-white" : ""
+                                        }`}
+                                    onClick={() => {
+                                        setSelectedImage(card.image);
+                                        setSelectedTitle(card.title);
+                                    }}
+                                >
+                                    {/* Dark Overlay */}
+                                    <div className="absolute inset-0 bg-black opacity-50"></div>
+                                    {/* Image (Black & White) */}
+                                    <img
+                                        src={card.image}
+                                        alt={card.title}
+                                        className="rounded-md w-full h-full object-cover filter grayscale"
+                                    />
+                                </div>
+                            ))}
+
+
+                            {/* User-Generated Cards */}
+                            {videoLinks.map((video, index) => (
+                                <Reveal keyframes={fadeInUp} duration={800} delay={index * 100} key={index}>
+                                    <div className="relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
+                                        <h3 className="absolute top-1 text-white text-center text-xs lg:text-lg md:text-lg">
+                                            {video.status === 'loading' ? 'Your next one is loading' : 'Video Analysis'}
+                                        </h3>
+                                        {video.status === 'loading' ? (
+                                            <div className="flex justify-center items-center h-full">
+                                                <div className="animate-spin w-8 h-8 border-4 border-t-transparent border-purple-600 rounded-full"></div>
+                                            </div>
+                                        ) : (
+                                            <iframe
+                                                className="rounded-md w-full h-full object-cover"
+                                                src={video.link} // Replace with actual video link
+                                                title={`Video ${index}`}
+                                                frameBorder="0"
+                                                allowFullScreen
+                                            ></iframe>
+                                        )}
+                                        {video.status === 'loading' && (
+                                            <button
+                                                className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-[#8E72D7] px-3 py-1 text-white rounded-full text-xs"
+                                                onClick={() => handleVideoReady(index)}
+                                            >
+                                                Simulate Ready
+                                            </button>
+                                        )}
+                                    </div>
+                                </Reveal>
+                            ))}
+                        </div>
+
+                    </div>
+                </div>
+            </Reveal>
+
+
+
+
+
+            <div className="relative text-white mt-10 mb-10">
+                {/* Blurred Background */}
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                    style={{
+                        backgroundImage: `url(${selectedImage})`,
+                        filter: "blur(30px)", // Adjust the blur intensity
+
+                    }}
+                ></div>
+
+                {/* Content */}
+                <div className="relative z-10">
+                    {/* video Section */}
+                    <div>
                         <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                             <h2 className="text-xl md:text-2xl lg:text-3xl  mb-5 text-left md:text-left lg:text-left mt-5" style={{ fontFamily: 'Playfair' }}>
                                 Highlights of the Video
                             </h2>
-                            </Reveal>
-                            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                        </Reveal>
+                        <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                             <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center mt-5 gap-6">
                                 {/* Video Card */}
                                 <div className="relative w-full lg:w-1/2 aspect-video">
@@ -217,7 +406,7 @@ const Chat = () => {
                                     {/* Video Cover */}
                                     <img
                                         id="coverOverlay"
-                                        src="/cover.png" // Cover image
+                                        src={selectedImage}
                                         alt="Video Cover"
                                         className="absolute w-full h-full object-cover rounded-lg"
                                     />
@@ -230,7 +419,7 @@ const Chat = () => {
                                             Uploaded By: <span className="font-medium">TEDx Talks</span>
                                         </p>
                                         <h4 className="text-md lg:text-3xl md:text-xl" style={{ fontFamily: 'Wix Madefor Display' }}>
-                                            tl;dr - The quality of your relationships determines the quality of your lives
+                                            tl;dr - {selectedTitle}
                                         </h4>
 
                                         <p className="text-sm lg:text-lg font-light">Esther Perel - 12 min</p>
@@ -262,77 +451,77 @@ const Chat = () => {
                                     </button>
                                 </div>
                             </div>
-                            </Reveal>
-                        </div>
-                        {/* question Section */}
-                        
-                        <div className="w-full mx-auto bg-[#262121] bg-opacity-70 text-white p-5 rounded-lg shadow-lg mt-10"
-                         style={{
+                        </Reveal>
+                    </div>
+                    {/* question Section */}
+
+                    <div className="w-full mx-auto bg-[#262121] bg-opacity-70 text-white p-5 rounded-lg shadow-lg mt-10"
+                        style={{
                             backgroundColor: 'rgba(74, 62, 62, 0.7)', // Apply transparency using rgba
                         }}>
-                            {/* Header */}
-                            <div className="flex justify-between items-center mb-4">
-                                <div className="flex items-center">
-                                    <img
-                                        src="/collections/protocol1.png"
-                                        alt="Profile"
-                                        className="w-10 h-10 rounded-full"
-                                    />
-                                    <p className="ml-4 font-medium text-sm">Ask me anything</p>
-                                </div>
-                                <button
-                                    onClick={handleEndChat}
-                                    className="text-gray-400 hover:text-white text-sm"
-                                >
-                                    ✖
-                                </button>
-                            </div>
-
-                            {/* Conversation */}
-                            <div className="h-64 overflow-y-auto space-y-4 mb-4">
-                                {conversation.map((item, index) => (
-                                    <div
-                                        key={index}
-                                        className={`flex ${item.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                                    >
-                                        <div
-                                            className={`p-3 rounded-lg max-w-xs ${item.role === 'user' ? 'bg-[#8E72D7] text-white' : ' text-gray-300'
-                                                }`}
-                                        >
-                                            {item.message}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            {/* Input Section */}
+                        {/* Header */}
+                        <div className="flex justify-between items-center mb-4">
                             <div className="flex items-center">
-                                <input
-                                    type="text"
-                                    placeholder="Type your question..."
-                                    value={inputValueQ}
-                                    onChange={(e) => setInputValueQ(e.target.value)}
-                                    onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                                    className="flex-1 p-3 rounded-full bg-transparent border border-gray-500 text-white placeholder-gray-400 focus:outline-none"
+                                <img
+                                    src={selectedImage}
+                                    alt="Profile"
+                                    className="w-10 h-10 rounded-full"
                                 />
-                                <button
-                                    onClick={handleSendMessage}
-                                    disabled={isLoading}
-                                    className="ml-4 bg-white p-3 rounded-full"
-                                    style={{ minWidth: '48px', minHeight: '48px' }}
-                                >
-                                    {isLoading ? (
-                                        <div className="animate-spin w-6 h-6 border-2 border-t-transparent border-purple-600 rounded-full"></div>
-                                    ) : (
-                                        <ArrowForwardIcon style={{ fontSize: '24px', color: 'black' }} />
-                                    )}
-                                </button>
+                                <p className="ml-4 font-medium text-sm">Ask me anything</p>
                             </div>
+                            <button
+                                onClick={handleEndChat}
+                                className="text-gray-400 hover:text-white text-sm"
+                            >
+                                ✖
+                            </button>
                         </div>
 
+                        {/* Conversation */}
+                        <div className="h-64 overflow-y-auto space-y-4 mb-4">
+                            {conversation.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className={`flex ${item.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                                >
+                                    <div
+                                        className={`p-3 rounded-lg max-w-xs ${item.role === 'user' ? 'bg-[#8E72D7] text-white' : ' text-gray-300'
+                                            }`}
+                                    >
+                                        {item.message}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Input Section */}
+                        <div className="flex items-center">
+                            <input
+                                type="text"
+                                placeholder="Type your question..."
+                                value={inputValueQ}
+                                onChange={(e) => setInputValueQ(e.target.value)}
+                                onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                                className="flex-1 p-3 rounded-full bg-transparent border border-gray-500 text-white placeholder-gray-400 focus:outline-none"
+                            />
+                            <button
+                                onClick={handleSendMessage}
+                                disabled={isLoading}
+                                className="ml-4 bg-white p-3 rounded-full"
+                                style={{ minWidth: '48px', minHeight: '48px' }}
+                            >
+                                {isLoading ? (
+                                    <div className="animate-spin w-6 h-6 border-2 border-t-transparent border-purple-600 rounded-full"></div>
+                                ) : (
+                                    <ArrowForwardIcon style={{ fontSize: '24px', color: 'black' }} />
+                                )}
+                            </button>
+                        </div>
                     </div>
+
                 </div>
-           
+            </div>
+
 
 
 

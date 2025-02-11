@@ -17,7 +17,13 @@ const Practice = () => {
     const [inputValuePractice, setInputValuePractice] = useState("I'm grateful for ");
     const [practiceFinished, setPracticeFinished] = useState(false); // Tracks if the practice is finished
     const examples = ['Love', 'Family', 'Health', 'Work', 'Food'];
-
+    const creators = [
+        { name: "Glucose Revolution", image: "/coverb.jpeg" },
+        { name: "Esther Perel", image: "/esther.png" },
+        { name: "Ramit Sethi", image: "/vid2.png" },
+        { name: "Adam Grant", image: "/vid1.png" },
+    ];
+    const [selectedCreator, setSelectedCreator] = useState(creators[0]);
     const handleExampleClick = (example) => {
         setInputValuePractice(`I'm grateful for ${example}`);
     };
@@ -82,119 +88,143 @@ const Practice = () => {
             </Reveal>
 
             <Reveal keyframes={fadeInUp} duration={800} delay={50}>
-                <div className="relative text-white mt-10">
+                {/* Blurry Card Container */}
+                <div
+                    className="relative bg-white bg-opacity-10 rounded-lg p-6 flex flex-col lg:flex-row w-full gap-6 "
+                    style={{
+                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        WebkitBackdropFilter: "blur(20px)",
+                        backdropFilter: "blur(20px)",
+                    }}
+                >
+                    {/* Left Chat Section */}
+                    <div className="flex flex-col justify-between w-full lg:w-1/3 h-full">
+                        {/* Title Section */}
+                        <div className="flex space-x-5 mb-5 ">
+                            <h2
+                                className={`text-md md:text-md lg:text-md pb-2 cursor-pointer border-b-2 border-white `}
 
+                            >
+                                Videos
+                            </h2>
 
-                    {/* Content */}
-                    <div className="relative z-10">
-                        {/* Cards Section */}
-                        <div className="w-full text-white">
-                            <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-5 ">
-                                {/* Card 1 */}
-                                <div
-                                    className="bg-[#4A3E3E] bg-opacity-70 pt-5 rounded-lg flex flex-col items-center"
-                                    style={{
-                                        backgroundColor: 'rgba(74, 62, 62, 0.7)', // Apply transparency using rgba
-                                    }}
-                                >
-                                    <h3
-                                        className="text-xs md:text-xl lg:text-xl text-left font-medium mb-4"
-                                        style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}
-                                    >
-                                        Deep Work Challenge
-                                    </h3>
-                                    <img
-                                        src="/icons/practice1.svg"
-                                        alt="Deep Work Challenge"
-                                        className="w-20 h-20 md:w-28 md:h-28"
-                                    />
-                                </div>
-
-                                {/* Card 2 */}
-                                <div
-                                    className="bg-[#4A3E3E] bg-opacity-70 pt-5 rounded-lg flex flex-col items-center"
-                                    style={{
-                                        backgroundColor: 'rgba(74, 62, 62, 0.7)', // Apply transparency using rgba
-                                    }}
-                                >
-
-                                    <h3
-                                        className="text-xs md:text-xl lg:text-xl text-left px-4 font-medium mb-4"
-                                        style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}
-                                    >
-                                        Mastering Effective Feedback
-                                    </h3>
-                                    <img
-                                        src="/icons/practice2.svg"
-                                        alt="Mastering Effective Feedback"
-                                        className="w-20 h-20 md:w-28 md:h-28 mb-5 md:mb-10"
-                                    />
-                                </div>
-                                {/* Card 3 */}
-                                <div
-                                    className="bg-[#4A3E3E] bg-opacity-70 pt-5 rounded-lg flex flex-col items-center"
-                                    style={{
-                                        backgroundColor: 'rgba(74, 62, 62, 0.7)', // Apply transparency using rgba
-                                    }}
-                                >
-                                    <h3
-                                        className="text-xs md:text-xl lg:text-xl text-left px-4 font-medium mb-4"
-                                        style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}
-                                    >
-                                        Make your Relationship Work
-                                    </h3>
-                                    <img
-                                        src="/icons/practice3.svg"
-                                        alt="Make your Relationship Work"
-                                        className="w-20 h-20 md:w-28 md:h-28"
-                                    />
-                                </div>
-                                {/* Card 4 */}
-                                <div
-                                    className="bg-[#4A3E3E] hidden bg-opacity-70 pt-5 rounded-lg md:flex flex-col items-center"
-                                    style={{
-                                        backgroundColor: 'rgba(74, 62, 62, 0.7)', // Apply transparency using rgba
-                                    }}
-                                >
-                                    <h3
-                                        className="text-xs md:text-xl lg:text-xl text-left px-4 font-medium mb-4"
-                                        style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}
-                                    >
-                                        Better  emotional
-                                        intelligence
-                                    </h3>
-                                    <img
-                                        src="/icons/practice1.svg"
-                                        alt="Make your Relationship Work"
-                                        className="w-20 h-20 md:w-28 md:h-28"
-                                    />
-                                </div>
-                                {/* Card 5 */}
-                                <div
-                                    className="bg-[#4A3E3E] hidden bg-opacity-70 pt-5 rounded-lg lg:flex flex-col items-center"
-                                    style={{
-                                        backgroundColor: 'rgba(74, 62, 62, 0.7)',
-                                    }}
-                                >
-                                    <h3
-                                        className="text-xs md:text-xl lg:text-xl text-left px-4 font-medium mb-4"
-                                        style={{ fontFamily: 'Wix Madefor Display', height: '50px' }}
-                                    >
-                                        Mastering Effective
-                                        Feedback
-                                    </h3>
-                                    <img
-                                        src="/icons/practice2.svg"
-                                        alt="Make your Relationship Work"
-                                        className="w-20 h-20 md:w-28 md:h-28"
-                                    />
-                                </div>
-                            </div>
                         </div>
+                        <div>
+                            <h2 className="text-md md:text-md lg:text-md mb-5">
+                                Discover coaching sessions designed to help you improve your skills and mindset.
+                            </h2>
+                        </div>
+
+                        {/* Chat Input and Response Logic */}
+                        <div className="mt-auto">
+                            {!chatResponse ? (
+                                // Input Section
+                                <>
+                                    <div className="flex space-x-3 mb-2">
+                                        {creators.map((creator, index) => (
+                                            <button
+                                                key={index}
+                                                className={`w-10 h-10 rounded-full overflow-hidden border-2 ${selectedCreator.name === creator.name ? "border-white" : "border-transparent"
+                                                    }`}
+                                                onClick={() => setSelectedCreator(creator)}
+                                            >
+                                                <img src={creator.image} alt={creator.name} className="w-full h-full object-cover" />
+                                            </button>
+                                        ))}
+                                    </div>
+
+
+                                    <div className="flex items-center w-full gap-2">
+
+
+
+                                        {/* Text Input */}
+                                        <input
+                                            type="text"
+                                            placeholder={`Ask ${selectedCreator.name} anything`}
+                                            className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none"
+                                            style={{ fontSize: "14.29px" }}
+                                        />
+
+                                        {/* Send Button */}
+                                        <button className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
+                                            <ArrowForwardIcon style={{ fontSize: "24px", color: "black" }} />
+                                        </button>
+                                    </div>
+                                </>
+                            ) : (
+                                // Chat Response Section
+                                <div className="w-full mt-5 p-2 rounded-lg" style={{ backgroundColor: "rgba(74, 62, 62, 0.7)" }}>
+                                    <div className="flex items-center">
+                                        <img
+                                            src="/collections/protocol1.png"
+                                            alt="Profile"
+                                            className="w-10 h-10 rounded-full"
+                                        />
+                                        <p className="ml-4 text-sm font-medium">{inputValueQ}</p>
+                                    </div>
+                                    <div className="mt-4 p-0 rounded-lg text-sm text-white">{chatResponse}</div>
+                                    <div className="flex justify-end space-x-4 mt-4">
+                                        <button
+                                            onClick={() => {
+                                                setChatResponse(null);
+                                                setInputValueQ("");
+                                            }}
+                                            className="px-2 py-1 border text-xs text-white rounded-full"
+                                        >
+                                            End Chat
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setChatResponse(null); // Clear response for next input
+                                                setInputValueQ(""); // Reset input
+                                            }}
+                                            className="px-3 py-1 bg-white text-xs text-black rounded-full"
+                                        >
+                                            Continue
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Right Cards Section */}
+                    <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4  w-full lg:w-2/3 mt-10">
+
+                        {/* Coaching Cards */}
+                        <div className="relative text-center h-48 md:h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg overflow-hidden">
+                            <img
+                                src="/creators/coach1.png"
+                                alt="Card 1"
+                                className="rounded-md w-full h-full object-cover"
+                            />
+                        </div>
+                        <div className="relative text-center h-48 md:h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg overflow-hidden">
+                            <img
+                                src="/creators/coach2.png"
+                                alt="Card 1"
+                                className="rounded-md w-full h-full object-cover"
+                            />
+                        </div>
+                        <div className="relative text-center h-48 md:h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg overflow-hidden">
+                            <img
+                                src="/creators/coach3.png"
+                                alt="Card 1"
+                                className="rounded-md w-full h-full object-cover"
+                            />
+                        </div>
+                        <div className="hidden md:flex relative text-center h-48 md:h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg overflow-hidden">
+                            <img
+                                src="/creators/coach4.png"
+                                alt="Card 1"
+                                className="rounded-md w-full h-full object-cover"
+                            />
+                        </div>
+                       
                     </div>
                 </div>
             </Reveal>
-
 
 
 

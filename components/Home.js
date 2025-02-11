@@ -15,19 +15,17 @@ const VideoAnalysisPage = () => {
     const [inputValue, setInputValue] = useState('');
     const [inputValueQ, setInputValueQ] = useState('');
     const [chatResponse, setChatResponse] = useState(null);
-    const [showModal, setShowModal] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [inputValuePractice, setInputValuePractice] = useState("I'm grateful for ");
-    const [practiceFinished, setPracticeFinished] = useState(false); // Tracks if the practice is finished
-    const examples = ['Love', 'Family', 'Health', 'Work', 'Food'];
+    const [activeTab, setActiveTab] = useState("videos");
 
-    const handleExampleClick = (example) => {
-        setInputValuePractice(`I'm grateful for ${example}`);
-    };
+    const creators = [
+        { name: "Glucose Revolution", image: "/hero/card1.png" },
+        { name: "Esther Perel", image: "/hero/card2.png" },
+        { name: "Ramit Sethi", image: "/hero/card3.png" },
+        { name: "Adam Grant", image: "/hero/card4.png" },
+      ];
+    const [selectedCreator, setSelectedCreator] = useState(creators[0]);
 
-    const handleSubmitPractice = () => {
-        setPracticeFinished(true); // Set practice to finished
-    };
     const handleAddLink = () => {
         if (inputValue.trim()) {
             setVideoLinks((prev) => [...prev, { link: inputValue, status: 'loading' }]);
@@ -69,7 +67,7 @@ const VideoAnalysisPage = () => {
         }
     };
 
-
+   
 
     const carouselData = [
         {
@@ -168,9 +166,27 @@ const VideoAnalysisPage = () => {
                     {/* Left Chat Section */}
                     <div className="flex flex-col justify-between w-full lg:w-1/3 h-full">
                         {/* Title Section */}
+                        <div className="flex space-x-5 mb-5 ">
+                            <h2
+                                className={`text-md md:text-md lg:text-md pb-2 cursor-pointer ${activeTab === "videos" ? "border-b-2 border-white" : "text-gray-400"
+                                    }`}
+                                onClick={() => setActiveTab("videos")}
+                            >
+                                Videos
+                            </h2>
+                            <h2
+                                className={`text-md md:text-md lg:text-md pb-2 cursor-pointer ${activeTab === "coaching" ? "border-b-2 border-white" : "text-gray-400"
+                                    }`}
+                                onClick={() => setActiveTab("coaching")}
+                            >
+                                Coaching
+                            </h2>
+                        </div>
                         <div>
-                            <h2 className="text-md md:text-md lg:text-md mb-5" style={{ fontFamily: "Playfair" }}>
-                                You watched videos about dopamine fasting, personal finance tips, and skin care.
+                            <h2 className="text-md md:text-md lg:text-md mb-5">
+                                {activeTab === "videos"
+                                    ? "You watched videos about dopamine fasting, personal finance tips, and skin care."
+                                    : "Discover coaching sessions designed to help you improve your skills and mindset."}
                             </h2>
                         </div>
 
@@ -178,34 +194,40 @@ const VideoAnalysisPage = () => {
                         <div className="mt-auto">
                             {!chatResponse ? (
                                 // Input Section
-                                <div className="flex flex-nowrap items-center w-full gap-2">
-                                    <img
-                                        src="/collections/protocol1.png"
-                                        alt="Profile"
-                                        className="w-12 h-12 rounded-full flex-shrink-0"
-                                    />
-                                    <input
-                                        type="text"
-                                        placeholder="Ask me anything"
-                                        value={inputValueQ}
-                                        onChange={(e) => setInputValueQ(e.target.value)}
-                                        onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
-                                        className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none"
-                                        style={{ fontSize: "14.29px" }}
-                                    />
-                                    <button
-                                        onClick={handleSendMessage}
-                                        disabled={isLoading}
-                                        className="bg-white p-3 rounded-full flex-shrink-0"
-                                        style={{ minWidth: "48px", minHeight: "48px" }}
-                                    >
-                                        {isLoading ? (
-                                            <div className="animate-spin w-6 h-6 border-2 border-t-transparent border-purple-600 rounded-full"></div>
-                                        ) : (
-                                            <ArrowForwardIcon style={{ fontSize: "24px", color: "black" }} />
-                                        )}
-                                    </button>
-                                </div>
+                                <>
+                                <div className="flex space-x-3 mb-2">
+                                {creators.map((creator, index) => (
+                                  <button
+                                    key={index}
+                                    className={`w-10 h-10 rounded-full overflow-hidden border-2 ${
+                                      selectedCreator.name === creator.name ? "border-white" : "border-transparent"
+                                    }`}
+                                    onClick={() => setSelectedCreator(creator)}
+                                  >
+                                    <img src={creator.image} alt={creator.name} className="w-full h-full object-cover" />
+                                  </button>
+                                ))}
+                              </div>
+                        
+                              
+                              <div className="flex items-center w-full gap-2">
+                              
+                               
+                                
+                                {/* Text Input */}
+                                <input
+                                  type="text"
+                                  placeholder={`Ask ${selectedCreator.name} anything`}
+                                  className="flex-1 p-3 rounded-full bg-transparent text-white border placeholder-gray-400 focus:outline-none"
+                                  style={{ fontSize: "14.29px" }}
+                                />
+                                
+                                {/* Send Button */}
+                                <button className="bg-white p-3 rounded-full flex-shrink-0" style={{ minWidth: "48px", minHeight: "48px" }}>
+                                  <ArrowForwardIcon style={{ fontSize: "24px", color: "black" }} />
+                                </button>
+                              </div>
+                              </>
                             ) : (
                                 // Chat Response Section
                                 <div className="w-full mt-5 p-2 rounded-lg" style={{ backgroundColor: "rgba(74, 62, 62, 0.7)" }}>
@@ -244,78 +266,85 @@ const VideoAnalysisPage = () => {
                     </div>
 
                     {/* Right Cards Section */}
-                    <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full lg:w-2/3">
-                        {/* Purple Card */}
-                        <div className="relative text-center bg-[#7A65B0] rounded-lg p-4 flex flex-col items-center justify-between h-64">
-                            <img
-                                src="/coverb.jpeg"
-                                alt="Relationship Reboot Coaching"
-                                className="w-full h-auto max-w-xs lg:max-h-28 md:max-h-28 mb-3 rounded-[20px] object-cover"
-                            />
-                            <h3 className="text-white text-sm lg:text-lg font-medium mb-3" style={{ fontFamily: "Playfair" }}>
-                                Relationship Reboot Coaching
-                            </h3>
-                            <Button
-                                isLink
-                                href={'/practice'}
-                                className={'bg-white text-black py-2 px-4 rounded-full text-xs font-medium hover:bg-gray-200'}
-                                variant={'primary'}
-                            >
-                                Start Practice
-                            </Button>
-
-                        </div>
-
-                        {/* Static Cards */}
-                        <div className="relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
-                            <h3 className="text-white text-center text-xs lg:text-lg md:text-lg absolute top-1">
-                                Enhancing Focus Through Routine
-                            </h3>
-                            <img src="/hero/card1.png" alt="Card 1" className="rounded-md w-full h-full object-cover" />
-                        </div>
-                        <div className="relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
-                            <h3 className="text-white text-center text-xs lg:text-lg md:text-lg absolute top-1">
-                                Mastering Effective Feedback
-                            </h3>
-                            <img src="/hero/card2.png" alt="Card 2" className="rounded-md w-full h-full object-cover" />
-                        </div>
-                        <div className="hidden md:flex relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
-                            <h3 className="text-white text-center text-xs lg:text-lg md:text-lg absolute top-1">
-                                Mastering Effective Feedback
-                            </h3>
-                            <img src="/hero/card3.png" alt="Card 2" className="rounded-md w-full h-full object-cover" />
-                        </div>
-                        {/* User-Generated Cards */}
-                        {videoLinks.map((video, index) => (
-                            <Reveal keyframes={fadeInUp} duration={800} delay={index * 100} key={index}>
+                    <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full lg:w-2/3 mt-10">
+                        {activeTab === "videos" ? (
+                            <>
+                                {/* Static Cards */}
                                 <div className="relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
-                                    <h3 className="absolute top-1 text-white text-center text-xs lg:text-lg md:text-lg">
-                                        {video.status === 'loading' ? 'Your next one is loading' : 'Video Analysis'}
+                                    <h3 className="text-white text-center text-xs lg:text-lg md:text-lg absolute top-1">
+                                        Enhancing Focus Through Routine
                                     </h3>
-                                    {video.status === 'loading' ? (
-                                        <div className="flex justify-center items-center h-full">
-                                            <div className="animate-spin w-8 h-8 border-4 border-t-transparent border-purple-600 rounded-full"></div>
-                                        </div>
-                                    ) : (
-                                        <iframe
-                                            className="rounded-md w-full h-full object-cover"
-                                            src={video.link} // Replace with actual video link
-                                            title={`Video ${index}`}
-                                            frameBorder="0"
-                                            allowFullScreen
-                                        ></iframe>
-                                    )}
-                                    {video.status === 'loading' && (
-                                        <button
-                                            className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-[#8E72D7] px-3 py-1 text-white rounded-full text-xs"
-                                            onClick={() => handleVideoReady(index)}
-                                        >
-                                            Simulate Ready
-                                        </button>
-                                    )}
+                                    <img src="/hero/card1.png" alt="Card 1" className="rounded-md w-full h-full object-cover" />
                                 </div>
-                            </Reveal>
-                        ))}
+                                <div className="relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
+                                    <h3 className="text-white text-center text-xs lg:text-lg md:text-lg absolute top-1">
+                                        Mastering Effective Feedback
+                                    </h3>
+                                    <img src="/hero/card2.png" alt="Card 2" className="rounded-md w-full h-full object-cover" />
+                                </div>
+                                <div className=" flex relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
+                                    <h3 className="text-white text-center text-xs lg:text-lg md:text-lg absolute top-1">
+                                        Mastering Effective Feedback
+                                    </h3>
+                                    <img src="/hero/card3.png" alt="Card 2" className="rounded-md w-full h-full object-cover" />
+                                </div>
+                                <div className="hidden md:flex relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
+                                    <h3 className="text-white text-center text-xs lg:text-lg md:text-lg absolute top-1">
+                                        Mastering Effective Feedback
+                                    </h3>
+                                    <img src="/hero/card4.png" alt="Card 2" className="rounded-md w-full h-full object-cover" />
+                                </div>
+                                {/* User-Generated Cards */}
+                                {videoLinks.map((video, index) => (
+                                    <Reveal keyframes={fadeInUp} duration={800} delay={index * 100} key={index}>
+                                        <div className="relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
+                                            <h3 className="absolute top-1 text-white text-center text-xs lg:text-lg md:text-lg">
+                                                {video.status === 'loading' ? 'Your next one is loading' : 'Video Analysis'}
+                                            </h3>
+                                            {video.status === 'loading' ? (
+                                                <div className="flex justify-center items-center h-full">
+                                                    <div className="animate-spin w-8 h-8 border-4 border-t-transparent border-purple-600 rounded-full"></div>
+                                                </div>
+                                            ) : (
+                                                <iframe
+                                                    className="rounded-md w-full h-full object-cover"
+                                                    src={video.link} // Replace with actual video link
+                                                    title={`Video ${index}`}
+                                                    frameBorder="0"
+                                                    allowFullScreen
+                                                ></iframe>
+                                            )}
+                                            {video.status === 'loading' && (
+                                                <button
+                                                    className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-[#8E72D7] px-3 py-1 text-white rounded-full text-xs"
+                                                    onClick={() => handleVideoReady(index)}
+                                                >
+                                                    Simulate Ready
+                                                </button>
+                                            )}
+                                        </div>
+                                    </Reveal>
+                                ))}
+
+                            </>
+                        ) : (
+                            <>
+                                {/* Coaching Cards */}
+                                {/* Static Cards */}
+                                <div className="relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">    
+                                    <img src="/creators/coach1.png" alt="Card 1" className="rounded-md w-full h-full object-cover" />
+                                </div>
+                                <div className="relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
+                                    <img src="/creators/coach2.png" alt="Card 2" className="rounded-md w-full h-full object-cover" />
+                                </div>
+                                <div className="flex relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
+                                    <img src="/creators/coach3.png" alt="Card 2" className="rounded-md w-full h-full object-cover" />
+                                </div>
+                                <div className="hidden md:flex relative text-center h-64 flex flex-col items-center justify-center bg-[#262121] rounded-lg">
+                                    <img src="/creators/coach4.png" alt="Card 2" className="rounded-md w-full h-full object-cover" />
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </Reveal>
@@ -333,7 +362,7 @@ const VideoAnalysisPage = () => {
                         >
                             {/* Image */}
                             <div
-                                className="w-full h-80 overflow-hidden rounded-lg shadow-lg"
+                                className="w-full h-80 overflow-hidden rounded-lg "
                                 style={{
                                     boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.3)",
                                     transition: "box-shadow 0.3s ease, transform 0.3s ease",
