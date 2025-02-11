@@ -25,9 +25,9 @@ const VideoAnalysisPage = () => {
 
     const creators = [
         { name: "Glucose Revolution", image: "/hero/card1.png" },
-        { name: "Esther Perel", image: "/hero/card2.png" },
+        { name: "Jessie Inchauspe", image: "/hero/card2.png" },
         { name: "Ramit Sethi", image: "/hero/card3.png" },
-        { name: "Adam Grant", image: "/hero/card4.png" },
+        { name: "Esther Perel", image: "/hero/card4.png" },
     ];
     const [selectedCreator, setSelectedCreator] = useState(creators[0]);
 
@@ -173,9 +173,9 @@ const HomePage = () => {
 
     const creators = [
         { name: "Glucose Revolution", image: "/hero/card1.png" },
-        { name: "Esther Perel", image: "/hero/card2.png" },
+        { name: "Jessie Inchauspe", image: "/hero/card2.png" },
         { name: "Ramit Sethi", image: "/hero/card3.png" },
-        { name: "Adam Grant", image: "/hero/card4.png" },
+        { name: "Esther Perel", image: "/hero/card4.png" },
     ];
     const [selectedCreator, setSelectedCreator] = useState(creators[0]);
 
