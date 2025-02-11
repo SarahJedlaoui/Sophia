@@ -105,9 +105,10 @@ const CreatorSearch = () => {
             </Reveal>
 
             {/* Creators Section */}
-            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
-                <div className="grid grid-cols-1 gap-5">
+           
+                <div className="grid grid-cols-1 md:grid-cols-2  gap-5">
                     {filteredCreators.map((creator, index) => (
+                          <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                         <div key={index} className="flex bg-[#4A3E3E] rounded-lg p-5 mb-5 items-center md:h-[150px]"
                         >
                             {/* Left Section: Image */}
@@ -135,9 +136,10 @@ const CreatorSearch = () => {
                                 <p className="text-xs mt-2 text-gray-400">{creator.description}</p>
                             </div>
                         </div>
+                        </Reveal>
                     ))}
                 </div>
-            </Reveal>
+           
 
 
             {/* No results message */}
