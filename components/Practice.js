@@ -3,7 +3,7 @@ import { Reveal } from 'react-awesome-reveal';
 import { fadeInUp } from '@/keyframes';
 import { Button, Container } from '.';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-
+import Image from 'next/image';
 
 
 
@@ -244,7 +244,8 @@ const Practice = () => {
 
                     <div className="text-left lg:text-center mb-6">
                         <h2 className="text-xl md:text-2xl lg:text-3xl text-left mb-6" style={{ fontFamily: 'Playfair' }}>
-                            Improve your ability to understand                        </h2>
+                            Improve your ability to understand                        
+                            </h2>
                         <p className="text-sm lg:text-lg mt-2">
                             Strengthen your connections with practical, guided steps. Build trust, improve communication, and nurture meaningful relationships.
                         </p>

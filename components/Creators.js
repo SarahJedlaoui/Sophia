@@ -6,7 +6,7 @@ import { Reveal } from 'react-awesome-reveal';
 import { fadeInUp, fadeInLeft } from '@/keyframes';
 import Link from 'next/link';
 import { Button, Container } from '.';
-
+import Image from 'next/image';
 const CreatorSearch = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const creators = [

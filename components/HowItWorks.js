@@ -3,7 +3,7 @@ import { Container } from '.';
 import { Reveal } from 'react-awesome-reveal';
 import { fadeInDownShorter2 } from '@/keyframes';
 import styles from './HowItWorks.module.css'; // CSS Module
-
+import Image from 'next/image';
 const HowItWorks = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 

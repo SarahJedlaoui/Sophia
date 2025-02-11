@@ -67,7 +67,7 @@ const Hero = () => {
       <div className='flex-1 mt-14 sm:mt-0'>
         <JackInTheBox delay={200} triggerOnce>
           <div className='relative w-full h-[400px] lg:h-[500px]'>
-            <Image
+            <img
               layout='fill'
               objectFit='contain'
               objectPosition={'center'}

@@ -10,7 +10,7 @@ import Chat from './Chat';
 import Practice from './Practice';
 import CreatorSearch from './Creators';
 import CreatorProfileSection from './Esther';
-
+import Image from 'next/image';
 
 
 const VideoAnalysisPage = () => {

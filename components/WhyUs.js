@@ -1,7 +1,7 @@
 import React from 'react';
 import { Reveal } from 'react-awesome-reveal';
 import { fadeInDownShorter2, fadeInUp } from '@/keyframes';
-
+import Image from 'next/image';
 const WhyChooseSophia = () => {
   const features = [
     {
