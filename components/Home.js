@@ -29,7 +29,6 @@ const VideoAnalysisPage = () => {
         { name: "Ramit Sethi", image: "/hero/card3.png" },
         { name: "Esther Perel", image: "/hero/card4.png" },
     ];
-    const [selectedCreator, setSelectedCreator] = useState(creators[0]);
 
     const handleAddLink = () => {
         if (inputValue.trim()) {
@@ -38,92 +37,6 @@ const VideoAnalysisPage = () => {
         }
     };
 
-    const handleVideoReady = (index) => {
-        setVideoLinks((prev) =>
-            prev.map((item, i) => (i === index ? { ...item, status: 'ready' } : item))
-        );
-    };
-    const handleSendMessage = async () => {
-        if (!inputValueQ.trim()) return;
-
-        setIsLoading(true);
-
-        try {
-            const response = await fetch('https://aftervisit-0b4087b58b8e.herokuapp.com/api/ask-ai', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ question: inputValueQ }), // Send the user's question
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch AI response');
-            }
-
-            const data = await response.json();
-            setChatResponse(data.answer); // Update chat response with AI's answer
-
-        } catch (error) {
-            console.error('Error fetching AI response:', error);
-            setChatResponse('There was an error processing your question. Please try again.');
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-
-
-    const carouselData = [
-        {
-            title: "Glucose Revolution",
-            image: "/hero/carousel1.png",
-        },
-        {
-            title: "Ramit Sethi",
-            image: "/hero/carousel2.png",
-        },
-        {
-            title: "Esther Perel",
-            image: "/hero/carousel3.png",
-        },
-        {
-            title: "Glucose Revolution",
-            image: "/hero/carousel4.png",
-        },
-        {
-            title: "Ramit Sethi",
-            image: "/hero/carousel5.png",
-        },
-    ];
-
-    const settings = {
-        dots: false,
-        arrows: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 5.1,
-        centerMode: true,
-        centerPadding: "0",
-        focusOnSelect: true,
-        arrows: true,
-        responsive: [
-            {
-                breakpoint: 1024, // For medium screens (tablets)
-                settings: {
-                    slidesToShow: 4.1, // Show 4.1 slides
-                    centerMode: true,
-                },
-            },
-            {
-                breakpoint: 768, // For mobile screens
-                settings: {
-                    slidesToShow: 1.5, // Show 3.1 slides
-                    centerMode: true,
-                },
-            },
-        ],
-    };
 
     return (
         <>
@@ -153,7 +66,7 @@ const VideoAnalysisPage = () => {
 
         {/* Render the selected tab's component separately (Each has its own <Container>) */}
         {activeTabPage === "home" && <HomePage />}
-        {activeTabPage === "content" && <Chat />}
+        {activeTabPage === "content" && <Chat setActiveTabPage={setActiveTabPage} />}
         {activeTabPage === "coaching" && <Practice />}
         {activeTabPage === "creators" && <CreatorSearch />}
     </>

@@ -7,7 +7,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 
 
-const Chat = () => {
+const Chat = ({ setActiveTabPage }) => {
     const [videoLinks, setVideoLinks] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [inputValueChat, setInputValueChat] = useState('');
@@ -558,74 +558,79 @@ const Chat = () => {
 
             {/* Insights Section */}
             {insights && insights.length > 0 && (
-        <div className="text-white flex flex-col w-full items-center mt-7">
-            {/* Title Section */}
-            <div className="flex justify-between items-center w-full mb-6">
-                {/* Title (Aligned Left) */}
-                <h2 className="text-xl md:text-2xl lg:text-3xl text-left mt-5" style={{ fontFamily: 'Playfair' }}>
-                    Personalized Insights
-                </h2>
+                <div className="text-white flex flex-col w-full items-center mt-7">
+                    {/* Title Section */}
+                    <div className="flex justify-between items-center w-full mb-6">
+                        {/* Title (Aligned Left) */}
+                        <h2 className="text-xl md:text-2xl lg:text-3xl text-left mt-5" style={{ fontFamily: 'Playfair' }}>
+                            Personalized Insights
+                        </h2>
 
-                {/* Save to Coaching Button (Aligned Right, Disabled If No Saved Insights) */}
-                <button
-                    onClick={() => alert('Practices saved!')}
-                    disabled={!hasSavedInsights} // Disable if no saved insights
-                    className={`py-2 px-4 rounded-full text-xs font-medium transition ${
-                        hasSavedInsights ? "bg-white text-black hover:bg-gray-200" : "bg-gray-600 text-gray-300 cursor-not-allowed"
-                    }`}
-                >
-                    Save to Coaching
-                </button>
-            </div>
-
-            {/* Subtitle */}
-            <p className="text-sm md:text-base lg:text-lg mt-2">
-                In the video, Esther Perel explores the complexities of relationships, how we connect, communicate, and grow with our partners. Based on your conversation, here&apos;s what stood out.
-            </p>
-
-            {/* Dynamic Cards Section */}
-            <div className="space-y-4 w-full">
-                {insights.map((insight, index) => (
-                    <div key={index} className="bg-[#4A3E3E] p-4 rounded-lg flex flex-col relative">
-                        {/* Save Button (Top Right of Card) */}
+                        {/* Save to Coaching Button (Aligned Right, Disabled If No Saved Insights) */}
                         <button
-                            onClick={() => handleToggleSave(insight)}
-                            className="absolute top-2 right-2 p-2 rounded-full transition"
-                        >
-                            {/* Save Icon (Fill if saved, Outline if not saved) */}
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className={`h-6 w-6 ${
-                                    savedInsights.some((item) => item.title === insight.title) ? "text-white fill-white" : "text-gray-400"
+                            onClick={() => {
+                                if (hasSavedInsights) {
+                                    setActiveTabPage("coaching"); // Switch to the Practice tab
+                                } else {
+                                    alert("You need to save at least one insight first!");
+                                }
+                            }}
+                            disabled={!hasSavedInsights} // Disable if no saved insights
+                            className={`py-2 px-4 rounded-full text-xs font-medium transition ${hasSavedInsights ? "bg-white text-black hover:bg-gray-200" : "bg-gray-600 text-gray-300 cursor-not-allowed"
                                 }`}
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                fill="none"
-                                strokeWidth={2}
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v18l7-4 7 4V3z" />
-                            </svg>
+                        >
+                            Save to Coaching
                         </button>
 
-                        {/* Insight Title & Content */}
-                        <div className="flex items-center gap-2 mb-2">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6 text-white"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 20h9m-9-4h6m-6-4h3m-3-4h.01M9 12h.01M6 16h.01M6 20h.01M6 8h.01M9 4h.01M9 8h.01M6 4h.01" />
-                            </svg>
-                            <h3 className="text-sm font-bold">{insight.title}</h3>
-                        </div>
-                        <p className="text-xs md:text-sm">{insight.description}</p>
                     </div>
-                ))}
-            </div>
-        </div>
-    )}
+
+                    {/* Subtitle */}
+                    <p className="text-sm md:text-base lg:text-lg mt-2">
+                        In the video, Esther Perel explores the complexities of relationships, how we connect, communicate, and grow with our partners. Based on your conversation, here&apos;s what stood out.
+                    </p>
+
+                    {/* Dynamic Cards Section */}
+                    <div className="space-y-4 w-full">
+                        {insights.map((insight, index) => (
+                            <div key={index} className="bg-[#4A3E3E] p-4 rounded-lg flex flex-col relative">
+                                {/* Save Button (Top Right of Card) */}
+                                <button
+                                    onClick={() => handleToggleSave(insight)}
+                                    className="absolute top-2 right-2 p-2 rounded-full transition"
+                                >
+                                    {/* Save Icon (Fill if saved, Outline if not saved) */}
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className={`h-6 w-6 ${savedInsights.some((item) => item.title === insight.title) ? "text-white fill-white" : "text-gray-400"
+                                            }`}
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        fill="none"
+                                        strokeWidth={2}
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v18l7-4 7 4V3z" />
+                                    </svg>
+                                </button>
+
+                                {/* Insight Title & Content */}
+                                <div className="flex items-center gap-2 mb-2">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-6 w-6 text-white"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 20h9m-9-4h6m-6-4h3m-3-4h.01M9 12h.01M6 16h.01M6 20h.01M6 8h.01M9 4h.01M9 8h.01M6 4h.01" />
+                                    </svg>
+                                    <h3 className="text-sm font-bold">{insight.title}</h3>
+                                </div>
+                                <p className="text-xs md:text-sm">{insight.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
         </Container>
     );
 };
