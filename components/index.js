@@ -24,6 +24,7 @@ import Practice from './Practice';
 import CreatorSearch from './Creators';
 import CreatorProfileSection from './Esther';
 import Navbar2 from './Navbar2';
+import VideoSection from './VideoSection'
 export {
   FAQ,
   CreatorItem,
@@ -50,5 +51,6 @@ export {
   Practice,
   CreatorSearch,
   CreatorProfileSection,
-  Navbar2
+  Navbar2,
+  VideoSection
 };

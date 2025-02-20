@@ -430,9 +430,9 @@ const Chat = ({ setActiveTabPage }) => {
                                         src="https://www.youtube.com/embed/OkgtwMxbnLw?rel=0&autoplay=1"
                                         title="YouTube video player"
                                         frameBorder="0"
-                                        allow="accelerometer ; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                         allowFullScreen
-                                        style={{ display: 'none' }} // Initially hide the YouTube video
+                                        style={{ display: 'none' }} 
                                     ></iframe>
                                     {/* Video Cover */}
                                     <img
