@@ -21,7 +21,7 @@ const Hero = () => {
         if (text.length < word.length) {
           setText(word.slice(0, text.length + 1));
         } else {
-          setTimeout(() => setIsDeleting(true), 1000); // Pause before deleting
+          setTimeout(() => setIsDeleting(true), 1800); // Pause before deleting
         }
       } else {
         if (text.length > 0) {
@@ -31,7 +31,7 @@ const Hero = () => {
           setCurrentWordIndex((prev) => (prev + 1) % words.length);
         }
       }
-    }, speed);
+    }, 150);
 
     return () => clearTimeout(timeout);
   }, [text, isDeleting, currentWordIndex]);
