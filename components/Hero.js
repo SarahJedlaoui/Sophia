@@ -39,9 +39,9 @@ const Hero = () => {
     <Container className={'flex flex-col sm:flex-row mt-20 mb-32'}>
       <div className='w-full sm:w-[50%] pr-0 sm:pr-10 lg:pr-20 mt-[-20px] sm:mt-5 lg:mt-10'>
         <Reveal keyframes={fadeInLeft} duration={800} delay={200}>
-        <h1 className='text-3xl lg:text-6xl font-bold mb-5'>
-            Transform your <span className="text-[#937BD0]">{text}</span> into personalized coaching sessions.
-          </h1>
+        <h1 className='text-3xl lg:text-6xl font-bold mb-5 min-h-[150px] md:min-h-[150px] lg:min-h-[300px]'>
+        Transform your <span className="text-[#937BD0]">{text}</span> into personalized coaching sessions.
+    </h1>
         </Reveal>
         <Reveal keyframes={fadeInDownShorter} duration={1000} delay={800}>
           <p className='mb-8 opacity-50'>

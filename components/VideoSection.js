@@ -20,7 +20,7 @@ const VideoSection = () => {
                     <VideoPlayer selectedVideo={selectedVideo} showVideo={showVideo} setShowVideo={setShowVideo} />
 
                     {/* Chat Section */}
-                    <ChatComponent />
+                    <ChatComponent selectedVideo={selectedVideo}/>
 
                     {/* Insights Panel with Filters */}
                     <InsightsPanel selectedVideo={selectedVideo} filterType={filterType} setFilterType={setFilterType} />

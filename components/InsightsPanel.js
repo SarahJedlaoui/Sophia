@@ -7,9 +7,9 @@ const InsightsPanel = ({ selectedVideo, filterType, setFilterType }) => {
 
             {/* Filter Buttons */}
             <div className="flex gap-2 mb-4">
-                <button onClick={() => setFilterType('all')} className={`px-3 py-1 rounded-full text-sm ${filterType === 'all' ? 'bg-blue-500' : 'bg-gray-700'}`}>All</button>
-                <button onClick={() => setFilterType('coaching')} className={`px-3 py-1 rounded-full text-sm ${filterType === 'coaching' ? 'bg-blue-500' : 'bg-gray-700'}`}>Coaching</button>
-                <button onClick={() => setFilterType('insights')} className={`px-3 py-1 rounded-full text-sm ${filterType === 'insights' ? 'bg-blue-500' : 'bg-gray-700'}`}>Insights</button>
+                <button onClick={() => setFilterType('all')} className={`px-3 py-1 rounded-full text-sm ${filterType === 'all' ? 'bg-white text-black' : 'bg-gray-800'}`}>All</button>
+                <button onClick={() => setFilterType('coaching')} className={`px-3 py-1 rounded-full text-sm ${filterType === 'coaching' ? 'bg-white text-black' : 'bg-gray-800'}`}>Coaching</button>
+                <button onClick={() => setFilterType('insights')} className={`px-3 py-1 rounded-full text-sm ${filterType === 'insights' ? 'bg-white text-black' : 'bg-gray-800'}`}>Insights</button>
             </div>
 
             {/* Coaching Cards */}
