@@ -25,6 +25,7 @@ import CreatorSearch from './Creators';
 import CreatorProfileSection from './Esther';
 import Navbar2 from './Navbar2';
 import VideoSection from './VideoSection'
+import ToolsPage from './Tools'
 export {
   FAQ,
   CreatorItem,
@@ -52,5 +53,6 @@ export {
   CreatorSearch,
   CreatorProfileSection,
   Navbar2,
-  VideoSection
+  VideoSection,
+  ToolsPage,
 };

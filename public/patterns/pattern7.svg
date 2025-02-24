@@ -1,0 +1,10 @@
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="sinewave" patternUnits="userSpaceOnUse" width="100" height="100">
+      <path d="M 0 50 Q 25 0, 50 50 T 100 50" stroke="white" fill="transparent" stroke-width="2">
+        <animate attributeName="d" values="M 0 50 Q 25 0, 50 50 T 100 50; M 0 50 Q 25 50, 50 0 T 100 50" dur="4s" repeatCount="indefinite"/>
+      </path>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#sinewave)"/>
+</svg>
