@@ -26,7 +26,7 @@ const imageList = [
     { src: "/cover.png" },
     { src: "/cover4.png" },
     { src: "/card1.png" },
-    { src: "/card2.png" },
+    { src: "/content2.png" },
     { src: "/cover2.png" },
     { src: "/card3.png" },
     { src: "/card4.png" },
