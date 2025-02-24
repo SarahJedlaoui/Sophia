@@ -201,7 +201,7 @@ const ToolsPage = () => {
                     <AudioWavePlayer audioSrc="/Andeas.wav" />
 
 
-                    <h2 className="text-2xl font-bold mt-2">Lets practice</h2>
+                    <h2 className="text-2xl font-bold mt-2">Let&apos;s practice</h2>
 
                 </div>
 
