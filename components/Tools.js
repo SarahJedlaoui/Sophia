@@ -61,7 +61,7 @@ const ToolsPage = () => {
       </div>
 
        {/* Tools Section with Animated Cards */}
-       <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
+       <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-10 mt-8">
           {tools.map((tool, index) => (
             <div 
               key={index} 
