@@ -35,7 +35,7 @@ const BestSelfPage = () => {
             guideImage: "/cover.png",
             details: `Anna Smith is a Mindfulness Coach and Neuroscience Researcher. She has spent over a decade studying the role of curiosity in personal development. 
           Through her work, she helps individuals shift from fear-based decision-making to curiosity-driven growth, encouraging them to embrace uncertainty as a tool for transformation.`,
-            videoUrl: "https://www.youtube.com/watch?v=SwQhKFMxmDY&ab_channel=RichRoll", // Replace with real link
+            videoUrl: "hhttps://youtube.com/shorts/ua1_5Tl51CI?si=5D87FJZPofsTcLUN", 
             instructions: [
                 "Make a list of your top three favorite distractions.",
                 "Ask yourself, 'What relief do I get from this distraction?'.",
@@ -52,7 +52,7 @@ const BestSelfPage = () => {
             guideImage: "/cover5.png",
             details: `Michael Brown is an Art Therapist and Creativity Educator. With a background in Expressive Arts Therapy, he has worked with children and adults to 
           unlock their creative potential. His approach emphasizes how drawing, doodling, and visual storytelling can enhance emotional well-being and mindfulness.`,
-            videoUrl: "https://www.youtube.com/watch?v=SwQhKFMxmDY&ab_channel=RichRoll", // Replace with real link
+            videoUrl: "https://youtube.com/shorts/UEEDbtVJBI4?si=d5mS2FRznz4fF6hh", 
             instructions: [
                 "Make a list of your top three favorite distractions.",
                 "Ask yourself, 'What relief do I get from this distraction?'.",
