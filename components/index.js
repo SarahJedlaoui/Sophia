@@ -23,9 +23,11 @@ import Chat from './Chat';
 import Practice from './Practice';
 import CreatorSearch from './Creators';
 import CreatorProfileSection from './Esther';
+import CreatorProfileSectionSaif from './Saif';
 import Navbar2 from './Navbar2';
 import VideoSection from './VideoSection'
 import ToolsPage from './Tools'
+import SaifPractice from './Saif-practice'
 export {
   FAQ,
   CreatorItem,
@@ -52,7 +54,9 @@ export {
   Practice,
   CreatorSearch,
   CreatorProfileSection,
+  CreatorProfileSectionSaif,
   Navbar2,
   VideoSection,
   ToolsPage,
+  SaifPractice
 };

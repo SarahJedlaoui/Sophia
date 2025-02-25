@@ -30,7 +30,6 @@ const imageList = [
     { src: "/cover2.png" },
     { src: "/card3.png" },
     { src: "/card4.png" },
-
     { src: "/cover5.png" },
     { src: "/content3.png" },
 ];
