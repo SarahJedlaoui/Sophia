@@ -300,7 +300,7 @@ const CreatorProfileSectionSaif = () => {
                     <ComedyCard
                         title="Comedy Foundations: The Art of Being Funny"
                         imageSrc="/saif/saif4.jpeg"  // Replace with your actual image path
-                        redirectUrl="/comedy-course"   // Replace with your actual redirect URL
+                        redirectUrl="/saif-practice"   // Replace with your actual redirect URL
                     />
                 </div>
 
