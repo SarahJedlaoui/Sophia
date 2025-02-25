@@ -6,6 +6,8 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from "next/image";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
+import { ChevronLeft } from 'lucide-react';
+import Link from 'next/link';
 
 const AudioWavePlayer = ({ audioSrc }) => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -196,6 +198,16 @@ const SaifPractice = ({ setActiveTabPage }) => {
 
     return (
         <Container className="min-h-screen bg-black text-white p-5">
+             {/* Top Bar with Title and Back Arrow */}
+             <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                    <div className="relative z-10 w-full  px-4 mt-6 flex items-center">
+                        <Link href='/seif-omrane'>
+                            <ChevronLeft size={24} className="mr-4 cursor-pointer hover:text-gray-300" />
+                        </Link>
+                        <h1 className="text-xl font-semibold" style={{ fontFamily: 'Playfair' }} >
+                            Saif Omrane</h1>
+                    </div>
+                </Reveal>
             {/* Welcome Section */}
             <div className="text-left  lg:text-left md:text-left mb-10">
                 <p className="text-sm lg:text-lg md:text-lg mt-2 " >Ready to learn something new today?</p>

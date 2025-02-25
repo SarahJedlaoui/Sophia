@@ -149,11 +149,12 @@ const CreatorProfileSectionSaif = () => {
                 {/* Top Bar with Title and Back Arrow */}
                 <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                     <div className="relative z-10 w-full  px-4 mt-6 flex items-center">
-                        <Link href='/home'>
+                        <Link href='/'>
                             <ChevronLeft size={24} className="mr-4 cursor-pointer hover:text-gray-300" />
                         </Link>
                         <h1 className="text-xl font-semibold" style={{ fontFamily: 'Playfair' }} >
-                            Saif Omrane</h1>
+                            Saif Omrane
+                        </h1>
                     </div>
                 </Reveal>
                 <Reveal keyframes={fadeInUp} duration={800} delay={50}>
@@ -272,7 +273,7 @@ const CreatorProfileSectionSaif = () => {
                                                     >
                                                         End Chat
                                                     </button>
-                                                   
+
                                                 </div>
                                             </div>
                                         )}
@@ -389,7 +390,7 @@ const CreatorProfileSectionSaif = () => {
                                         {/* Image Section */}
                                         <div className="w-full flex justify-center items-center p-4">
                                             <img
-                                               src="/saif/saif2.jpeg"
+                                                src="/saif/saif2.jpeg"
                                                 alt="Emotional Resilience Mastery"
                                                 className="w-full max-w-xs md:max-w-xs lg:max-w-xs max-h-40 rounded-70 object-cover"
                                             />
@@ -412,7 +413,7 @@ const CreatorProfileSectionSaif = () => {
                                         {/* Image Section */}
                                         <div className="w-full flex justify-center items-center mb-4">
                                             <img
-                                               src="/saif/saif3.jpeg"
+                                                src="/saif/saif3.jpeg"
                                                 alt="Emotional Intelligence Coaching"
                                                 className="w-full max-w-xs md:max-w-xs lg:max-w-xs max-h-40 object-cover"
                                             />
@@ -581,8 +582,8 @@ const CreatorProfileSectionSaif = () => {
                                         </div>
                                         {/* Content Section */}
                                         <div className="w-full flex flex-col items-center justify-center">
-                                            <h3 className="text-md md:text-lg font-semibold text-center mb-5">Stay 
-                                            Funny</h3>
+                                            <h3 className="text-md md:text-lg font-semibold text-center mb-5">Stay
+                                                Funny</h3>
                                             <button className="bg-white opacity-70 text-black py-1 px-4 rounded-full text-sm font-medium hover:bg-gray-200">
                                                 Add
                                             </button>
