@@ -299,7 +299,7 @@ const CreatorProfileSectionSaif = () => {
                 <div className="flex items-center justify-center mt-10">
                     <ComedyCard
                         title="Comedy Foundations: The Art of Being Funny"
-                        imageSrc="/saif/saif4.jpeg"  // Replace with your actual image path
+                        imageSrc="/saif/saif1.jpeg"  // Replace with your actual image path
                         redirectUrl="/saif-practice"   // Replace with your actual redirect URL
                     />
                 </div>
