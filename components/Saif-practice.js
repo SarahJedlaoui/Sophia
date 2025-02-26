@@ -8,6 +8,8 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
+import axios from 'axios';
+import ComedyPunchlineGame from './ComedyPunchLineGame';
 
 const AudioWavePlayer = ({ audioSrc }) => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -76,30 +78,56 @@ const AudioWavePlayer = ({ audioSrc }) => {
 };
 
 const SaifPractice = ({ setActiveTabPage }) => {
-    const [videoLinks, setVideoLinks] = useState([]);
-    const [inputValue, setInputValue] = useState('');
-    const [inputValueChat, setInputValueChat] = useState('');
+
     const [inputValueQ, setInputValueQ] = useState('');
-    const [chatResponse, setChatResponse] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [inputValuePractice, setInputValuePractice] = useState(" Yes, and I’ve decided my ship will only sail on land now! ");
+    const [inputValuePractice, setInputValuePractice] = useState("");
     const [practiceFinished, setPracticeFinished] = useState(false); // Tracks if the practice is finished
-    const examples = ['Love', 'Family', 'Health', 'Work', 'Food'];
     const [conversation, setConversation] = useState([
         { role: 'ai', message: 'How can you be funny? ' },
     ]);
+    const [conversation2, setConversation2] = useState([]);
+    const [isLoading2, setIsLoading2] = useState(false);
+
     const [insights, setInsights] = useState([]); // Add this state
     const [savedInsights, setSavedInsights] = useState([]);
     const hasSavedInsights = savedInsights.length > 0; // Check if any insight is saved
 
     const [selectedImage, setSelectedImage] = useState("/saif/saif12.jpeg");
-    const handleExampleClick = (example) => {
-        setInputValuePractice(`Yes, and I’ve decided my ship will only sail on land now! ${example}`);
+
+
+    const handleSubmitPractice = async () => {
+        // Normalize input: Convert to lowercase and trim spaces
+        const normalizedInput = inputValuePractice.toLowerCase().trim();
+
+        // Define accepted variations
+        const validStartPatterns = ["yes and", "yes, and", "yes,and"];
+
+        // Check if the input starts with any of the valid patterns
+        const isValidStart = validStartPatterns.some(pattern => normalizedInput.startsWith(pattern));
+
+        if (!isValidStart) {
+            alert("Make sure your response starts with 'Yes, and...'");
+            return;
+        }
+
+        setIsLoading2(true);
+        try {
+            const response = await axios.post("https://sophiaai-9a965fb6e429.herokuapp.com/api/improv-game", {
+                userInput: inputValuePractice
+            });
+
+            const newAIResponse = response.data.aiResponse;
+
+            setConversation2([...conversation2, { user: inputValuePractice, ai: newAIResponse }]);
+            setInputValuePractice(""); // Clear input field for next response
+        } catch (error) {
+            console.error("Error fetching AI response:", error);
+        }
+        setIsLoading2(false);
     };
 
-    const handleSubmitPractice = () => {
-        setPracticeFinished(true); // Set practice to finished
-    };
+
     const videoCards = [
         { title: "From Idea to Laughter- Crafting the Perfect Joke", image: "/saif/saif9.jpeg" },
         { title: "From Idea to Laughter- Crafting the Perfect Joke", image: "/saif/saif10.jpeg" },
@@ -146,43 +174,6 @@ const SaifPractice = ({ setActiveTabPage }) => {
             setIsLoading(false); // Stop loading spinner
         }
     };
-    const handleSendMessage2 = async () => {
-        if (!inputValueChat.trim()) return;
-
-        setIsLoading(true);
-
-        try {
-            const response = await fetch('https://aftervisit-0b4087b58b8e.herokuapp.com/api/ask-ai', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ question: inputValueChat }), // Send the user's question
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch AI response');
-            }
-
-            const data = await response.json();
-            setChatResponse(data.answer); // Update chat response with AI's answer
-
-        } catch (error) {
-            console.error('Error fetching AI response:', error);
-            setChatResponse('There was an error processing your question. Please try again.');
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-
-    const handleEndChat = () => {
-        setConversation([]); // Clear the conversation
-        setInputValue(''); // Reset input field
-    };
-
-    // Save state for cards
-    const [savedCards, setSavedCards] = useState({});
 
     // Function to toggle insight saving
     const handleToggleSave = (insight) => {
@@ -198,16 +189,16 @@ const SaifPractice = ({ setActiveTabPage }) => {
 
     return (
         <Container className="min-h-screen bg-black text-white p-5">
-             {/* Top Bar with Title and Back Arrow */}
-             <Reveal keyframes={fadeInUp} duration={800} delay={50}>
-                    <div className="relative z-10 w-full  px-4 mt-6 flex items-center">
-                        <Link href='/seif-omrane'>
-                            <ChevronLeft size={24} className="mr-4 cursor-pointer hover:text-gray-300" />
-                        </Link>
-                        <h1 className="text-xl font-semibold" style={{ fontFamily: 'Playfair' }} >
-                            Saif Omrane</h1>
-                    </div>
-                </Reveal>
+            {/* Top Bar with Title and Back Arrow */}
+            <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+                <div className="relative z-10 w-full  px-4 mt-6 flex items-center">
+                    <Link href='/seif-omrane'>
+                        <ChevronLeft size={24} className="mr-4 cursor-pointer hover:text-gray-300" />
+                    </Link>
+                    <h1 className="text-xl font-semibold" style={{ fontFamily: 'Playfair' }} >
+                        Saif Omrane</h1>
+                </div>
+            </Reveal>
             {/* Welcome Section */}
             <div className="text-left  lg:text-left md:text-left mb-10">
                 <p className="text-sm lg:text-lg md:text-lg mt-2 " >Ready to learn something new today?</p>
@@ -434,80 +425,66 @@ const SaifPractice = ({ setActiveTabPage }) => {
                     </div>
 
 
-                    <div className=" mx-auto bg-[#7A65B0] text-white p-4 rounded-lg">
-
-
+                    <div className="mx-auto bg-[#7A65B0] text-white p-4 rounded-lg">
                         <div className="flex items-center mb-4">
-                            <img
-                                src="/saif/saif.png"
-                                alt="Esther Perl"
-                                className="w-12 h-12 md:w-20 md:h-20 lg:w-25 lg:h-25 rounded-full"
-                            />
+                            <img src="/saif/saif.png" alt="Saif Omrane" className="w-12 h-12 md:w-20 md:h-20 lg:w-25 lg:h-25 rounded-full" />
                             <div className="ml-4">
                                 <p className="text-xs lg:text-lg font-medium">1. Improv: "Yes, And…" Game</p>
-                                <p className="text-xs md:text-lg text-gray-200">By Saif omrane</p>
+                                <p className="text-xs md:text-lg text-gray-200">By Saif Omrane</p>
                             </div>
                         </div>
+
                         {!practiceFinished ? (
                             <>
+                                <h3 className="text-md md:text-lg font-medium mb-4">
+                                    Test your improv skills! Keep the scene going by building on funny AI-generated prompts using the golden rule of improv: Yes, and…
+                                </h3>
+                                <p className="text-xs md:text-sm mb-4">You're a pirate who's afraid of water. What&apos;s your solution?</p>
 
-                                <h3 className="text-md md:text-lg font-medium mb-4">Test your improv skills! Keep the scene going by building on funny AI-generated prompts using the golden rule of improv: Yes, and…</h3>
-                                <p className="text-xs md:text-sm mb-4 ">You're a pirate who's afraid of water. What&apos;s your solution?</p>
+                                {/* Chat Display */}
+                                <div className="mb-4 max-h-64 overflow-y-auto bg-[#6a4ca0] p-3 rounded-md">
+                                    {conversation2.map((entry, index) => (
+                                        <div key={index} className="mb-2">
+                                            <p className="text-sm text-yellow-300"><strong>You:</strong> {entry.user}</p>
+                                            <p className="text-sm text-gray-300"><strong>AI:</strong> {entry.ai}</p>
+                                        </div>
+                                    ))}
+                                </div>
 
-
+                                {/* Input Field */}
                                 <div className="flex items-center">
                                     <input
                                         type="text"
                                         value={inputValuePractice}
                                         onChange={(e) => setInputValuePractice(e.target.value)}
                                         className="flex-1 mt-5 rounded-md bg-transparent placeholder-gray-300 text-xs md:text-lg text-white focus:outline-none"
-                                        placeholder="Yes, and I’ve decided my ship will only sail on land now!"
+                                        placeholder="Yes, and..."
                                     />
-
                                 </div>
 
-
+                                {/* Buttons */}
                                 <div className="flex items-right justify-end mt-4">
                                     <button
                                         onClick={handleSubmitPractice}
                                         className="ml-4 bg-white p-3 rounded-full opacity-80 flex items-center justify-center shadow-md"
                                         style={{ width: '48px', height: '48px' }}
+                                        disabled={isLoading}
                                     >
-                                        <ArrowForwardIcon style={{ fontSize: '24px', color: 'black' }} />
+                                        {isLoading ? "⏳" : <ArrowForwardIcon style={{ fontSize: '24px', color: 'black' }} />}
                                     </button>
                                 </div>
-
-                                {/**
-                                <div className="mt-4">
-                                    <h4 className="text-sm font-medium mb-2">Examples</h4>
-                                    <div className="flex gap-1 flex-wrap">
-                                        {examples.map((example, index) => (
-                                            <button
-                                                key={index}
-                                                onClick={() => handleExampleClick(example)}
-                                                className="px-2 py-1 border border-white text-white rounded-full text-xs"
-                                            >
-                                                {example}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-                                 */}
-
                             </>
                         ) : (
                             <div className="text-center mb-10">
                                 <h3 className="text-lg md:text-xl font-medium mb-4">Your practice is finished. Thank you!</h3>
-                                <img
-                                    src="/icons/practice1.svg"
-                                    alt="Practice Completed"
-                                    className="mx-auto w-32 h-32"
-                                />
+                                <img src="/icons/practice1.svg" alt="Practice Completed" className="mx-auto w-32 h-32" />
                             </div>
                         )}
                     </div>
                 </div>
             </Reveal>
+
+            <ComedyPunchlineGame/>
         </Container>
     );
 };
