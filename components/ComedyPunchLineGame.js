@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-
+import { Reveal } from 'react-awesome-reveal';
+import { fadeInUp } from '@/keyframes'; 
 const scenarios = [
   {
     question: "You walk into a room full of people, and someone says, ‘You’re late!’",
@@ -79,6 +80,7 @@ const ComedyPunchlineGame = () => {
 
   return (
     <div className="flex justify-center items-center mt-5 p-4">
+         <Reveal keyframes={fadeInUp} duration={800} delay={50}>
       <div
         className="relative bg-white bg-opacity-10 rounded-lg p-6 w-full max-w-3xl mx-auto shadow-lg backdrop-blur-xl"
       >
@@ -157,6 +159,7 @@ const ComedyPunchlineGame = () => {
           </>
         )}
       </div>
+      </Reveal>
     </div>
   );
 };
