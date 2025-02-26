@@ -80,7 +80,7 @@ const ComedyPunchlineGame = () => {
 
   return (
     <div className="flex justify-center items-center mt-5 p-4">
-         <Reveal keyframes={fadeInUp} duration={800} delay={50}>
+        
       <div
         className="relative bg-white bg-opacity-10 rounded-lg p-6 w-full max-w-3xl mx-auto shadow-lg backdrop-blur-xl"
       >
@@ -159,7 +159,6 @@ const ComedyPunchlineGame = () => {
           </>
         )}
       </div>
-      </Reveal>
     </div>
   );
 };
