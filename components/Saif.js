@@ -69,7 +69,7 @@ const CreatorProfileSectionSaif = () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch('https://aftervisit-0b4087b58b8e.herokuapp.com/api/ask-ai', {
+            const response = await fetch(' https://sophiaai-9a965fb6e429.herokuapp.com/api/ask-ai2', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

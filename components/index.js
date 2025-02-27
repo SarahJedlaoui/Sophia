@@ -28,6 +28,8 @@ import Navbar2 from './Navbar2';
 import VideoSection from './VideoSection'
 import ToolsPage from './Tools'
 import SaifPractice from './Saif-practice'
+import ArticlesPage from './Articles'
+import ArticlePage from './article'
 export {
   FAQ,
   CreatorItem,
@@ -58,5 +60,7 @@ export {
   Navbar2,
   VideoSection,
   ToolsPage,
-  SaifPractice
+  SaifPractice,
+  ArticlesPage,
+  ArticlePage
 };
