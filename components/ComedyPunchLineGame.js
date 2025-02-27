@@ -136,13 +136,7 @@ const ComedyPunchlineGame = () => {
             <div className="text-center">
               <h3 className="text-xl font-bold text-white mb-4">Your Funny Meter Score: {funnyScore}</h3>
               <p className="text-lg text-white">{getFunnyEvaluation()}</p>
-              <Image
-                src="/icons/laugh-meter.svg"
-                alt="Funny Meter"
-                width={200}
-                height={200}
-                className="mx-auto my-6"
-              />
+             
               <button
                 onClick={() => {
                   setCurrentScenario(0);
