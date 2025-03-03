@@ -147,8 +147,9 @@ const ArticlesPage = () => {
     const filteredArticles = [...articles, ...predefinedArticles].filter(
         (article) =>
             article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            article.author.toLowerCase().includes(searchTerm.toLowerCase())
+            (article.author?.name && article.author.name.toLowerCase().includes(searchTerm.toLowerCase()))
     );
+    
 
     return (
         <Container>
