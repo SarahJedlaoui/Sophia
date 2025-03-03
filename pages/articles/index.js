@@ -21,7 +21,7 @@ const Home = () => {
             <div className='h-full main_bg text-white overflow-hidden' id='top'>
                 <Navbar2 />
                 <ArticlesPage />
-               
+                
             </div>
         </>
     );

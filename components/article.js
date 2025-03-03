@@ -1,9 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Button, Container } from ".";
-
+import { useRouter } from "next/router";
 const ArticlePage = () => {
+    const router = useRouter();
     // State to store the article
+    const { title } = router.query;
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -12,10 +14,11 @@ const ArticlePage = () => {
     const [loadingStates, setLoadingStates] = useState([]);
     const [showOriginal, setShowOriginal] = useState(Array(sections.length).fill(false));    // Fetch the article from MongoDB
     useEffect(() => {
+        if (!title) return;
         const fetchArticle = async () => {
             try {
                 const response = await fetch(
-                    "https://sophiaai-9a965fb6e429.herokuapp.com/api/articles/Understanding ADHD: Tips for Focus & Productivity"
+                    `https://sophiaai-9a965fb6e429.herokuapp.com/api/articles/${decodeURIComponent(title)}`
                 );
 
                 if (!response.ok) {
@@ -39,7 +42,21 @@ const ArticlePage = () => {
 
     // Ensure we don't access properties on null
     if (loading) return <p className="text-center text-gray-400">Loading article...</p>;
-    if (error) return <p className="text-center text-red-500">Error: {error}</p>;
+    if (error)  
+    
+    return (
+        <Container>
+            <div className="min-h-screen text-white p-6 w-full mx-auto">
+              
+                <div className="flex justify-between items-center pb-4">
+                    <h1 className="text-2xl font-bold">Article not published yet!</h1>
+                    
+                </div>
+
+               
+            </div>
+        </Container>
+    );
     if (!article) return <p className="text-center text-gray-400">Article not found.</p>;
 
     // Handle user input change
@@ -145,11 +162,16 @@ const ArticlePage = () => {
                     <div key={index} className="mt-6 p-4   ">
                         <h2 className="text-xl font-semibold mb-2">{section.sectionTitle}</h2>
                         {/* Toggle between original and latest content */}
+                        <h2 className="text-lg font-semibold mb-2">Original Section</h2>
                         <p className="text-gray-300">
-                            {showOriginal[index] ? section.content : section.originalContent}
+                            {section.content }
+                        </p>
+                        <h2 className="text-lg font-semibold mb-2">Summary Community addition</h2>
+                        <p className="text-gray-300">
+                            { section.originalContent}
                         </p>
 
-                        {/* Button to toggle original content view */}
+                        {/* Button to toggle original content view 
                         <button
                             className="mt-2 text-[#8E72D7] hover:text-[#E9DEFF] underline"
                             onClick={() => {
@@ -162,7 +184,7 @@ const ArticlePage = () => {
                         >
                             {showOriginal[index] ? "See Latest Version" : "See Original Content"}
                         </button>
-
+                           */}
                         {/* Display previous contributions */}
                         {section.modifications.length > 0 && (
                             <div className="mt-3 p-3 bg-gray-700 rounded-md">
