@@ -81,7 +81,7 @@ const ArticlePage = () => {
         });
 
         try {
-            const response = await fetch("https://sophiaai-9a965fb6e429.herokuapp.com/api/add-contribution", {
+            const response = await fetch("https://sophiaai-9a965fb6e429.herokuapp.com/api/add-contribution-summary", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

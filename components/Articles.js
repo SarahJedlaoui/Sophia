@@ -11,6 +11,10 @@ const ArticlesPage = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [articles, setArticles] = useState([]); // Store articles from DB
     const [loadingArticles, setLoadingArticles] = useState(true);
+    const [categories] = useState(["Health", "Productivity", "Mindfulness", "Relationships", "Fitness", "Comedy", "Love", "Food"]);
+    const [showCustomCategory, setShowCustomCategory] = useState(false);
+    const predefinedCategories = ["All", "Comedy", "Health", "Religion", "Acting", "Love", "Relationships", "Food", "Diet"];
+    const [selectedCategory, setSelectedCategory] = useState("All");
 
     // Fetch articles from backend
     useEffect(() => {
@@ -75,6 +79,7 @@ const ArticlesPage = () => {
     const [newArticle, setNewArticle] = useState({
         title: "",
         author: "",
+        category: "",
         image: "",
         description: "",
         sections: [{ title: "", content: "" }],
@@ -113,6 +118,8 @@ const ArticlesPage = () => {
                 body: JSON.stringify({
                     title: newArticle.title,
                     author: { name: newArticle.author, image: newArticle.image },
+                    category: newArticle.category,
+                    image: newArticle.image,
                     contributors: [],
                     sections: newArticle.sections,
                 }),
@@ -144,12 +151,36 @@ const ArticlesPage = () => {
         }
     };
 
-    const filteredArticles = [...articles, ...predefinedArticles].filter(
+    const removeSection = (index) => {
+        setNewArticle((prevArticle) => ({
+            ...prevArticle,
+            sections: prevArticle.sections.filter((_, i) => i !== index), // Remove the section at the given index
+        }));
+    };
+
+    // Function to handle image upload
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setNewArticle({ ...newArticle, image: reader.result }); // Store Base64 string
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    // First, apply the search filter
+    const searchFilteredArticles = [...articles, ...predefinedArticles].filter(
         (article) =>
             article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             (article.author?.name && article.author.name.toLowerCase().includes(searchTerm.toLowerCase()))
     );
-    
+
+    // Then, apply the category filter on the already filtered list
+    const filteredArticles = selectedCategory === "All"
+        ? searchFilteredArticles
+        : searchFilteredArticles.filter(article => article.category === selectedCategory);
 
     return (
         <Container>
@@ -157,7 +188,7 @@ const ArticlesPage = () => {
                 <div className="flex justify-between items-center mb-6">
                     <Reveal keyframes={fadeInUp} duration={800} delay={50}>
                         <h1 className="text-3xl font-bold" style={{ fontFamily: "Playfair" }}>
-                            Comedy Articles
+                           Articles
                         </h1>
                     </Reveal>
 
@@ -182,31 +213,74 @@ const ArticlesPage = () => {
                     />
                 </div>
 
-                {/* Articles List */}
+                {/* Category Filters */}
+                <div className="flex space-x-3 mb-6 overflow-x-auto">
+                    {predefinedCategories.map((category, index) => (
+                        <button
+                            key={index}
+                            className={`px-4 py-2 rounded-full text-sm font-semibold transition ${selectedCategory === category ? "bg-purple-600 text-white" : "bg-gray-800 text-gray-300"
+                                }`}
+                            onClick={() => setSelectedCategory(category)}
+                        >
+                            {category}
+                        </button>
+                    ))}
+                </div>
+
                 {loadingArticles ? (
                     <p className="text-center text-gray-400">Loading articles...</p>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {filteredArticles.length > 0 ? (
                             filteredArticles.map((article) => {
-                                const formattedTitle = encodeURIComponent(article.title.replace(/\s+/g, "-").toLowerCase()); // Format title for URL
+                                const formattedTitle = encodeURIComponent(article.title.replace(/\s+/g, "-").toLowerCase());
 
                                 return (
                                     <Link key={article._id || article.id} href={`/article/${formattedTitle}`} passHref>
-                                        <div
-                                            key={article._id || article.id}
-                                            className="bg-white bg-opacity-20 p-5 rounded-3xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer flex flex-col items-center text-center"
-                                        >
-                                            <img
-                                                src={article.image ? article.image : "/articles/adhd.svg"}
-                                                alt={article.title}
-                                                className="w-48 h-48 object-cover rounded-md mb-4"
-                                            />
-                                            <h2 className="text-xl font-semibold">{article.title}</h2>
-                                            <p className="text-gray-400 text-sm mt-1">By {article.author?.name || article.author}</p>
-                                            <p className="text-gray-300 mt-2">
-                                                {article.sections?.[0]?.content.split(".")[0] || article.description}
-                                            </p>
+                                        <div className="bg-gray-900 p-5 rounded-2xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+
+                                            {/* Article Image */}
+                                            <div className="relative w-full h-48">
+                                                <img
+                                                    src={article.image ? article.image : "/cover.png"} // Default image
+                                                    alt={article.title}
+                                                    className="w-full h-full object-cover rounded-xl"
+                                                />
+                                                {/* Category Badge */}
+                                                {article.category && (
+                                                    <span className="absolute top-3 left-3 bg-purple-700 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                                        {article.category}
+                                                    </span>
+                                                )}
+                                            </div>
+
+                                            {/* Article Content */}
+                                            <div className="mt-4">
+                                                <h2 className="text-lg font-semibold text-white">{article.title}</h2>
+                                                <p className="text-gray-400 text-sm mt-1">
+                                                    {article.sections?.[0]?.content.split(".")[0] || article.description}
+                                                </p>
+                                            </div>
+
+                                            {/* Author & Timestamp */}
+                                            <div className="flex items-center mt-4">
+                                                <img
+                                                    src={article.author?.image || "/cover.png"} // Default avatar
+                                                    alt="Author"
+                                                    className="w-8 h-8 rounded-full object-cover mr-2"
+                                                />
+                                                <div>
+                                                    <p className="text-sm text-white">{article.author?.name || "Unknown"}</p>
+                                                    <p className="text-xs text-gray-400">
+                                                        {new Date(article.timestamp).toLocaleDateString("en-US", {
+                                                            month: "long",
+                                                            day: "numeric",
+                                                            year: "numeric",
+                                                        })}
+                                                    </p>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </Link>
                                 );
@@ -214,35 +288,135 @@ const ArticlesPage = () => {
                         ) : (
                             <p className="text-center text-gray-400 col-span-3">No articles found.</p>
                         )}
-
                     </div>
                 )}
 
+
+
                 {/* Modal for Adding Article */}
                 {showModal && (
-                    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                        <div className="bg-black bg-opacity-80 p-6 rounded-lg shadow-lg w-38%">
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center overflow-y-auto">
+                        <div className="bg-black bg-opacity-80 p-6 rounded-lg shadow-lg w-3/8 max-h-[90vh] overflow-y-auto">
                             <h2 className="text-lg font-semibold mb-4">Add New Article</h2>
 
-                            <input type="text" name="title" placeholder="Article Title" value={newArticle.title} onChange={handleInputChange} className="w-full p-2 border text-black rounded mb-2" />
-                            <input type="text" name="author" placeholder="Author Name" value={newArticle.author} onChange={handleInputChange} className="w-full p-2 border  text-black rounded mb-2" />
+                            {/* Article Title & Author */}
+                            <input
+                                type="text"
+                                name="title"
+                                placeholder="Article Title"
+                                value={newArticle.title}
+                                onChange={handleInputChange}
+                                className="w-full p-2 border text-black rounded-xl mb-2"
+                            />
+                            <input
+                                type="text"
+                                name="author"
+                                placeholder="Author Name"
+                                value={newArticle.author}
+                                onChange={handleInputChange}
+                                className="w-full p-2 border text-black rounded-xl mb-2"
+                            />
+                            {/* Image Upload */}
+                            <h3 className="font-semibold mb-2">Upload Image</h3>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                                className="w-full p-2 border text-black rounded-xl mb-2"
+                            />
 
+                            {/* Preview Image */}
+                            {newArticle.image && (
+                                <img src={newArticle.image} alt="Preview" className="w-48 h-48 object-cover rounded-lg mb-2" />
+                            )}
+
+                            {/* Category Dropdown & Custom Input */}
+                            <h3 className="font-semibold mb-2">Category</h3>
+                            <select
+                                className="w-full p-2 border text-black rounded-xl mb-2"
+                                value={newArticle.category}
+                                onChange={(e) => {
+                                    const selectedCategory = e.target.value;
+                                    if (selectedCategory === "custom") {
+                                        setShowCustomCategory(true);
+                                        setNewArticle({ ...newArticle, category: "" });
+                                    } else {
+                                        setShowCustomCategory(false);
+                                        setNewArticle({ ...newArticle, category: selectedCategory });
+                                    }
+                                }}
+                            >
+                                <option value="">Select a Category</option>
+                                {categories.map((cat, index) => (
+                                    <option key={index} value={cat}>{cat}</option>
+                                ))}
+                                <option value="custom">+ Add Custom Category</option>
+                            </select>
+
+                            {showCustomCategory && (
+                                <input
+                                    type="text"
+                                    placeholder="Enter custom category"
+                                    className="w-full p-2 border text-black rounded-xl mb-2"
+                                    value={newArticle.category}
+                                    onChange={(e) => setNewArticle({ ...newArticle, category: e.target.value })}
+                                />
+                            )}
+
+                            {/* Sections */}
                             <h3 className="font-semibold mb-2">Sections</h3>
-                            {newArticle.sections.map((section, index) => (
-                                <div key={index} className="mb-2">
-                                    <input type="text" placeholder="Section Title" value={section.title} onChange={(e) => handleSectionChange(index, "title", e.target.value)} className="w-full p-2 border text-black rounded mb-1" />
-                                    <textarea placeholder="Section Content" value={section.content} onChange={(e) => handleSectionChange(index, "content", e.target.value)} className="w-full p-2 border text-black rounded" />
-                                </div>
-                            ))}
+                            <div className="max-h-[50vh] overflow-y-auto ">
+                                {newArticle.sections.map((section, index) => (
+                                    <div key={index} className="mb-2 p-2 bg-gray-800 bg-opacity-50 rounded-md relative">
+                                        <input
+                                            type="text"
+                                            placeholder="Section Title"
+                                            value={section.title}
+                                            onChange={(e) => handleSectionChange(index, "title", e.target.value)}
+                                            className="w-full p-2 border text-black rounded-xl mb-1"
+                                        />
+                                        <textarea
+                                            placeholder="Section Content"
+                                            value={section.content}
+                                            onChange={(e) => handleSectionChange(index, "content", e.target.value)}
+                                            className="w-full p-2 border text-black rounded-xl"
+                                        />
+                                        {/* Delete Section Button */}
+                                        <svg
+                                            onClick={() => removeSection(index)}
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="absolute top-2 right-2 w-6 h-6 cursor-pointer text-black hover:text-gray-700 transition"
+                                            viewBox="0 0 24 24"
+                                            fill="currentColor"
+                                        >
+                                            <path d="M6 6L18 18M6 18L18 6" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Add Section Button */}
                             <button className="text-[#8E72D7] underline mt-2" onClick={addSection}>+ Add Section</button>
 
+                            {/* Buttons */}
                             <div className="flex justify-between mt-4">
-                                <Button className=" text-white px-4 py-2 rounded-lg" onClick={() => setShowModal(false)}>Cancel</Button>
-                                <Button className=" text-white px-4 py-2 rounded-lg" variant={"primary"} onClick={handleSubmit}>Add</Button>
+                                <Button className="text-white px-4 py-2 rounded-lg" onClick={() => setShowModal(false)}>Cancel</Button>
+                                <Button
+                                    className="text-white px-4 py-2 rounded-lg"
+                                    variant={"primary"}
+                                    onClick={handleSubmit}
+                                    disabled={loadingSubmit} // Disable button while loading
+                                >
+                                    {loadingSubmit ? "Loading..." : "Add"}
+                                </Button>
+
                             </div>
                         </div>
                     </div>
                 )}
+
+
+
             </div>
         </Container>
     );
